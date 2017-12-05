@@ -12,6 +12,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.six.cat.sixcat.R;
 
 /**
+ * glide v3->v4 api的改变需要注意
+ *
  * @author liguoying
  * @date 2017/12/4.
  */
@@ -29,8 +31,8 @@ public class ImageUtil {
             imageView.setImageResource(R.drawable.iv_default);
             return;
         }
-        Glide.with(imageView.getContext()).load(url)/*
-                .skipMemoryCache(true).into(imageView)*/;
+        Glide.with(imageView.getContext()).load(url).apply(skipMemoryCacheOf(true))
+                .into(imageView);
     }
 
     public static void loadImage(String url, ImageView imageView, int holderResId) {
@@ -38,7 +40,7 @@ public class ImageUtil {
             imageView.setImageResource(R.drawable.iv_default);
             return;
         }
-        Glide.with(imageView.getContext()).load(url)/*.placeholder(holderResId)*/.into(imageView);
+        Glide.with(imageView.getContext()).load(url).apply(placeholderOf(holderResId)).into(imageView);
     }
 
     public static void loadImageWithBitmap(String url, ImageView imageView, int holderResId) {
@@ -74,8 +76,7 @@ public class ImageUtil {
             return;
 
         }
-        Glide.with(imageView.getContext()).load(url).apply(placeholderOf(placeHolder)).into(
-                imageView);
+        Glide.with(imageView.getContext()).load(url).apply(placeholderOf(placeHolder)).into(imageView);
     }
 
     public static void loadAvatarImage(String url, ImageView imageView, int holderResId) {
@@ -84,7 +85,6 @@ public class ImageUtil {
             return;
         }
         TransitionOptions transitionOptions = new DrawableTransitionOptions().dontTransition();
-        Glide.with(imageView.getContext()).load(url).transition(transitionOptions).apply(placeholderOf(holderResId)).into(
-                imageView);
+        Glide.with(imageView.getContext()).load(url).transition(transitionOptions).apply(placeholderOf(holderResId)).into(imageView);
     }
 }
