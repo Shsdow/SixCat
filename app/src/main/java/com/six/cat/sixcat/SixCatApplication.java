@@ -5,6 +5,7 @@ import android.app.Application;
 /**
  * @author liguoying
  * @date 2017/12/4.
+ *
  */
 
 public class SixCatApplication extends Application {
