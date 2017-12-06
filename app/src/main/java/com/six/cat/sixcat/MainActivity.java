@@ -13,7 +13,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViewById(R.id.tv_id).setOnClickListener(view -> {
         });
-
-
     }
 }
