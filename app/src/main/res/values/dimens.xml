@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dp_0">0dp</dimen>
     <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_13">13dp</dimen>
@@ -8,6 +9,7 @@
     <dimen name="dp_25">25dp</dimen>
     <dimen name="dp_80">80dp</dimen>
     <dimen name="dp_155">155dp</dimen>
+    <dimen name="dp_200">200dp</dimen>
 
 
     <dimen name="textSize_normal">14sp</dimen>
