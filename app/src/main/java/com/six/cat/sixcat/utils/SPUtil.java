@@ -11,11 +11,13 @@ import java.util.List;
 
 /**
  * 持久化存储工具类
+ *
  * @author liguoying
  * @date 2017/12/4.
  */
 
-public class SpShareUtil {
+public class SPUtil {
+
     private static SharedPreferences mSharedPreferences;
 
     private static void init() {
@@ -128,7 +130,7 @@ public class SpShareUtil {
         if (mSharedPreferences == null) {
             init();
         }
-        return getInt(key,defaultValue);
+        return getInt(key, defaultValue);
     }
 
     public static void setSharedStringData(Context context, String key,
@@ -136,7 +138,7 @@ public class SpShareUtil {
         if (mSharedPreferences == null) {
             init();
         }
-        setString(key,value);
+        setString(key, value);
     }
 
     public static void remove(Context context, String key) {
@@ -166,6 +168,7 @@ public class SpShareUtil {
             setString(key + i, strList.get(i));
         }
     }
+
     public static void removeStrList(Context context, String key) {
         int size = getInt(context, key + "size", 0);
         if (0 == size) {
@@ -176,12 +179,13 @@ public class SpShareUtil {
             remove(context, key + i);
         }
     }
+
     public static List<String> getStrListValue(Context context, String key) {
         List<String> strList = new ArrayList<String>();
         int size = getInt(context, key + "size", 0);
         //Log.d("sp", "" + size);
         for (int i = 0; i < size; i++) {
-            strList.add(getString( key + i, null));
+            strList.add(getString(key + i, null));
         }
         return strList;
     }
