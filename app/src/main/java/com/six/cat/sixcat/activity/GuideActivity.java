@@ -3,39 +3,54 @@ package com.six.cat.sixcat.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
-import com.six.cat.sixcat.MainActivity;
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.base.BaseActivity;
 import com.six.cat.sixcat.constants.Constants;
 import com.six.cat.sixcat.utils.SpShareUtil;
 import com.six.cat.sixcat.view.CustomerVideoView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+/**
+ * 首次进入app的展示：1.视频展示 2.多图片滑动
+ */
 public class GuideActivity extends BaseActivity {
-    private CustomerVideoView mVideoView;
-    private TextView mGuideExit;
+    @BindView(R.id.cvv_guide_video)
+    CustomerVideoView mVideoView;
+    @BindView(R.id.tv_guide_exit)
+    TextView mGuideExit;
     private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guide);
-        initView();
         playVideo();
     }
 
-    private void initView() {
-        mVideoView = findViewById(R.id.cvv_guide_video);
-        mGuideExit = findViewById(R.id.tv_guide_exit);
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_guide;
+    }
+
+    @Override
+    protected void initView(Bundle savedInstanceState) {
+        initViewClick();
+    }
+
+    @Override
+    protected void initToolBar() {
+
+    }
+
+    private void initViewClick() {
         mGuideExit.setOnClickListener(v -> {
-                    startActivity(new Intent(this, MainActivity.class));
-                    SpShareUtil.setString("firstGuide", "ok");
-                    mManager.finishActivity();
-                    mVideoView.destroyDrawingCache();
+                    finishVideo();
                 }
         );
     }
@@ -44,11 +59,15 @@ public class GuideActivity extends BaseActivity {
         mVideoView.setVideoURI(Uri.parse("android.resource://" + this.getPackageName() + Constants.PATHS_SEPARATOR + R.raw.video));
         mVideoView.start();
         mVideoView.setOnCompletionListener(mediaPlayer -> {
-            startActivity(new Intent(this,MainActivity.class));
-            SpShareUtil.setString("firstGuide", "ok");
-            mManager.finishActivity();
-            mVideoView.destroyDrawingCache();
+            finishVideo();
         });
+    }
+
+    private void finishVideo() {
+        startActivity(new Intent(this, MainActivity.class));
+        SpShareUtil.setString("firstGuide", "ok");
+        mManager.finishActivity();
+        mVideoView.destroyDrawingCache();
     }
 
     @Override
