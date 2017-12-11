@@ -1,6 +1,7 @@
 package com.six.cat.sixcat.activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -9,24 +10,31 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.jaeger.library.StatusBarUtil;
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.base.BaseActivity;
 import com.six.cat.sixcat.fragment.HomeFragment;
 import com.six.cat.sixcat.fragment.PictureFragment;
 import com.six.cat.sixcat.fragment.ThemeFragment;
 import com.six.cat.sixcat.fragment.VideoFragment;
+import com.six.cat.sixcat.utils.SettingUtil;
 import com.six.cat.sixcat.utils.ShowToast;
+import com.six.cat.sixcat.view.CircleImageView;
 import com.six.cat.sixcat.widget.BottomNavigationViewHelper;
 
 import java.util.Locale;
@@ -68,6 +76,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        StatusBarUtil.setTranslucent(this, 150);
+//        StatusBarUtil.setTransparent(this);
+//        StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.black, null));
         initFragments(savedInstanceState);
         initNavigationView();
     }
@@ -76,9 +87,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void initFragments(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             mHomeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.class.getName());
-            mPictureFragment = (PictureFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.class.getName());
-            mThemeFragment = (ThemeFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.class.getName());
-            mVideoFragment = (VideoFragment) getSupportFragmentManager().findFragmentByTag(HomeFragment.class.getName());
+            mPictureFragment = (PictureFragment) getSupportFragmentManager().findFragmentByTag(PictureFragment.class.getName());
+            mThemeFragment = (ThemeFragment) getSupportFragmentManager().findFragmentByTag(ThemeFragment.class.getName());
+            mVideoFragment = (VideoFragment) getSupportFragmentManager().findFragmentByTag(VideoFragment.class.getName());
             showFragment(savedInstanceState.getInt(POSITION));
             mBottomNavigationView.setSelectedItemId(savedInstanceState.getInt(SELECT_ITEM));
         } else {
@@ -117,7 +128,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     private void doubleClick(int fragmentVideo) {
@@ -125,11 +135,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void showFragment(int fragmentNews) {
-        ShowToast.shortTime(String.format(Locale.CHINA, "这是第 %d 个 fragment ,", fragmentNews));
+        ShowToast.shortTime(String.format(Locale.CHINA, "这是第 %d 个 fragment ", fragmentNews));
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         hideFragment(ft);
-        position = index;
-        switch (index) {
+        position = fragmentNews;
+        switch (fragmentNews) {
             case FRAGMENT_NEWS:
                 mToolbar.setTitle(R.string.app_name);
                 if (mHomeFragment == null) {
@@ -168,6 +178,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 } else {
                     ft.show(mThemeFragment);
                 }
+                break;
+            default:
+                break;
         }
 
         ft.commit();
@@ -197,13 +210,63 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void initNavigationView() {
-
+        mNavigationView.setNavigationItemSelectedListener(this);
+        View headerView = mNavigationView.getHeaderView(0);
+        CircleImageView circleImageView = headerView.findViewById(R.id.civ_header);
+        TextView mUserName = headerView.findViewById(R.id.tv_user_title_name);
+        Glide.with(this).load("https://bingfilestore.blob.core.windows.net/homepage/app/Holiday2017/v1/icons/snow_40x40.png").into(circleImageView);
+        mUserName.setText("我的大头照");
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         ShowToast.shortTime("我点击了 naviagetion");
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        switch (item.getItemId()) {
+            case R.id.item_home:
+                // 主页
+                return true;
+            case R.id.item_download:
+                return true;
+            case R.id.item_vip:
+                return true;
+            case R.id.item_favourite:
+                return true;
+            case R.id.item_history:
+                return true;
+            case R.id.item_group:
+                return true;
+            case R.id.item_tracker:
+                return true;
+            case R.id.item_theme:
+                // 主题选择
+                changeTheme();
+                return true;
+            case R.id.item_app:
+                // 应用推荐
+                startActivity(new Intent(this, SettingActivity.class));
+                return true;
+            case R.id.item_settings:
+                // 设置中心
+                return true;
+            default:
+                mDrawerLayout.closeDrawers();
+                break;
+        }
         return false;
+    }
+
+    private void changeTheme() {
+        int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (mode == Configuration.UI_MODE_NIGHT_YES) {
+            SettingUtil.getInstance().setIsNightMode(false);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else {
+            SettingUtil.getInstance().setIsNightMode(true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+        recreate();
     }
 
     @Override
