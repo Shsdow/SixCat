@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app_bar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="false"
     android:orientation="vertical"
-    app:elevation="@dimen/dp_0"
-    android:theme="@style/AppTheme.AppBarOverlay">
+    android:theme="@style/AppTheme.AppBarOverlay"
+    app:elevation="@dimen/dp_0">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

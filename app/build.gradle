@@ -9,7 +9,7 @@ android {
     buildToolsVersion "27.0.0"
     defaultConfig {
         applicationId "com.six.cat.sixcat"
-        minSdkVersion 19
+        minSdkVersion 24
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -29,6 +29,7 @@ android {
 
     lintOptions {
         abortOnError false
+
     }
 
     buildTypes {
