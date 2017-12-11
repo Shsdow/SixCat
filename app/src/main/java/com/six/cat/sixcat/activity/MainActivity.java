@@ -240,7 +240,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 return true;
             case R.id.item_theme:
                 // 主题选择
-                changeTheme();
+//                changeTheme();
                 return true;
             case R.id.item_app:
                 // 应用推荐
