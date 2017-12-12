@@ -33,7 +33,7 @@ public class GuideActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        StatusBarUtil.setTransparent(this);
+        StatusBarUtil.setTranslucent(this,0);
         playVideo();
         initViewClick();
     }
