@@ -15,6 +15,7 @@ android {
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resConfigs "es"
     }
 
 //    signConfigs {
@@ -32,9 +33,15 @@ android {
 
     }
 
+    dexOptions{
+        javaMaxHeapSize "4g"
+    }
+
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->
                 variant.outputs.all { output ->

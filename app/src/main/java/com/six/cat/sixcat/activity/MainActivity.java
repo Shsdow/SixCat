@@ -2,6 +2,7 @@ package com.six.cat.sixcat.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -41,6 +42,8 @@ import java.util.Locale;
 
 import butterknife.BindView;
 
+import static com.six.cat.sixcat.R.style.AppTheme;
+
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -77,8 +80,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void initView(Bundle savedInstanceState) {
         StatusBarUtil.setTranslucent(this, 150);
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent, null));
 //        StatusBarUtil.setTransparent(this);
-//        StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.black, null));
+        StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.colorAccent, null));
         initFragments(savedInstanceState);
         initNavigationView();
     }
