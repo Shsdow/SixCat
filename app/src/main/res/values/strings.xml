@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SixCat1</string>
+    <string name="app_name">SixCat</string>
     <string name="item_settings">设置与帮助</string>
     <string name="item_app">应用推荐</string>
     <string name="item_theme">主题选择</string>

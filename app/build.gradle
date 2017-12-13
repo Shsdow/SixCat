@@ -33,7 +33,7 @@ android {
 
     }
 
-    dexOptions{
+    dexOptions {
         javaMaxHeapSize "4g"
     }
 
@@ -68,10 +68,10 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     //material design
     implementation 'com.android.support:design:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
     // retrofit 2
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -104,7 +104,9 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //statusbar
     implementation 'com.jaeger.statusbarutil:library:1.4.0'
-
+    //左滑退出activity
     implementation 'com.r0adkll:slidableactivity:2.0.6'
+    //MD Dialog  c 需更新gradle 版本
+    implementation 'com.afollestad.material-dialogs:commons:0.9.5.0'
 
 }
