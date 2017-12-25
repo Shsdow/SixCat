@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.view;
+c
 
 import android.content.Context;
 import android.content.res.TypedArray;

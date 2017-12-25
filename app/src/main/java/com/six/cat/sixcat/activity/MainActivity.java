@@ -2,10 +2,8 @@ package com.six.cat.sixcat.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -14,16 +12,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.jaeger.library.StatusBarUtil;
@@ -38,11 +32,11 @@ import com.six.cat.sixcat.utils.ShowToast;
 import com.six.cat.sixcat.view.CircleImageView;
 import com.six.cat.sixcat.widget.BottomNavigationViewHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
-
-import static com.six.cat.sixcat.R.style.AppTheme;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -71,6 +65,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final String SELECT_ITEM = "bottomNavigationSelectItem";
     private int position;
     private int index;
+    private List<String> titleList = new ArrayList<>();
 
     @Override
     public int getLayoutId() {
@@ -85,6 +80,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.colorAccent, null));
         initFragments(savedInstanceState);
         initNavigationView();
+        titleList.add("讲演");
+        titleList.add("枝丫");
+        titleList.add("线程");
+        titleList.add("记录");
     }
 
 
