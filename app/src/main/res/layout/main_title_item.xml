@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="UNKNOWN_DATA_0x7301">
+    android:layout_height="?attr/actionBarSize">
 
     <ImageView
         android:id="@+id/main_title_image"
@@ -11,14 +11,14 @@
 
     <View
         android:id="@+id/main_title_left"
-        android:layout_width="UNKNOWN_DATA_0x7f0a00ec"
-        android:layout_height="UNKNOWN_DATA_0x7f0a00ec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true" />
 
     <View
         android:id="@+id/main_title_right"
-        android:layout_width="UNKNOWN_DATA_0x7f0a00ec"
-        android:layout_height="UNKNOWN_DATA_0x7f0a00ec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true" />
 </RelativeLayout>
