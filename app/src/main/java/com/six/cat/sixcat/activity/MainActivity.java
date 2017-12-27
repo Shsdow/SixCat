@@ -2,6 +2,8 @@ package com.six.cat.sixcat.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -74,10 +76,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        StatusBarUtil.setTranslucent(this, 150);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent, null));
+//        StatusBarUtil.setTranslucent(this, 150);
+//        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent, null));
 //        StatusBarUtil.setTransparent(this);
-        StatusBarUtil.setColorForDrawerLayout(this, mDrawerLayout, getResources().getColor(R.color.colorAccent, null));
+        StatusBarUtil.setColorForDrawerLayout(MainActivity.this, mDrawerLayout, Color.parseColor("#20C1FD"), 255);
         initFragments(savedInstanceState);
         initNavigationView();
         titleList.add("讲演");
