@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.fragment;
+package com.six.cat.sixcat.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +19,7 @@ import butterknife.Unbinder;
  * @author liguoying
  * @date 2017/12/11.
  */
-public abstract class RxLazyFragment extends RxFragment {
+public abstract class BaseRxLazyFragment extends RxFragment {
     private View parentView;
     private FragmentActivity activity;
     // 标志位 标志已经初始化完成。

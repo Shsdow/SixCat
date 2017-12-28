@@ -3,13 +3,14 @@ package com.six.cat.sixcat.fragment;
 import android.os.Bundle;
 
 import com.six.cat.sixcat.R;
+import com.six.cat.sixcat.base.BaseRxLazyFragment;
 
 /**
  * @author liguoying
  * @date 2017/12/11.
  */
 
-public class PictureFragment extends RxLazyFragment {
+public class PictureFragment extends BaseRxLazyFragment {
 
     public static PictureFragment newInstance() {
         return new PictureFragment();
