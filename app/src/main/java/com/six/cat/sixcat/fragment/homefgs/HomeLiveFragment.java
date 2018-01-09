@@ -19,6 +19,7 @@ public class HomeLiveFragment extends BaseRxLazyFragment {
         }
         return instance;
     }
+
     @Override
     public int getLayoutResId() {
         return R.layout.fragment_ex;
