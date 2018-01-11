@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.six.cat.sixcat.module.base.IBasePresenter;
+import com.six.cat.sixcat.module.base.IBaseView;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import butterknife.ButterKnife;
@@ -19,7 +21,7 @@ import butterknife.Unbinder;
  * @author liguoying
  * @date 2017/12/11.
  */
-public abstract class BaseRxLazyFragment extends RxFragment {
+public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFragment implements IBaseView<T> {
     private View parentView;
     private FragmentActivity activity;
     // 标志位 标志已经初始化完成。
@@ -28,14 +30,16 @@ public abstract class BaseRxLazyFragment extends RxFragment {
     protected boolean isVisible;
     private Unbinder bind;
 
-    public abstract
     @LayoutRes
-    int getLayoutResId();
+    public abstract int getLayoutResId();
+
+    protected T presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
         parentView = inflater.inflate(getLayoutResId(), container, false);
         activity = getSupportActivity();
+        setPresenter(presenter);
         return parentView;
     }
 
