@@ -1,8 +1,6 @@
 package com.six.cat.sixcat.utils;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
 
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.SixCatApplication;
@@ -26,7 +24,7 @@ public class SettingUtil {
      * 获取是否开启无图模式
      */
     public boolean getIsNoPhotoMode() {
-        return SPUtil.getBoolean("switch_noPhotoMode", false) && NetWorkUitl.isMobileConnected(SixCatApplication.getInstance());
+        return SPUtil.getBoolean("switch_noPhotoMode", false) && NetWorkUtil.isMobileConnected(SixCatApplication.getInstance());
     }
 
     /**
@@ -142,7 +140,7 @@ public class SettingUtil {
      * 获取是否开启视频自动播放
      */
     public boolean getIsVideoAutoPlay() {
-        return SPUtil.getBoolean("video_auto_play", false) && NetWorkUitl.isWifiConnected(SixCatApplication.getInstance());
+        return SPUtil.getBoolean("video_auto_play", false) && NetWorkUtil.isWifiConnected(SixCatApplication.getInstance());
     }
 
     /**

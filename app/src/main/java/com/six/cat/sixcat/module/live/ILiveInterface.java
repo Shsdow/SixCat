@@ -1,7 +1,10 @@
 package com.six.cat.sixcat.module.live;
 
+import com.six.cat.sixcat.bean.LiveBean;
 import com.six.cat.sixcat.module.base.IBasePresenter;
 import com.six.cat.sixcat.module.base.IBaseView;
+
+import java.util.List;
 
 /**
  * @author liguoying
@@ -27,7 +30,7 @@ public interface ILiveInterface {
         /**
          * 设置适配器
          */
-        void doSetAdapter();
+        void doSetAdapter(List<LiveBean.SubjectsBean> mList);
 
         void doShowNoMore();
     }
