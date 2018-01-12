@@ -11,6 +11,9 @@ import com.six.cat.sixcat.adapter.HomeFgAdapter;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
 import com.six.cat.sixcat.utils.SettingUtil;
 import com.six.cat.sixcat.utils.ShowToast;
+import com.trello.rxlifecycle2.LifecycleTransformer;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -56,5 +59,40 @@ public class HomeFragment extends BaseRxLazyFragment {
         mHomeTb.setTabMode(TabLayout.MODE_SCROLLABLE);
         mHomeIv.setOnClickListener(view -> ShowToast.shortTime("i click it"));
         mHomell.setBackgroundColor(SettingUtil.getInstance().getColor());
+    }
+
+    @Override
+    public void onShowLoading() {
+
+    }
+
+    @Override
+    public void onHideLoading() {
+
+    }
+
+    @Override
+    public void onShowNetError() {
+
+    }
+
+    @Override
+    public void setPresenter(Object presenter) {
+
+    }
+
+    @Override
+    public void onShowNoMore() {
+
+    }
+
+    @Override
+    public LifecycleTransformer bindToLife() {
+        return null;
+    }
+
+    @Override
+    public void onSetAdapter(List list) {
+
     }
 }

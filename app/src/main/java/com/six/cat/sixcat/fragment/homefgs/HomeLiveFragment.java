@@ -1,8 +1,10 @@
 package com.six.cat.sixcat.fragment.homefgs;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
@@ -10,6 +12,7 @@ import com.six.cat.sixcat.module.live.ILiveInterface;
 import com.six.cat.sixcat.module.live.LiveContentPresenter;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILivePresenter;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILiveView;
+import com.six.cat.sixcat.utils.ShowToast;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import java.util.List;
@@ -22,12 +25,12 @@ import butterknife.BindView;
  */
 
 public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePresenter> implements ILiveView {
+    @SuppressLint("StaticFieldLeak")
+    private static HomeLiveFragment instance;
     @BindView(R.id.rv_show_items)
     RecyclerView mRecyclerView;
     @BindView(R.id.srl_show_live_items)
     SwipeRefreshLayout mSwipeRefreshLayout;
-
-    private static HomeLiveFragment instance;
 
     public static HomeLiveFragment newInstance() {
         if (instance == null) {
@@ -52,10 +55,7 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
             return;
         }
         mSwipeRefreshLayout.setOnRefreshListener(this::loadData);
-        mSwipeRefreshLayout.post(() -> {
-            mSwipeRefreshLayout.setRefreshing(true);
-            loadData();
-        });
+        isFresh(true);
     }
 
     @Override
@@ -66,22 +66,26 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     public void onShowLoading() {
-        mSwipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(true);
+        isFresh(true);
+    }
+
+    private void isFresh(boolean isFresh) {
+        mSwipeRefreshLayout.post(() -> {
+            if (isFresh) {
+                loadData();
             }
+            mSwipeRefreshLayout.setRefreshing(true);
         });
     }
 
     @Override
     public void onHideLoading() {
-
+        isFresh(false);
     }
 
     @Override
     public void onShowNetError() {
-
+        ShowToast.shortTime(R.string.network_error);
     }
 
     @Override
@@ -99,7 +103,9 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     public void onShowNoMore() {
-
+        getActivity().runOnUiThread(() -> {
+            ShowToast.shortTime(R.string.have_no_data);
+        });
     }
 
     @Override

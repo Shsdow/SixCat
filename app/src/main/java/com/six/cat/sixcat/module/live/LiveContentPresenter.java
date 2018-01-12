@@ -32,7 +32,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
     @Override
     public void doLoadData() {
 
-        RetrofitFactory.getRetrofit().create(ILiveApi.class).getLiveContent("北京", 0, 2)
+        RetrofitFactory.getRetrofit().create(ILiveApi.class).getLiveContent("北京", 0, count)
                 .subscribeOn(Schedulers.io())
                 .map(new Function<LiveBean, List<LiveBean.SubjectsBean>>() {
                     @Override
