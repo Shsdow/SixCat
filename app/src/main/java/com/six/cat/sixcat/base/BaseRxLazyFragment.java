@@ -124,7 +124,7 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
     }
 
     /**
-     * fragment懒加载方法
+     * fragment懒加载方法，获取页面信息，例如进行请求数据
      */
     protected void lazyLoad() {
     }

@@ -10,7 +10,7 @@ import android.net.NetworkInfo;
  * @date 2017/12/4.
  */
 
-public class NetWorkUitl {
+public class NetWorkUtil {
     /**
      * 判断是否有网络连接
      */

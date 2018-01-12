@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView;
 
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
-import com.six.cat.sixcat.module.base.IBaseView;
 import com.six.cat.sixcat.module.live.ILiveInterface;
+import com.six.cat.sixcat.module.live.LiveContentPresenter;
+import com.six.cat.sixcat.module.live.ILiveInterface.ILivePresenter;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILiveView;
 import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.android.FragmentEvent;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -36,7 +38,7 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     public int getLayoutResId() {
-        return R.layout.fragment_ex;
+        return R.layout.fragment_live;
     }
 
     @Override
@@ -58,11 +60,18 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     public void loadData() {
+        onShowLoading();
+        presenter.doLoadData();
     }
 
     @Override
     public void onShowLoading() {
-
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+            }
+        });
     }
 
     @Override
@@ -76,7 +85,20 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
     }
 
     @Override
-    public void setPresenter(ILiveInterface.ILivePresenter presenter) {
+    public void setPresenter(ILivePresenter presenter) {
+        if (presenter == null) {
+            this.presenter = new LiveContentPresenter(this);
+        }
+    }
+
+    @Override
+    public void onSetAdapter(List<?> list) {
+
+
+    }
+
+    @Override
+    public void onShowNoMore() {
 
     }
 
