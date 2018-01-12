@@ -1,6 +1,9 @@
 package com.six.cat.sixcat.module.live;
 
+import com.six.cat.sixcat.bean.LiveBean;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILivePresenter;
+
+import java.util.List;
 
 /**
  * @author liguoying
@@ -31,7 +34,7 @@ public class LivePersenter implements ILivePresenter {
     }
 
     @Override
-    public void doSetAdapter() {
+    public void doSetAdapter(List<LiveBean.SubjectsBean> mList) {
 
     }
 

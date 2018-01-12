@@ -11,6 +11,7 @@ import com.six.cat.sixcat.SixCatApplication;
 
 /**
  * Toast 工具类
+ *
  * @author liguoying
  * @date 2017/12/4.
  */
@@ -18,6 +19,10 @@ import com.six.cat.sixcat.SixCatApplication;
 public class ShowToast {
     private static Toast toast;
     private static TextView tvText;
+
+    public static void shortTime(int resId) {
+        shortTime(SixCatApplication.getInstance().getString(resId));
+    }
 
     public static void shortTime(String text) {
         if (SixCatApplication.getInstance() == null) {
