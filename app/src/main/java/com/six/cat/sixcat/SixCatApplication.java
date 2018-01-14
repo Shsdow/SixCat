@@ -2,6 +2,7 @@ package com.six.cat.sixcat;
 
 import android.app.Application;
 
+import com.akaita.java.rxjava2debug.RxJava2Debug;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
@@ -33,6 +34,12 @@ public class SixCatApplication extends Application {
 //        if (LeakCanary.isInAnalyzerProcess(this)) {
 //            return;
 //        }
+//        Fabric.with(this, new Crashlytics());
+
+        // Enable RxJava assembly stack collection, to make RxJava crash reports clear and unique
+        // Make sure this is called AFTER setting up any Crash reporting mechanism as Crashlytics
+        RxJava2Debug.enableRxJava2AssemblyTracking(new String[]{"com.six.cat.sixcat", "com.six.cat.sixcat"});
+
         LeakCanary.install(this);
     }
 }

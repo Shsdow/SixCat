@@ -54,7 +54,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
     public void doRefresh() {
         if (mLiveDataList.size() > 0) {
             mLiveDataList.clear();
-            count = 0;
+            count = 1;
         }
         mView.onShowLoading();
         doLoadData();
