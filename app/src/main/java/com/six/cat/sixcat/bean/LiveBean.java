@@ -25,6 +25,17 @@ public class LiveBean {
     private String title;
     private List<SubjectsBean> subjects;
 
+    @Override
+    public String toString() {
+        return "LiveBean{" +
+                "count=" + count +
+                ", start=" + start +
+                ", total=" + total +
+                ", title='" + title + '\'' +
+                ", subjects=" + subjects +
+                '}';
+    }
+
     public int getCount() {
         return count;
     }

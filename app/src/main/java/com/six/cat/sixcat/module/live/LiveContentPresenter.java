@@ -3,6 +3,7 @@ package com.six.cat.sixcat.module.live;
 import com.six.cat.sixcat.RetrofitFactory;
 import com.six.cat.sixcat.api.ILiveApi;
 import com.six.cat.sixcat.bean.LiveBean;
+import com.six.cat.sixcat.utils.LogUtil;
 import com.six.cat.sixcat.widget.ErrorAction;
 
 import java.util.ArrayList;
@@ -34,22 +35,17 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
         RetrofitFactory.getRetrofit().create(ILiveApi.class).getLiveContent("北京", 0, count)
                 .subscribeOn(Schedulers.io())
-                .map(new Function<LiveBean, List<LiveBean.SubjectsBean>>() {
-                    @Override
-                    public List<LiveBean.SubjectsBean> apply(LiveBean liveBean) throws Exception {
-                        return liveBean.getSubjects();
-                    }
+                .map(liveBean -> {
+                    LogUtil.e("abc" + liveBean.toString());
+                    return liveBean.getSubjects();
                 })
-                .compose(mView.<List<LiveBean.SubjectsBean>>bindToLife())
+//                .compose(mView.<List<LiveBean.SubjectsBean>>bindToLife())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<LiveBean.SubjectsBean>>() {
-                    @Override
-                    public void accept(List<LiveBean.SubjectsBean> subjectsBeans) throws Exception {
-                        if (subjectsBeans.size() > 0) {
-                            doSetAdapter(subjectsBeans);
-                        } else {
-                            doShowNoMore();
-                        }
+                .subscribe(subjectsBeans -> {
+                    if (subjectsBeans.size() > 0) {
+                        doSetAdapter(subjectsBeans);
+                    } else {
+                        doShowNoMore();
                     }
                 }, ErrorAction.error());
 
@@ -61,6 +57,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
             mLiveDataList.clear();
             count = 0;
         }
+        mView.onShowLoading();
         doLoadData();
     }
 
@@ -74,15 +71,14 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
     public void doSetAdapter(List<LiveBean.SubjectsBean> mList) {
         mLiveDataList.addAll(mList);
         mView.onSetAdapter(mLiveDataList);
+        mView.onHideLoading();
     }
 
 
     @Override
     public void doShowNoMore() {
         mView.onHideLoading();
-        if (mLiveDataList.size() > 0) {
-            mView.onShowNoMore();
-        }
+        mView.onShowNoMore();
     }
 
     @Override
