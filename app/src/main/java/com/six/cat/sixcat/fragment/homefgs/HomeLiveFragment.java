@@ -49,6 +49,7 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
         isPrepared = true;
 //        layLoadFragment();
         mSwipeRefreshLayout.setOnRefreshListener(() -> presenter.doRefresh());
+        isFresh(true);
     }
 
 

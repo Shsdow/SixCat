@@ -23,7 +23,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     private ILiveInterface.ILiveView mView;
     private List<LiveBean.SubjectsBean> mLiveDataList = new ArrayList<>();
-    private int count;
+    private int count = 2;
 
     public LiveContentPresenter(ILiveInterface.ILiveView mView) {
         this.mView = mView;
@@ -35,12 +35,12 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
         RetrofitFactory.getRetrofit().create(ILiveApi.class).getLiveContent("北京", 0, count)
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .map(liveBean -> {
                     LogUtil.e("abc" + liveBean.toString());
                     return liveBean.getSubjects();
                 })
-//                .compose(mView.<List<LiveBean.SubjectsBean>>bindToLife())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(mView.<List<LiveBean.SubjectsBean>>bindToLife())
                 .subscribe(subjectsBeans -> {
                     if (subjectsBeans.size() > 0) {
                         doSetAdapter(subjectsBeans);
@@ -48,7 +48,6 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
                         doShowNoMore();
                     }
                 }, ErrorAction.error());
-
     }
 
     @Override

@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface ILiveApi {
 
-    @GET("/in_theaters/?apikey=0b2bdeda43b5688921839c8ecb20399b&client=somemessage&udid=dddddddddddddddddddddd ")
+    @GET("https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&client=somemessage&udid=dddddddddddddddddddddd ")
     Observable<LiveBean> getLiveContent(
             @Query("city") String city,
             @Query("start") int start,
