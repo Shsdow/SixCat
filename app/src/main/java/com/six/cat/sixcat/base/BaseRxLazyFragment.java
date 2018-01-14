@@ -57,7 +57,6 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
      */
     public abstract void finishCreateView(Bundle state);
 
-
     @Override
     public void onResume() {
         super.onResume();
