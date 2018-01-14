@@ -69,7 +69,6 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
         bind.unbind();
     }
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
