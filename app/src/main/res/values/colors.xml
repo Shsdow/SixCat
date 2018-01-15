@@ -10,6 +10,7 @@
     <color name="viewBackground">@android:color/white</color>
     <color name="gray">#9cffffff</color>
     <color name="windowBackground">@color/Grey100</color>
+    <color name="transparent">#00ffffff</color>
 
 
     <color name="Grey50">#FAFAFA</color>
