@@ -11,6 +11,7 @@ import com.six.cat.sixcat.module.live.ILiveInterface;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILivePresenter;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILiveView;
 import com.six.cat.sixcat.module.live.LiveContentPresenter;
+import com.six.cat.sixcat.utils.LogUtil;
 import com.six.cat.sixcat.utils.ShowToast;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
@@ -47,9 +48,8 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
     @Override
     public void finishCreateView(Bundle state) {
         isPrepared = true;
-//        layLoadFragment();
         mSwipeRefreshLayout.setOnRefreshListener(() -> presenter.doRefresh());
-        isFresh(true);
+        lazyLoad();
     }
 
 
@@ -58,29 +58,25 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
         if (!isPrepared || !isVisible) {
             return;
         }
-        isFresh(true);
+        loadData();
         isPrepared = false;
-    }
-
-
-    @Override
-    public void onShowLoading() {
-        isFresh(true);
-    }
-
-    private void isFresh(boolean isFresh) {
-        mSwipeRefreshLayout.post(() -> {
-            if (isFresh) {
-                loadData();
-            }
-            mSwipeRefreshLayout.setRefreshing(true);
-        });
     }
 
     @Override
     public void loadData() {
         onShowLoading();
         presenter.doLoadData();
+    }
+
+    private void isFresh(boolean isFresh) {
+        mSwipeRefreshLayout.post(() -> {
+            mSwipeRefreshLayout.setRefreshing(true);
+        });
+    }
+
+    @Override
+    public void onShowLoading() {
+        isFresh(true);
     }
 
     @Override
@@ -102,8 +98,7 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     public void onSetAdapter(List<?> list) {
-
-
+        LogUtil.e("size:" + list.size());
     }
 
     @Override
@@ -112,10 +107,4 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
             ShowToast.shortTime(R.string.have_no_data);
         });
     }
-
-    @Override
-    public <T> LifecycleTransformer<T> bindToLife() {
-        return null;
-    }
-
 }

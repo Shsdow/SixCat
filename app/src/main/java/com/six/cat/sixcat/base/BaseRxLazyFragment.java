@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.six.cat.sixcat.module.base.IBasePresenter;
 import com.six.cat.sixcat.module.base.IBaseView;
+import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import butterknife.ButterKnife;
@@ -169,6 +171,10 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
     protected void finishTask() {
     }
 
+    @Override
+    public <T> LifecycleTransformer<T> bindToLife() {
+        return bindUntilEvent(FragmentEvent.DESTROY);
+    }
 
     @SuppressWarnings("unchecked")
     public <T extends View> T $(int id) {
