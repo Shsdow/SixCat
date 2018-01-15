@@ -68,12 +68,6 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
         presenter.doLoadData();
     }
 
-    private void isFresh(boolean isFresh) {
-        mSwipeRefreshLayout.post(() -> {
-            mSwipeRefreshLayout.setRefreshing(true);
-        });
-    }
-
     @Override
     public void onShowLoading() {
         isFresh(true);
@@ -82,6 +76,12 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
     @Override
     public void onHideLoading() {
         isFresh(false);
+    }
+
+    private void isFresh(boolean isFresh) {
+        mSwipeRefreshLayout.post(() -> {
+            mSwipeRefreshLayout.setRefreshing(isFresh);
+        });
     }
 
     @Override
@@ -98,7 +98,7 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     public void onSetAdapter(List<?> list) {
-        LogUtil.e("size:" + list.size());
+        LogUtil.e(list.size());
     }
 
     @Override

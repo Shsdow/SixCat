@@ -68,8 +68,8 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     @Override
     public void doSetAdapter(List<LiveBean.SubjectsBean> mList) {
-        mLiveDataList.addAll(mList);
-        mView.onSetAdapter(mLiveDataList);
+//        mLiveDataList.addAll(mList);
+        mView.onSetAdapter(mList);
         mView.onHideLoading();
     }
 

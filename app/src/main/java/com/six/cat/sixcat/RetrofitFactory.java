@@ -15,7 +15,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
+//import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -68,8 +68,8 @@ public class RetrofitFactory {
     public static Retrofit getRetrofit() {
         synchronized (Object) {
             if (retrofit == null) {
-                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
                 // 指定缓存路径,缓存大小 50Mb
                 Cache cache = new Cache(new File(SixCatApplication.getInstance().getCacheDir(), "HttpCache"),
                         1024 * 1024 * 50);
@@ -83,7 +83,7 @@ public class RetrofitFactory {
                         .cache(cache)
                         .addInterceptor(cacheControlInterceptor)
 //                        .addNetworkInterceptor(new StethoInterceptor())
-                        .addInterceptor(interceptor)
+//                        .addInterceptor(interceptor)
                         .connectTimeout(10, TimeUnit.SECONDS)
                         .readTimeout(15, TimeUnit.SECONDS)
                         .writeTimeout(15, TimeUnit.SECONDS)
