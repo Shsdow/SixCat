@@ -29,6 +29,7 @@ import com.six.cat.sixcat.fragment.HomeFragment;
 import com.six.cat.sixcat.fragment.PictureFragment;
 import com.six.cat.sixcat.fragment.ThemeFragment;
 import com.six.cat.sixcat.fragment.VideoFragment;
+import com.six.cat.sixcat.utils.SPUtil;
 import com.six.cat.sixcat.utils.SettingUtil;
 import com.six.cat.sixcat.utils.ShowToast;
 import com.six.cat.sixcat.view.CircleImageView;
@@ -76,6 +77,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        if (!SPUtil.getBoolean("isFirst")) {
+            startActivity(new Intent(this, GuideActivity.class));
+        }
 //        StatusBarUtil.setTranslucent(this, 150);
 //        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent, null));
 //        StatusBarUtil.setTransparent(this);

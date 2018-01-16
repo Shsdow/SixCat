@@ -35,11 +35,13 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
     private static HomeLiveFragment instance;
     private LiveFragementJavaAdapter mLiveFragmentAdapter;
     private List<LiveBean.SubjectsBean> mBeanList = new ArrayList<>();
+    private boolean isFreshing = false;
 
     @BindView(R.id.rv_show_items)
     RecyclerView mRecyclerView;
     @BindView(R.id.srl_show_live_items)
     SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     public static HomeLiveFragment newInstance() {
         if (instance == null) {
@@ -87,6 +89,7 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
     protected void initRefreshLayout() {
         LogUtil.e("bubu 3");
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            isFreshing = true;
             presenter.doRefresh();
         });
         mSwipeRefreshLayout.setColorSchemeColors(getApplicationContext().getResources().getColor(R.color.colorAccent));
@@ -133,9 +136,11 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     public void onSetAdapter(List<?> list) {
+        if (isFreshing && !mBeanList.isEmpty()) {
+            mBeanList.clear();
+        }
         mBeanList.addAll((Collection<? extends LiveBean.SubjectsBean>) list);
         mLiveFragmentAdapter.notifyDataSetChanged();
-        LogUtil.e(list.size());
     }
 
     @Override

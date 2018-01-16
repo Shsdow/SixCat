@@ -2,6 +2,7 @@ package com.six.cat.sixcat.adapter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -45,26 +46,26 @@ public class LiveFragementJavaAdapter extends BaseQuickAdapter<LiveBean.Subjects
             helper.setText(R.id.tv_item_title, item.getTitle());
             helper.setText(R.id.tv_director,
                     String.format(Locale.CHINA, SixCatApplication.getInstance().getResources().getString(R.string.showing_movie_actors), item.getDirectors().get(0).getName()));
-            String actors = "";
+            StringBuilder actors = new StringBuilder();
             List<LiveBean.SubjectsBean.CastsBean> castsBeanList = item.getCasts();
             int size = castsBeanList.size() - 1;
-            for (int i = 0; i < size; i++) {
-                actors += castsBeanList.get(i).getName() + (i == size ? "" : "/");
+            for (int i = 0; i <= size; i++) {
+                actors.append(castsBeanList.get(i).getName()).append(i == size ? "" : "/");
             }
-            helper.setText(R.id.tv_actor, actors);
-            LogUtil.e(item.getMainland_pubdate() + "9090" + mSimpleDateFormat.parse(item.getMainland_pubdate()).getTime() + " " + currentTime);
+            helper.setText(R.id.tv_actor, String.format(Locale.CHINA, SixCatApplication.getInstance().getResources().getString(R.string.showing_movie_actors), actors.toString()));
+            helper.setVisible(R.id.ll_star_show, false);
             if ((mSimpleDateFormat.parse(item.getMainland_pubdate()).getTime() > currentTime)) {
                 helper.setText(R.id.tv_port_status, "预售");
             } else {
+                helper.setVisible(R.id.ll_star_show, true);
                 helper.setText(R.id.tv_port_status, "购票");
+                helper.setText(R.id.tv_star_num, String.valueOf(item.getRating().getAverage()));
+                ((RatingBar) (helper.getView(R.id.rb_star))).setRating((float) item.getRating().getAverage() / 2.0f);
             }
-            ((RatingBar) (helper.getView(R.id.rb_star))).setRating((float) item.getRating().getAverage());
-            ;
+
             helper.setText(R.id.tv_want_to_watch_number, String.format(SixCatApplication.getInstance().getString(R.string.number_want_to_watch_movie), String.valueOf(item.getCollect_count())));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
     }
 }

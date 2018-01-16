@@ -34,6 +34,7 @@ public class GuideActivity extends BaseActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         StatusBarUtil.setTranslucent(this, 0);
+        SPUtil.setBoolean("isFirst", true);
         playVideo();
         initViewClick();
     }
@@ -59,8 +60,6 @@ public class GuideActivity extends BaseActivity {
     }
 
     private void finishVideo() {
-        startActivity(new Intent(this, MainActivity.class));
-        SPUtil.setString("firstGuide", "ok");
         mManager.finishActivity();
         mVideoView.destroyDrawingCache();
     }

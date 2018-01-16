@@ -22,8 +22,8 @@ import io.reactivex.schedulers.Schedulers;
 public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     private ILiveInterface.ILiveView mView;
-    private List<LiveBean.SubjectsBean> mLiveDataList = new ArrayList<>();
-    private int count = 2;
+//    private List<LiveBean.SubjectsBean> mLiveDataList = new ArrayList<>();
+    private int count = 10;
 
     public LiveContentPresenter(ILiveInterface.ILiveView mView) {
         this.mView = mView;
@@ -50,10 +50,11 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     @Override
     public void doRefresh() {
-        if (mLiveDataList.size() > 0) {
-            mLiveDataList.clear();
-            count = 1;
-        }
+//        if (mLiveDataList.size() > 0) {
+//            mLiveDataList.clear();
+//            count = 1;
+//        }
+        count = 10;
         mView.onShowLoading();
         doLoadData();
     }
