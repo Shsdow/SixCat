@@ -32,12 +32,10 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     @Override
     public void doLoadData() {
-
         RetrofitFactory.getRetrofit().create(ILiveApi.class).getLiveContent("北京", 0, count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(liveBean -> {
-                    LogUtil.e("abc" + liveBean.toString());
                     return liveBean.getSubjects();
                 })
                 .compose(mView.<List<LiveBean.SubjectsBean>>bindToLife())

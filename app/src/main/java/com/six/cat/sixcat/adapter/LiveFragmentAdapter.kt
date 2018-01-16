@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.bean.LiveBean
+import com.six.cat.sixcat.utils.LogUtil
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,6 +21,8 @@ class LiveFragmentAdapter(val context: Context, data: List<LiveBean.SubjectsBean
     private var currentTime: Long = System.currentTimeMillis()
 
     override fun convert(helper: BaseViewHolder, item: LiveBean.SubjectsBean) {
+
+        LogUtil.e("3634634636")
         helper.addOnClickListener(R.id.cv_item)
         Glide.with(context).load(item.images.medium).into(helper.getView(R.id.iv_post_card))
         helper.getView<TextView>(R.id.tv_item_title).text = item.title

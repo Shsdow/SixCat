@@ -41,20 +41,15 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
         parentView = inflater.inflate(getLayoutResId(), container, false);
+        bind = ButterKnife.bind(this, parentView);
         activity = getSupportActivity();
         setPresenter(presenter);
-        LogUtil.e("initView 111");
-
-
         return parentView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        bind = ButterKnife.bind(this, view);
-        LogUtil.e("initView 11122");
-        initView();
         finishCreateView(savedInstanceState);
     }
 
@@ -169,6 +164,9 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
      * 初始化 View
      */
     protected void initView() {
+        LogUtil.e("bubu 1");
+        initRecyclerView();
+        initRefreshLayout();
     }
 
     /**
@@ -177,11 +175,11 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
     protected void initRefreshLayout() {
     }
 
-    /**
-     * 设置数据显示
-     */
-    protected void finishTask() {
-    }
+//    /**
+//     * 设置数据显示
+//     */
+//    protected void finishTask() {
+//    }
 
     @Override
     public <T> LifecycleTransformer<T> bindToLife() {

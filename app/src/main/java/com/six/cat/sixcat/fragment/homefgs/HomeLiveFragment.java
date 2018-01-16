@@ -3,9 +3,11 @@ package com.six.cat.sixcat.fragment.homefgs;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.six.cat.sixcat.R;
+import com.six.cat.sixcat.adapter.LiveFragementJavaAdapter;
 import com.six.cat.sixcat.adapter.LiveFragmentAdapter;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
 import com.six.cat.sixcat.bean.LiveBean;
@@ -31,7 +33,7 @@ import butterknife.BindView;
 public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePresenter> implements ILiveView/*,SwipeRefreshLayout.OnRefreshListener*/ {
 
     private static HomeLiveFragment instance;
-    private LiveFragmentAdapter mLiveFragmentAdapter;
+    private LiveFragementJavaAdapter mLiveFragmentAdapter;
     private List<LiveBean.SubjectsBean> mBeanList = new ArrayList<>();
 
     @BindView(R.id.rv_show_items)
@@ -54,15 +56,25 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
     @Override
     public void finishCreateView(Bundle state) {
         isPrepared = true;
-        mSwipeRefreshLayout.setOnRefreshListener(() -> presenter.doRefresh());
-        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent, null));
-        LogUtil.e("initView 2");
         lazyLoad();
     }
 
-    protected void initView() {
-        LogUtil.e("initView 1");
-        mLiveFragmentAdapter = new LiveFragmentAdapter(getApplicationContext(), mBeanList);
+
+    @Override
+    protected void lazyLoad() {
+        if (!isPrepared || !isVisible) {
+            return;
+        }
+        initView();
+        isPrepared = false;
+    }
+
+    @Override
+    protected void initRecyclerView() {
+        LogUtil.e("bubu 2");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mLiveFragmentAdapter = new LiveFragementJavaAdapter(mBeanList);
         mLiveFragmentAdapter.openLoadAnimation();
         mLiveFragmentAdapter.setNotDoAnimationCount(3);
         mLiveFragmentAdapter.setOnItemChildClickListener((adapter, view, position) -> {
@@ -72,14 +84,18 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
     }
 
     @Override
-    protected void lazyLoad() {
-        if (!isPrepared || !isVisible) {
-            return;
-        }
-        initView();
-        loadData();
-        isPrepared = false;
+    protected void initRefreshLayout() {
+        LogUtil.e("bubu 3");
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            presenter.doRefresh();
+        });
+        mSwipeRefreshLayout.setColorSchemeColors(getApplicationContext().getResources().getColor(R.color.colorAccent));
+        mSwipeRefreshLayout.post(() -> {
+            mSwipeRefreshLayout.setRefreshing(true);
+            loadData();
+        });
     }
+
 
     @Override
     public void loadData() {

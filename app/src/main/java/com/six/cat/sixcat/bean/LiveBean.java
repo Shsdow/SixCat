@@ -113,6 +113,28 @@ public class LiveBean {
         private List<DirectorsBean> directors;
         private List<String> pubdates;
 
+        @Override
+        public String toString() {
+            return "SubjectsBean{" +
+                    "rating=" + rating +
+                    ", title='" + title + '\'' +
+                    ", collect_count=" + collect_count +
+                    ", mainland_pubdate='" + mainland_pubdate + '\'' +
+                    ", has_video=" + has_video +
+                    ", original_title='" + original_title + '\'' +
+                    ", subtype='" + subtype + '\'' +
+                    ", year='" + year + '\'' +
+                    ", images=" + images +
+                    ", alt='" + alt + '\'' +
+                    ", id='" + id + '\'' +
+                    ", genres=" + genres +
+                    ", casts=" + casts +
+                    ", durations=" + durations +
+                    ", directors=" + directors +
+                    ", pubdates=" + pubdates +
+                    '}';
+        }
+
         public RatingBean getRating() {
             return rating;
         }
@@ -500,6 +522,8 @@ public class LiveBean {
             private String name;
             private String alt;
             private String id;
+
+
 
             public AvatarsBeanX getAvatars() {
                 return avatars;
