@@ -6,7 +6,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.six.cat.sixcat.R;
+import com.six.cat.sixcat.adapter.LiveFragmentAdapter;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
+import com.six.cat.sixcat.bean.LiveBean;
 import com.six.cat.sixcat.module.live.ILiveInterface;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILivePresenter;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILiveView;
@@ -15,6 +17,8 @@ import com.six.cat.sixcat.utils.LogUtil;
 import com.six.cat.sixcat.utils.ShowToast;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,11 +29,13 @@ import butterknife.BindView;
  */
 
 public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePresenter> implements ILiveView/*,SwipeRefreshLayout.OnRefreshListener*/ {
+
     private static HomeLiveFragment instance;
+    private LiveFragmentAdapter mLiveFragmentAdapter;
+    private List<LiveBean.SubjectsBean> mBeanList = new ArrayList<>();
 
     @BindView(R.id.rv_show_items)
     RecyclerView mRecyclerView;
-
     @BindView(R.id.srl_show_live_items)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -49,15 +55,28 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
     public void finishCreateView(Bundle state) {
         isPrepared = true;
         mSwipeRefreshLayout.setOnRefreshListener(() -> presenter.doRefresh());
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent, null));
+        LogUtil.e("initView 2");
         lazyLoad();
     }
 
+    protected void initView() {
+        LogUtil.e("initView 1");
+        mLiveFragmentAdapter = new LiveFragmentAdapter(getApplicationContext(), mBeanList);
+        mLiveFragmentAdapter.openLoadAnimation();
+        mLiveFragmentAdapter.setNotDoAnimationCount(3);
+        mLiveFragmentAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            ShowToast.shortTime(R.string.show_toast_tip);
+        });
+        mRecyclerView.setAdapter(mLiveFragmentAdapter);
+    }
 
     @Override
     protected void lazyLoad() {
         if (!isPrepared || !isVisible) {
             return;
         }
+        initView();
         loadData();
         isPrepared = false;
     }
@@ -98,6 +117,8 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     public void onSetAdapter(List<?> list) {
+        mBeanList.addAll((Collection<? extends LiveBean.SubjectsBean>) list);
+        mLiveFragmentAdapter.notifyDataSetChanged();
         LogUtil.e(list.size());
     }
 

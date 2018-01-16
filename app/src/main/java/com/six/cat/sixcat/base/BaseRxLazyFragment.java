@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.six.cat.sixcat.module.base.IBasePresenter;
 import com.six.cat.sixcat.module.base.IBaseView;
+import com.six.cat.sixcat.utils.LogUtil;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxFragment;
@@ -42,6 +43,9 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
         parentView = inflater.inflate(getLayoutResId(), container, false);
         activity = getSupportActivity();
         setPresenter(presenter);
+        LogUtil.e("initView 111");
+
+
         return parentView;
     }
 
@@ -49,6 +53,8 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bind = ButterKnife.bind(this, view);
+        LogUtil.e("initView 11122");
+        initView();
         finishCreateView(savedInstanceState);
     }
 
@@ -157,6 +163,12 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
      * 初始化recyclerView
      */
     protected void initRecyclerView() {
+    }
+
+    /**
+     * 初始化 View
+     */
+    protected void initView() {
     }
 
     /**

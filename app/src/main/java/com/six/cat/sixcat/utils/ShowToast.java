@@ -1,5 +1,6 @@
 package com.six.cat.sixcat.utils;
 
+import android.support.annotation.IdRes;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;

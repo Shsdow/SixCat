@@ -33,7 +33,7 @@ public class GuideActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        StatusBarUtil.setTranslucent(this,0);
+        StatusBarUtil.setTranslucent(this, 0);
         playVideo();
         initViewClick();
     }
@@ -100,5 +100,6 @@ public class GuideActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         mVideoView.destroyDrawingCache();
+        mVideoView = null;
     }
 }

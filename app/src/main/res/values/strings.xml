@@ -39,4 +39,9 @@
     <string name="section_discover">发现</string>
     <string name="network_error">网络错误</string>
     <string name="have_no_data">暂无数据</string>
+
+    <string name="showing_movie_actors">主演：%1$s</string>
+    <string name="showing_movie_director">导演：%1$s</string>
+    <string name="number_want_to_watch_movie">%1$s人看过</string>
+    <string name="show_toast_tip">我是一个toast</string>
 </resources>
