@@ -53,7 +53,6 @@ public class LiveFragementJavaAdapter extends BaseQuickAdapter<LiveBean.Subjects
                 actors.append(castsBeanList.get(i).getName()).append(i == size ? "" : "/");
             }
             helper.setText(R.id.tv_actor, String.format(Locale.CHINA, SixCatApplication.getInstance().getResources().getString(R.string.showing_movie_actors), actors.toString()));
-            helper.setVisible(R.id.ll_star_show, false);
             if ((mSimpleDateFormat.parse(item.getMainland_pubdate()).getTime() > currentTime)) {
                 helper.setText(R.id.tv_port_status, "预售");
             } else {
