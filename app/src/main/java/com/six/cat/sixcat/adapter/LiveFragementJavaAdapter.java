@@ -45,7 +45,7 @@ public class LiveFragementJavaAdapter extends BaseQuickAdapter<LiveBean.Subjects
                     .apply(RequestOptions.bitmapTransform(new GlideCircleTransform(SixCatApplication.getInstance(), 4))).into((ImageView) helper.getView(R.id.iv_post_card));
             helper.setText(R.id.tv_item_title, item.getTitle());
             helper.setText(R.id.tv_director,
-                    String.format(Locale.CHINA, SixCatApplication.getInstance().getResources().getString(R.string.showing_movie_actors), item.getDirectors().get(0).getName()));
+                    String.format(Locale.CHINA, SixCatApplication.getInstance().getResources().getString(R.string.showing_movie_director), item.getDirectors().get(0).getName()));
             StringBuilder actors = new StringBuilder();
             List<LiveBean.SubjectsBean.CastsBean> castsBeanList = item.getCasts();
             int size = castsBeanList.size() - 1;
@@ -55,8 +55,12 @@ public class LiveFragementJavaAdapter extends BaseQuickAdapter<LiveBean.Subjects
             helper.setText(R.id.tv_actor, String.format(Locale.CHINA, SixCatApplication.getInstance().getResources().getString(R.string.showing_movie_actors), actors.toString()));
             if ((mSimpleDateFormat.parse(item.getMainland_pubdate()).getTime() > currentTime)) {
                 helper.setText(R.id.tv_port_status, "预售");
+                ((TextView) helper.getView(R.id.tv_not_on_show)).setVisibility(View.VISIBLE);
+                ((TextView) helper.getView(R.id.ll_star_show)).setVisibility(View.GONE);
+
             } else {
-                helper.setVisible(R.id.ll_star_show, true);
+                ((TextView) helper.getView(R.id.tv_not_on_show)).setVisibility(View.GONE);
+                ((TextView) helper.getView(R.id.ll_star_show)).setVisibility(View.VISIBLE);
                 helper.setText(R.id.tv_port_status, "购票");
                 helper.setText(R.id.tv_star_num, String.valueOf(item.getRating().getAverage()));
                 ((RatingBar) (helper.getView(R.id.rb_star))).setRating((float) item.getRating().getAverage() / 2.0f);

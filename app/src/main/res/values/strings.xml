@@ -44,4 +44,5 @@
     <string name="showing_movie_director">导演：%1$s</string>
     <string name="number_want_to_watch_movie">%1$s人看过</string>
     <string name="show_toast_tip">我是一个toast</string>
+    <string name="have_not_show">尚无上映</string>
 </resources>
