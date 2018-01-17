@@ -7,8 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.six.cat.sixcat.R;
-import com.six.cat.sixcat.adapter.LiveFragementJavaAdapter;
-import com.six.cat.sixcat.adapter.LiveFragmentAdapter;
+import com.six.cat.sixcat.adapter.LiveJavaAdapter;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
 import com.six.cat.sixcat.bean.LiveBean;
 import com.six.cat.sixcat.module.live.ILiveInterface;
@@ -33,7 +32,7 @@ import butterknife.BindView;
 public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePresenter> implements ILiveView/*,SwipeRefreshLayout.OnRefreshListener*/ {
 
     private static HomeLiveFragment instance;
-    private LiveFragementJavaAdapter mLiveFragmentAdapter;
+    private LiveJavaAdapter mLiveFragmentAdapter;
     private List<LiveBean.SubjectsBean> mBeanList = new ArrayList<>();
     private boolean isFreshing = false;
 
@@ -76,7 +75,7 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
         LogUtil.e("bubu 2");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mLiveFragmentAdapter = new LiveFragementJavaAdapter(mBeanList);
+        mLiveFragmentAdapter = new LiveJavaAdapter(mBeanList);
         mLiveFragmentAdapter.openLoadAnimation();
         mLiveFragmentAdapter.setNotDoAnimationCount(3);
         mLiveFragmentAdapter.setOnItemChildClickListener((adapter, view, position) -> {

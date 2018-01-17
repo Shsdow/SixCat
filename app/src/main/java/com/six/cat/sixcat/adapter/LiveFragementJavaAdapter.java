@@ -1,6 +1,5 @@
 package com.six.cat.sixcat.adapter;
 
-import android.content.Context;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,7 +14,6 @@ import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.SixCatApplication;
 import com.six.cat.sixcat.bean.LiveBean;
 import com.six.cat.sixcat.utils.GlideCircleTransform;
-import com.six.cat.sixcat.utils.LogUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +23,7 @@ import java.util.Locale;
 /**
  * @author liguoying
  * @date 2018/1/16.
+ * 对应的 kotlin 代码 {@link com.six.cat.sixcat.adapter.LiveFragementJavaAdapter}
  */
 
 public class LiveFragementJavaAdapter extends BaseQuickAdapter<LiveBean.SubjectsBean, BaseViewHolder> {
