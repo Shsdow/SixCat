@@ -1,6 +1,5 @@
-package com.six.cat.sixcat.fragment.homefgs;
+package com.six.cat.sixcat.module.live;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,13 +9,10 @@ import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.adapter.LiveJavaAdapter;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
 import com.six.cat.sixcat.bean.LiveBean;
-import com.six.cat.sixcat.module.live.ILiveInterface;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILivePresenter;
 import com.six.cat.sixcat.module.live.ILiveInterface.ILiveView;
-import com.six.cat.sixcat.module.live.LiveContentPresenter;
 import com.six.cat.sixcat.utils.LogUtil;
 import com.six.cat.sixcat.utils.ShowToast;
-import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import java.util.ArrayList;
 import java.util.Collection;
