@@ -97,7 +97,7 @@ public class RetrofitFactory {
                 }
 
                 retrofit =  new Retrofit.Builder()
-                        .baseUrl(HostApi.HOST_API)
+                        .baseUrl(HostApi.Companion.getHOST_API())
                         .client(builder.build())
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
