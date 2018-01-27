@@ -1,17 +1,13 @@
-package com.six.cat.sixcat.module.live;
+package com.six.cat.sixcat.module.movieshow;
 
 import com.six.cat.sixcat.RetrofitFactory;
 import com.six.cat.sixcat.api.ILiveApi;
 import com.six.cat.sixcat.bean.LiveBean;
-import com.six.cat.sixcat.utils.LogUtil;
 import com.six.cat.sixcat.widget.ErrorAction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**

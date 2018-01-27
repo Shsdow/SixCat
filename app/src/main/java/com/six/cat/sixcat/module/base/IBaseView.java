@@ -30,10 +30,7 @@ public interface IBaseView<T> {
      */
     void setPresenter(T presenter);
 
-    /**
-     * 设置适配器
-     */
-    void onSetAdapter(List<?> list);
+
 
     /**
      * 加载完毕

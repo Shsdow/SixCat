@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.module.live;
+package com.six.cat.sixcat.module.movieshow;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,8 +9,8 @@ import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.adapter.LiveJavaAdapter;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
 import com.six.cat.sixcat.bean.LiveBean;
-import com.six.cat.sixcat.module.live.ILiveInterface.ILivePresenter;
-import com.six.cat.sixcat.module.live.ILiveInterface.ILiveView;
+import com.six.cat.sixcat.module.movieshow.ILiveInterface.ILivePresenter;
+import com.six.cat.sixcat.module.movieshow.ILiveInterface.ILiveView;
 import com.six.cat.sixcat.utils.LogUtil;
 import com.six.cat.sixcat.utils.ShowToast;
 

@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.fragment.homefgs.HomeBangumiFragment;
-import com.six.cat.sixcat.module.live.HomeLiveFragment;
+import com.six.cat.sixcat.module.movieshow.HomeLiveFragment;
 import com.six.cat.sixcat.fragment.homefgs.HomeRecommendedFragment;
 import com.six.cat.sixcat.fragment.homefgs.HomeRegionFragment;
 
