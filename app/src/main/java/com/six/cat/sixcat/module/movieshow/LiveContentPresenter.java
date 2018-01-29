@@ -3,7 +3,10 @@ package com.six.cat.sixcat.module.movieshow;
 import com.six.cat.sixcat.RetrofitFactory;
 import com.six.cat.sixcat.api.ILiveApi;
 import com.six.cat.sixcat.bean.LiveBean;
+import com.six.cat.sixcat.module.live.ILiveInterface;
 import com.six.cat.sixcat.widget.ErrorAction;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -61,12 +64,11 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
         doLoadData();
     }
 
-    @Override
-    public void doSetAdapter(List<LiveBean.SubjectsBean> mList) {
-//        mLiveDataList.addAll(mList);
-        mView.onSetAdapter(mList);
-        mView.onHideLoading();
-    }
+//    @Override
+//    public void doSetAdapter(List<LiveBean.SubjectsBean> mList) {
+////        mLiveDataList.addAll(mList);
+//
+//    }
 
 
     @Override
@@ -79,5 +81,11 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
     public void doShowNetError() {
         mView.onHideLoading();
         mView.onShowNetError();
+    }
+
+    @Override
+    public void doSetAdapter(@NotNull List<? extends LiveBean.SubjectsBean> mList) {
+        mView.onSetAdapter(mList);
+        mView.onHideLoading();
     }
 }

@@ -65,7 +65,7 @@ public class HomeRegionFragment extends BaseRxLazyFragment {
     }
 
     @Override
-    public void onSetAdapter(List list) {
+    public void  onSetAdapter(List list) {
 
     }
 }

@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.module.movieshow
+package com.six.cat.sixcat.module.live
 
 import com.six.cat.sixcat.bean.LiveBean
 import com.six.cat.sixcat.module.base.IBasePresenter
@@ -6,16 +6,13 @@ import com.six.cat.sixcat.module.base.IBaseView
 
 /**
  * @author liguoying
+ * *
  * @date 2018/1/9.
  */
 
 interface ILiveInterface {
     interface ILiveView : IBaseView<ILivePresenter> {
         fun loadData()
-        /**
-         * 设置适配器
-         */
-        fun onSetAdapter(list: List<*>)
     }
 
     interface ILivePresenter : IBasePresenter {

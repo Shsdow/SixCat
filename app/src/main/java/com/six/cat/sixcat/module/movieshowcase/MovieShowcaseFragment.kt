@@ -9,6 +9,10 @@ import com.six.cat.sixcat.base.BaseRxLazyFragment
  * @date 2018/1/27.
  */
 class MovieShowcaseFragment : BaseRxLazyFragment<IMovieShowcaseManager.IMoviewShowcasePresenter>(),IMovieShowcaseManager.IMoviewShowcaseView{
+    override fun onSetAdapter(list: MutableList<*>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onShowLoading() {
 
     }

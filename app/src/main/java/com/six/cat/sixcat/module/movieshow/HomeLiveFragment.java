@@ -9,8 +9,7 @@ import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.adapter.LiveJavaAdapter;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
 import com.six.cat.sixcat.bean.LiveBean;
-import com.six.cat.sixcat.module.movieshow.ILiveInterface.ILivePresenter;
-import com.six.cat.sixcat.module.movieshow.ILiveInterface.ILiveView;
+import com.six.cat.sixcat.module.live.ILiveInterface;
 import com.six.cat.sixcat.utils.LogUtil;
 import com.six.cat.sixcat.utils.ShowToast;
 
@@ -25,7 +24,7 @@ import butterknife.BindView;
  * @date 2017/12/27.
  */
 
-public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePresenter> implements ILiveView/*,SwipeRefreshLayout.OnRefreshListener*/ {
+public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePresenter> implements ILiveInterface.ILiveView/*,SwipeRefreshLayout.OnRefreshListener*/ {
 
     private static HomeLiveFragment instance;
     private LiveJavaAdapter mLiveFragmentAdapter;
@@ -123,7 +122,7 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
     }
 
     @Override
-    public void setPresenter(ILivePresenter presenter) {
+    public void setPresenter(ILiveInterface.ILivePresenter presenter) {
         if (presenter == null) {
             this.presenter = new LiveContentPresenter(this);
         }
