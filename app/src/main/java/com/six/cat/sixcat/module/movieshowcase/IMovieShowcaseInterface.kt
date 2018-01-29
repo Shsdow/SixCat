@@ -13,6 +13,6 @@ interface IMovieShowcaseManager {
     }
 
     interface IMoviewShowcasePresenter : IBasePresenter {
-        fun doLoadData()
+        fun doLoadData(movieId: String?)
     }
 }

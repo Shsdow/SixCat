@@ -39,9 +39,16 @@
     </style>
 
     <style name="SmallRatingStar" parent="@android:style/Widget.Holo.Light.RatingBar.Small">
-        <item name="android:maxHeight">@dimen/dp_20</item>
         <item name="android:indeterminateDrawable">@drawable/frodo_ratingbar_xsmall</item>
         <item name="android:progressDrawable">@drawable/frodo_ratingbar_xsmall</item>
+        <item name="android:maxHeight">@dimen/dp_20</item>
+        <item name="android:minHeight">@dimen/dp_20</item>
+    </style>
+
+    <style name="SmallRatingStarller" parent="@android:style/Widget.Holo.Light.RatingBar.Small">
+        <item name="android:indeterminateDrawable">@drawable/frodo_ratingbar_xsmall</item>
+        <item name="android:progressDrawable">@drawable/frodo_ratingbar_xsmall</item>
+        <item name="android:maxHeight">@dimen/dp_20</item>
         <item name="android:minHeight">@dimen/dp_20</item>
     </style>
 

@@ -45,4 +45,7 @@
     <string name="number_want_to_watch_movie">%1$s人看过</string>
     <string name="show_toast_tip">我是一个toast</string>
     <string name="have_not_show">尚无上映</string>
+    <string name="movie_show_case">%s\n上映时间:%s\n片长:%d分钟</string>
+    <string name="file_score_text">豆瓣评分</string>
+    <string name="movie_short_content">内容简介</string>
 </resources>

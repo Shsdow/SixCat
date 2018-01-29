@@ -1,5 +1,6 @@
 package com.six.cat.sixcat.module.movieshow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import com.six.cat.sixcat.adapter.LiveJavaAdapter;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
 import com.six.cat.sixcat.bean.LiveBean;
 import com.six.cat.sixcat.module.live.ILiveInterface;
+import com.six.cat.sixcat.module.movieshowcase.MovieShowcaseActivity;
 import com.six.cat.sixcat.utils.LogUtil;
 import com.six.cat.sixcat.utils.ShowToast;
 
@@ -74,10 +76,11 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
         mLiveFragmentAdapter.openLoadAnimation();
         mLiveFragmentAdapter.setNotDoAnimationCount(3);
         mLiveFragmentAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            ShowToast.shortTime(R.string.show_toast_tip);
+            startActivity(new Intent(getContext(), MovieShowcaseActivity.class).putExtra("movieId", mBeanList.get(position).getId()));
         });
         mRecyclerView.setAdapter(mLiveFragmentAdapter);
     }
+
 
     @Override
     protected void initRefreshLayout() {

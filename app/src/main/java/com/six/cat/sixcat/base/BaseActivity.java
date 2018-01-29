@@ -4,16 +4,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.six.cat.sixcat.R;
+import com.six.cat.sixcat.module.base.IBasePresenter;
+import com.six.cat.sixcat.module.base.IBaseView;
 import com.six.cat.sixcat.utils.ActivityManager;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity extends RxAppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity  {
 
     public ActivityManager mManager;
     private Unbinder bind;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

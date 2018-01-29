@@ -64,13 +64,6 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
         doLoadData();
     }
 
-//    @Override
-//    public void doSetAdapter(List<LiveBean.SubjectsBean> mList) {
-////        mLiveDataList.addAll(mList);
-//
-//    }
-
-
     @Override
     public void doShowNoMore() {
         mView.onHideLoading();
