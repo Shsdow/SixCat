@@ -29,6 +29,7 @@ import com.six.cat.sixcat.fragment.HomeFragment;
 import com.six.cat.sixcat.fragment.PictureFragment;
 import com.six.cat.sixcat.fragment.ThemeFragment;
 import com.six.cat.sixcat.fragment.VideoFragment;
+import com.six.cat.sixcat.module.base.IBasePresenter;
 import com.six.cat.sixcat.utils.SPUtil;
 import com.six.cat.sixcat.utils.SettingUtil;
 import com.six.cat.sixcat.utils.ShowToast;
@@ -41,7 +42,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity<IBasePresenter>implements NavigationView.OnNavigationItemSelectedListener {
 
 
     @BindView(R.id.drawer_layout)
@@ -290,5 +291,30 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             ShowToast.shortTime("我点击了 menu");
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onShowLoading() {
+
+    }
+
+    @Override
+    public void onHideLoading() {
+
+    }
+
+    @Override
+    public void onShowNetError() {
+
+    }
+
+    @Override
+    public void setPresenter(IBasePresenter presenter) {
+
+    }
+
+    @Override
+    public void onShowNoMore() {
+
     }
 }

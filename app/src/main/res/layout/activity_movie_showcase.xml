@@ -9,9 +9,9 @@
 
     <com.six.cat.sixcat.view.ObserverScrollView
         android:id="@+id/obsv_"
-        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,5 +97,25 @@
 
 
     </com.six.cat.sixcat.view.ObserverScrollView>
+
+    <View
+        android:id="@+id/vw_action"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:background="@color/transparent" />
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_below="@id/vw_action"
+        android:background="@color/transparent">
+
+        <ImageView
+            android:id="@+id/iv_finish"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:background="@drawable/finish" />
+
+    </android.support.v7.widget.Toolbar>
 
 </RelativeLayout>

@@ -59,8 +59,5 @@ public class PictureFragment extends BaseRxLazyFragment {
         return null;
     }
 
-    @Override
-    public void onSetAdapter(List list) {
 
-    }
 }

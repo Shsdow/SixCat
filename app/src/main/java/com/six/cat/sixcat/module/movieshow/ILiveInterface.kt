@@ -13,6 +13,10 @@ import com.six.cat.sixcat.module.base.IBaseView
 interface ILiveInterface {
     interface ILiveView : IBaseView<ILivePresenter> {
         fun loadData()
+        /**
+         * 设置适配器
+         */
+        abstract fun onSetAdapter(list: List<*>)
     }
 
     interface ILivePresenter : IBasePresenter {

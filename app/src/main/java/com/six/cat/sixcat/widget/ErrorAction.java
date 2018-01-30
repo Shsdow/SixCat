@@ -14,12 +14,9 @@ import io.reactivex.functions.Consumer;
 public class ErrorAction {
     @NonNull
     public static Consumer<Throwable> error() {
-        return new Consumer<Throwable>() {
-            @Override
-            public void accept(@NonNull Throwable throwable) throws Exception {
-                if (BuildConfig.DEBUG) {
-                    throwable.printStackTrace();
-                }
+        return throwable -> {
+            if (BuildConfig.DEBUG) {
+                throwable.printStackTrace();
             }
         };
     }

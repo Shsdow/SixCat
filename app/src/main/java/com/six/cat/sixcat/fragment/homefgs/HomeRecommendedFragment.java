@@ -64,8 +64,5 @@ public class HomeRecommendedFragment extends BaseRxLazyFragment {
         return null;
     }
 
-    @Override
-    public void onSetAdapter(List list) {
 
-    }
 }

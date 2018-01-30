@@ -9,7 +9,7 @@
         android:background="@color/windowBackground">
 
         <TextView
-            android:id="@+id/tv_movie_name"
+            android:id="@+id/tvMovieName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_10"
@@ -22,7 +22,7 @@
             android:id="@+id/tv_movie_showcase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_movie_name"
+            android:layout_below="@id/tvMovieName"
             android:layout_marginStart="@dimen/dp_10"
             android:textSize="@dimen/dp_10" />
 
@@ -49,14 +49,16 @@
                     android:textSize="@dimen/textSize_small" />
 
                 <TextView
+                    android:id="@+id/tvMovieScore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/textSize_18sp"
                     android:textStyle="bold"
                     tools:text="7.6" />
 
                 <RatingBar
-                    android:id="@+id/rb_star"
+                    android:id="@+id/rbStarNum"
                     style="@style/SmallRatingStar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,7 +68,7 @@
                     android:rating="3.3" />
 
                 <TextView
-                    android:id="@+id/tv_watcher_num"
+                    android:id="@+id/tvWatherNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/textSize_small"

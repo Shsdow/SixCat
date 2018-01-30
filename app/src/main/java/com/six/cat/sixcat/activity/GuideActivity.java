@@ -11,6 +11,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.base.BaseActivity;
 import com.six.cat.sixcat.constants.Constants;
+import com.six.cat.sixcat.module.base.IBasePresenter;
 import com.six.cat.sixcat.utils.SPUtil;
 import com.six.cat.sixcat.view.CustomerVideoView;
 
@@ -19,7 +20,7 @@ import butterknife.BindView;
 /**
  * 首次进入app的展示：1.视频展示 2.多图片滑动
  */
-public class GuideActivity extends BaseActivity {
+public class GuideActivity extends BaseActivity<IBasePresenter> {
     @BindView(R.id.cvv_guide_video)
     CustomerVideoView mVideoView;
     @BindView(R.id.tv_guide_exit)
@@ -100,5 +101,30 @@ public class GuideActivity extends BaseActivity {
         super.onDestroy();
         mVideoView.destroyDrawingCache();
         mVideoView = null;
+    }
+
+    @Override
+    public void onShowLoading() {
+
+    }
+
+    @Override
+    public void onHideLoading() {
+
+    }
+
+    @Override
+    public void onShowNetError() {
+
+    }
+
+    @Override
+    public void setPresenter(IBasePresenter presenter) {
+
+    }
+
+    @Override
+    public void onShowNoMore() {
+
     }
 }

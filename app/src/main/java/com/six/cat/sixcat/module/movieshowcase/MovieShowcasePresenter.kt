@@ -1,6 +1,13 @@
 package com.six.cat.sixcat.module.movieshowcase
 
+import com.six.cat.sixcat.BuildConfig
+import com.six.cat.sixcat.RetrofitFactory
+import com.six.cat.sixcat.api.ILiveApi
 import com.six.cat.sixcat.module.live.ILiveInterface
+import com.six.cat.sixcat.widget.ErrorAction
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.util.function.Consumer
 
 /**
  * @author liguoying
@@ -10,15 +17,41 @@ class MovieShowcasePresenter(val mView: IMovieShowcaseManager.IMoviewShowcaseVie
 
 
     override fun doRefresh() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun doShowNetError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun doLoadData(movieId: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        RetrofitFactory.getRetrofit().create(ILiveApi::class.java).getMovieShowcase(movieId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(mView.bindToLife())
+                .subscribe({ movieShowcasebean ->
+                    if (movieShowcasebean != null) {
+                        doSetData(movieShowcasebean!!)
+                    } else {
+                        doNotShowMore()
+                    }
+                }, { throwable ->
+                    doShowNetError()
+                    if (BuildConfig.DEBUG) {
+                        throwable.printStackTrace()
+                    }
+                })
     }
+
+    override fun doSetData(movieShowcaseBean: MovieShowcaseBean) {
+        mView.onShowLoading()
+        mView.doSetData(movieShowcaseBean)
+    }
+
+    override fun doShowNetError() {
+        mView.onHideLoading()
+        mView.onShowNoMore()
+    }
+
+    override fun doNotShowMore() {
+        mView.onHideLoading()
+        mView.onShowNoMore()
+    }
+
 
 }

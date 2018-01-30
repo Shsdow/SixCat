@@ -1,10 +1,12 @@
 package com.six.cat.sixcat.api
 
 import com.six.cat.sixcat.bean.LiveBean
+import com.six.cat.sixcat.module.movieshowcase.MovieShowcaseBean
 
 import io.reactivex.Observable
 
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -28,4 +30,9 @@ interface ILiveApi {
             @Query("start") start: Int,
             @Query("count") count: Int
     ): Observable<LiveBean>
+
+    @GET("http://api.douban.com/v2/movie/subject/{movieId}?apikey=0b2bdeda43b5688921839c8ecb20399b&city=%E5%8C%97%E4%BA%AC&client=something&udid=dddddddddddddddddddddd")
+    fun getMovieShowcase(
+            @Path("movieId") movieId: String?
+    ): Observable<MovieShowcaseBean>
 }

@@ -6,8 +6,9 @@ import android.support.annotation.NonNull;
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.base.BaseActivity;
+import com.six.cat.sixcat.module.base.IBasePresenter;
 
-public class SettingActivity extends BaseActivity implements ColorChooserDialog.ColorCallback{
+public class SettingActivity extends BaseActivity<IBasePresenter> implements ColorChooserDialog.ColorCallback{
 
     @Override
     public int getLayoutId() {
@@ -31,6 +32,31 @@ public class SettingActivity extends BaseActivity implements ColorChooserDialog.
 
     @Override
     public void onColorChooserDismissed(@NonNull ColorChooserDialog dialog) {
+
+    }
+
+    @Override
+    public void onShowLoading() {
+
+    }
+
+    @Override
+    public void onHideLoading() {
+
+    }
+
+    @Override
+    public void onShowNetError() {
+
+    }
+
+    @Override
+    public void setPresenter(IBasePresenter presenter) {
+
+    }
+
+    @Override
+    public void onShowNoMore() {
 
     }
 }
