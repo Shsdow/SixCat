@@ -22,14 +22,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.GuideActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SixCatTheme">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".activity.SettingActivity" />
 
-        <activity android:name=".module.movieshowcase.MovieShowcaseActivity" />
+        <activity
+            android:name=".module.movieshowcase.MovieShowcaseActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/windowBackground">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tvMovieName"
