@@ -69,7 +69,6 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     protected void initRecyclerView() {
-        LogUtil.e("bubu 2");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mLiveFragmentAdapter = new LiveJavaAdapter(mBeanList);

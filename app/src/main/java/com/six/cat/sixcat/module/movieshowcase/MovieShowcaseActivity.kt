@@ -1,15 +1,20 @@
 package com.six.cat.sixcat.module.movieshowcase
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.bumptech.glide.Glide
 import com.six.cat.sixcat.R
+import com.six.cat.sixcat.adapter.MovieShowcaseDiscussAdapter
 import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.module.movieshowcase.IMovieShowcaseManager.IMoviewShowcasePresenter
 import com.six.cat.sixcat.utils.LogUtil
+import kotlinx.android.synthetic.main.activity_movie_showcase.*
 import kotlinx.android.synthetic.main.movie_showcase_image.*
 import kotlinx.android.synthetic.main.movie_showcase_movie_content.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * @author liguoying
@@ -17,6 +22,8 @@ import java.util.*
  */
 class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieShowcaseManager.IMoviewShowcaseView {
     private var movieId: String? = null
+    private var adapter: MovieShowcaseDiscussAdapter? = null
+    private var showCaseList: ArrayList<MovieShowcaseBean.PopularCommentsBean>? = null
 
 
     override fun getLayoutId(): Int {
@@ -25,7 +32,18 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
 
     override fun initView(savedInstanceState: Bundle?) {
         movieId = this.intent.getStringExtra("movieId")
+        initActivityViews()
         loadData()
+    }
+
+    private fun initActivityViews() {
+        showCaseList = ArrayList()
+        val linearlayoutManager = LinearLayoutManager(this)
+        linearlayoutManager.orientation = LinearLayoutManager.VERTICAL
+        rvDiscuss.layoutManager = linearlayoutManager
+        rvDiscuss.isNestedScrollingEnabled = false
+        adapter = MovieShowcaseDiscussAdapter(this, showCaseList)
+        rvDiscuss.adapter = adapter
     }
 
     override fun initToolBar() {
@@ -70,7 +88,8 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
         tvMovieScore.text = movieShowcaseBean.rating?.average.toString()
         tvWatherNum.text = String.format(Locale.CHINA, resources.getString(R.string.movie_show_case_count), movieShowcaseBean.ratings_count)
         rbStarNum.rating = movieShowcaseBean.rating?.average!!.toFloat() / 2
-
+        showCaseList?.addAll(movieShowcaseBean.popular_comments!!)
+        adapter!!.notifyDataSetChanged()
     }
 
 }
