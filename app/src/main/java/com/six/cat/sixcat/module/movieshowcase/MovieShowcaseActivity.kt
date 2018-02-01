@@ -9,6 +9,7 @@ import com.six.cat.sixcat.R
 import com.six.cat.sixcat.adapter.MovieShowcaseDiscussAdapter
 import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.module.movieshowcase.IMovieShowcaseManager.IMoviewShowcasePresenter
+import com.six.cat.sixcat.utils.FullyLinearLayoutManager
 import com.six.cat.sixcat.utils.LogUtil
 import kotlinx.android.synthetic.main.activity_movie_showcase.*
 import kotlinx.android.synthetic.main.movie_showcase_image.*
@@ -90,6 +91,11 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
         rbStarNum.rating = movieShowcaseBean.rating?.average!!.toFloat() / 2
         showCaseList?.addAll(movieShowcaseBean.popular_comments!!)
         adapter!!.notifyDataSetChanged()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mManager.finishActivity()
     }
 
 }

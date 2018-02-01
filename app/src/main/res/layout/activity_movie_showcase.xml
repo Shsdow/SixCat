@@ -11,17 +11,19 @@
         android:id="@+id/obsv_"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fillViewport="true"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:descendantFocusability="blocksDescendants"
+
             android:orientation="vertical">
 
             <include layout="@layout/movie_showcase_image" />
 
             <include layout="@layout/movie_showcase_movie_content" />
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_show_image"
@@ -53,13 +55,21 @@
 
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvCommand"
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvDiscuss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvDiscuss"
+                android:id="@+id/rvCommand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
