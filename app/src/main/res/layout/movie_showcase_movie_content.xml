@@ -14,19 +14,21 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_10"
             android:textColor="@color/black"
-            android:textSize="@dimen/textSize_18sp"
+            android:textSize="@dimen/textSize_20sp"
             android:textStyle="bold"
             tools:text="无问西东" />
 
         <TextView
-            android:id="@+id/tv_movie_showcase"
+            android:id="@+id/tvMovieShortShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvMovieName"
             android:layout_marginStart="@dimen/dp_10"
-            android:textSize="@dimen/dp_10" />
+            android:lineSpacingMultiplier="1.2"
+            android:textSize="@dimen/textSize_small" />
 
         <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -65,12 +67,13 @@
                     android:layout_gravity="center"
                     android:minHeight="@dimen/dp_15"
                     android:numStars="5"
-                    android:rating="3.3" />
+                    tools:rating="3.3" />
 
                 <TextView
                     android:id="@+id/tvWatherNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:textSize="@dimen/textSize_small"
                     tools:text="235人" />
 

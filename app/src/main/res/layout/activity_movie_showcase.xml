@@ -53,12 +53,12 @@
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_command"
+                android:id="@+id/rvCommand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/tv_discuss"
+                android:id="@+id/tvDiscuss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

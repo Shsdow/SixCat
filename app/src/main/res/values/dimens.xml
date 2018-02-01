@@ -24,7 +24,6 @@
     <dimen name="dp_220">220dp</dimen>
     <dimen name="dp_250">250dp</dimen>
 
-
     <dimen name="textSize_smallest">10sp</dimen>
     <dimen name="textSize_small">12sp</dimen>
     <dimen name="textSize_normal">14sp</dimen>
