@@ -32,7 +32,7 @@
 
         <activity
             android:name=".module.movieshowcase.MovieShowcaseActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/titleTheme" />
     </application>
 
 </manifest>

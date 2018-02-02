@@ -81,7 +81,6 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
                 iv_finish.setImageResource(R.drawable.finish)
             }
         }
-
     }
 
     fun titlebarAlphaChange(dy: Int, mHeadHeighPx: Float) {
