@@ -1,12 +1,16 @@
 package com.six.cat.sixcat.module.movieshowcase
 
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.graphics.Palette
 import android.support.v7.widget.LinearLayoutManager
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.adapter.MovieShowcaseDiscussAdapter
 import com.six.cat.sixcat.base.BaseActivity
@@ -66,16 +70,14 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
         obsvAllData.setIScrollViewLisenter { oldy, dy, isUp ->
             val movieDistance = (headHeight - titleHeight).toFloat()
             if (!isUp && dy <= movieDistance) {
-                tbToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.pink_30))
-                vw_action.setBackgroundColor(ContextCompat.getColor(this, R.color.pink_30))
                 titlebarAlphaChange(dy, movieDistance)
-            }else if (!isUp && dy > movieDistance){
-                titlebarAlphaChange(1,1f)
+            } else if (!isUp && dy > movieDistance) {
+                titlebarAlphaChange(1, 1f)
                 iv_finish.setImageResource(R.drawable.ic_like)
-            }else if(isUp && dy > movieDistance){
+            } else if (isUp && dy > movieDistance) {
 
-            }else if (isUp && dy <= movieDistance){
-                titlebarAlphaChange(dy,movieDistance)
+            } else if (isUp && dy <= movieDistance) {
+                titlebarAlphaChange(dy, movieDistance)
                 iv_finish.setImageResource(R.drawable.finish)
             }
         }
@@ -138,7 +140,17 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
             yaear += "/" + it
         }
         tvMovieShortShow.text = String.format(Locale.CHINA, resources.getString(R.string.movie_show_case), yaear, movieShowcaseBean.mainland_pubdate, movieShowcaseBean.durations?.get(0).toString())
-        Glide.with(this).load(movieShowcaseBean.images?.large).into(ivMovieImage)
+        Glide.with(this).asBitmap().load(movieShowcaseBean.images?.large).into(object : SimpleTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>) {
+                ivMovieImage.setImageBitmap(resource)
+                Palette.from(resource).generate { palette ->
+                    val color = palette.getDominantColor(ContextCompat.getColor(this@MovieShowcaseActivity, R.color.blue_30))
+                    tbToolbar.setBackgroundColor(color)
+                    vw_action.setBackgroundColor(color)
+                    flBack.setBackgroundColor(color)
+                }
+            }
+        })
         tvMovieScore.text = movieShowcaseBean.rating?.average.toString()
         tvWatherNum.text = String.format(Locale.CHINA, resources.getString(R.string.movie_show_case_count), movieShowcaseBean.ratings_count)
         rbStarNum.rating = movieShowcaseBean.rating?.average!!.toFloat() / 2
