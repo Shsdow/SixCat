@@ -16,9 +16,33 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:id="@+id/llContain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <View
+                android:id="@+id/vw_action"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="@color/transparent" />
+
+            <android.support.v7.widget.Toolbar
+
+                android:id="@+id/tbToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+
+                android:layout_below="@id/vw_action"
+                android:background="@color/Blue_Grey">
+
+                <ImageView
+                    android:id="@+id/iv_finish"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    android:background="@drawable/finish" />
+
+            </android.support.v7.widget.Toolbar>
 
             <include layout="@layout/movie_showcase_image" />
 
@@ -55,7 +79,6 @@
 
             </LinearLayout>
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,9 +86,9 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvDiscuss"
-                    android:background="@color/white"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/white" />
 
             </RelativeLayout>
 
@@ -107,28 +130,6 @@
             <!--android:layout_marginTop="@dimen/dp_5" />-->
         </LinearLayout>
 
-
     </com.six.cat.sixcat.view.ObserverScrollView>
-
-    <View
-        android:id="@+id/vw_action"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_10"
-        android:background="@color/transparent" />
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tbToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_below="@id/vw_action"
-        android:background="@color/transparent">
-
-        <ImageView
-            android:id="@+id/iv_finish"
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
-            android:background="@drawable/finish" />
-
-    </android.support.v7.widget.Toolbar>
 
 </RelativeLayout>

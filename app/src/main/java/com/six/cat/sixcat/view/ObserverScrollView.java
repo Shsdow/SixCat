@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
 
+import com.six.cat.sixcat.utils.LogUtil;
+
 /**
  * @author liguoying
  * @date 2018/1/29.
@@ -29,6 +31,7 @@ public class ObserverScrollView extends ScrollView {
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
         if (mIScrollViewLisenter != null) {
+            LogUtil.e(l + "  " + "  " + t + " " + oldl + " " + oldt);
             if (oldt < t) {
                 mIScrollViewLisenter.onScroll(oldt, t, false);
             } else if (oldt > t) {
@@ -38,7 +41,7 @@ public class ObserverScrollView extends ScrollView {
     }
 
     public void setIScrollViewLisenter(IScrollViewLisenter scrollViewLisenter) {
-        scrollViewLisenter = mIScrollViewLisenter;
+        mIScrollViewLisenter = scrollViewLisenter;
     }
 
     public interface IScrollViewLisenter {

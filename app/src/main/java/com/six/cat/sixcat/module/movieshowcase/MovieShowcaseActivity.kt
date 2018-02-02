@@ -1,26 +1,18 @@
 package com.six.cat.sixcat.module.movieshowcase
 
-import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
-import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.WindowManager
 import com.bumptech.glide.Glide
-import com.scwang.smartrefresh.layout.util.DensityUtil
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.adapter.MovieShowcaseDiscussAdapter
 import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.module.movieshowcase.IMovieShowcaseManager.IMoviewShowcasePresenter
 import com.six.cat.sixcat.utils.DisplayUtil
-import com.six.cat.sixcat.utils.FullyLinearLayoutManager
-import com.six.cat.sixcat.utils.LogUtil
 import com.six.cat.sixcat.utils.WindowUtil
-import com.six.cat.sixcat.view.ObserverScrollView
 import kotlinx.android.synthetic.main.activity_movie_showcase.*
 import kotlinx.android.synthetic.main.movie_showcase_image.*
 import kotlinx.android.synthetic.main.movie_showcase_movie_content.*
@@ -44,7 +36,7 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
     override fun initView(savedInstanceState: Bundle?) {
         movieId = this.intent.getStringExtra("movieId")
         setLayoutParams()
-        initActivityViews()
+        initRecyclerview()
         initScrollView()
         loadData()
     }
@@ -77,6 +69,14 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
                 tbToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.pink_30))
                 vw_action.setBackgroundColor(ContextCompat.getColor(this, R.color.pink_30))
                 titlebarAlphaChange(dy, movieDistance)
+            }else if (!isUp && dy > movieDistance){
+                titlebarAlphaChange(1,1f)
+                iv_finish.setImageResource(R.drawable.ic_like)
+            }else if(isUp && dy > movieDistance){
+
+            }else if (isUp && dy <= movieDistance){
+                titlebarAlphaChange(dy,movieDistance)
+                iv_finish.setImageResource(R.drawable.finish)
             }
         }
 
@@ -91,7 +91,7 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
 
     }
 
-    private fun initActivityViews() {
+    private fun initRecyclerview() {
         showCaseList = ArrayList()
         val linearlayoutManager = LinearLayoutManager(this)
         linearlayoutManager.orientation = LinearLayoutManager.VERTICAL
