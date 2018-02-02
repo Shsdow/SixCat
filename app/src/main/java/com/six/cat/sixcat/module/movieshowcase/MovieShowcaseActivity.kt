@@ -83,12 +83,11 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
     }
 
     fun titlebarAlphaChange(dy: Int, mHeadHeighPx: Float) {
-        var rate: Float = Math.abs(dy) / Math.abs(mHeadHeighPx)
-        var alpha: Int = (rate * 255).toInt()
+        val rate: Float = Math.abs(dy) / Math.abs(mHeadHeighPx)
+        val alpha: Int = (rate * 255).toInt()
         tbToolbar.background.alpha = alpha
         vw_action.background.alpha = alpha
         iv_finish.background.alpha = 300 - alpha
-
     }
 
     private fun initRecyclerview() {
