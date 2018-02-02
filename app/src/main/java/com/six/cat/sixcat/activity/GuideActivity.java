@@ -101,6 +101,7 @@ public class GuideActivity extends BaseActivity<IBasePresenter> {
         super.onDestroy();
         mVideoView.destroyDrawingCache();
         mVideoView = null;
+        mManager.finishActivity();
     }
 
     @Override
