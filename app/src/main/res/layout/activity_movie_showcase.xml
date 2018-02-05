@@ -8,7 +8,6 @@
     tools:context=".module.movieshowcase.MovieShowcaseActivity">
 
 
-
     <com.six.cat.sixcat.view.ObserverScrollView
         android:id="@+id/obsvAllData"
         android:layout_width="match_parent"
@@ -126,10 +125,21 @@
         android:background="@color/tran">
 
         <ImageView
-            android:id="@+id/iv_finish"
+            android:id="@+id/ivFinish"
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
             android:background="@drawable/finish" />
+
+        <TextView
+            android:id="@+id/tvTitleMovieName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/action_search"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize_large"
+            android:visibility="gone" />
+
 
     </android.support.v7.widget.Toolbar>
 

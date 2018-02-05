@@ -31,7 +31,6 @@ public class ObserverScrollView extends ScrollView {
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
         if (mIScrollViewLisenter != null) {
-            LogUtil.e(l + "  " + "  " + t + " " + oldl + " " + oldt);
             if (oldt < t) {
                 mIScrollViewLisenter.onScroll(oldt, t, false);
             } else if (oldt > t) {

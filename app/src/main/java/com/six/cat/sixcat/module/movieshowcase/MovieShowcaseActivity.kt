@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import butterknife.OnClick
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
@@ -28,6 +30,8 @@ import kotlin.collections.ArrayList
  * @date 2018/1/27.
  */
 class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieShowcaseManager.IMoviewShowcaseView {
+
+
     private var movieId: String? = null
     private var adapter: MovieShowcaseDiscussAdapter? = null
     private var showCaseList: ArrayList<MovieShowcaseBean.PopularCommentsBean>? = null
@@ -63,22 +67,22 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
         return result
     }
 
-
     private fun initScrollView() {
         val titleHeight = DisplayUtil.dp2px(40f)
         val headHeight = DisplayUtil.dp2px(220f)
         obsvAllData.setIScrollViewLisenter { oldy, dy, isUp ->
             val movieDistance = (headHeight - titleHeight).toFloat()
+            tvTitleMovieName.visibility = View.GONE
             if (!isUp && dy <= movieDistance) {
                 titlebarAlphaChange(dy, movieDistance)
             } else if (!isUp && dy > movieDistance) {
                 titlebarAlphaChange(1, 1f)
-                iv_finish.setImageResource(R.drawable.ic_like)
+                tvTitleMovieName.visibility = View.VISIBLE
             } else if (isUp && dy > movieDistance) {
 
             } else if (isUp && dy <= movieDistance) {
                 titlebarAlphaChange(dy, movieDistance)
-                iv_finish.setImageResource(R.drawable.finish)
+                ivFinish.setImageResource(R.drawable.finish)
             }
         }
     }
@@ -88,10 +92,11 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
         val alpha: Int = (rate * 255).toInt()
         tbToolbar.background.alpha = alpha
         vw_action.background.alpha = alpha
-        iv_finish.background.alpha = 300 - alpha
+        ivFinish.background.alpha = 300 - alpha
     }
 
     private fun initRecyclerview() {
+        ivFinish.setOnClickListener { finish() }
         showCaseList = ArrayList()
         val linearlayoutManager = LinearLayoutManager(this)
         linearlayoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -133,7 +138,8 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
     }
 
     override fun doSetData(movieShowcaseBean: MovieShowcaseBean) {
-        tvMovieName.text = movieShowcaseBean.original_title
+        tvMovieName.text = movieShowcaseBean.title
+        tvTitleMovieName.text = movieShowcaseBean.title
         var yaear: String? = movieShowcaseBean.year
         movieShowcaseBean.genres!!.forEach {
             yaear += "/" + it
@@ -146,6 +152,8 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
                     val color = palette.getDominantColor(ContextCompat.getColor(this@MovieShowcaseActivity, R.color.blue_30))
                     tbToolbar.setBackgroundColor(color)
                     vw_action.setBackgroundColor(color)
+                    tbToolbar.background.alpha = 0
+                    vw_action.background.alpha = 0
                     flBack.setBackgroundColor(color)
                 }
             }
@@ -159,7 +167,9 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
 
     override fun onDestroy() {
         super.onDestroy()
-        mManager.finishActivity()
+        if (mManager.currentActivity() != null) {
+            mManager.finishActivity()
+        }
     }
 
 }
