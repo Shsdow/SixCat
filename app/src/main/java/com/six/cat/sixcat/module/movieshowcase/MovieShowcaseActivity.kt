@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.six.cat.sixcat.R
+import com.six.cat.sixcat.R.drawable.finish
+import com.six.cat.sixcat.R.id.*
 import com.six.cat.sixcat.adapter.MovieShowcaseDiscussAdapter
 import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.module.movieshowcase.IMovieShowcaseManager.IMoviewShowcasePresenter
