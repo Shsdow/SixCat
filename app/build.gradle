@@ -103,4 +103,6 @@ dependencies {
     implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
     implementation rootProject.ext.dependencies["expandableTextView"]
     implementation rootProject.ext.dependencies["ultra-ptr"]
+    implementation rootProject.ext.dependencies["lottie"]
+    implementation rootProject.ext.dependencies["videoplayer"]
 }

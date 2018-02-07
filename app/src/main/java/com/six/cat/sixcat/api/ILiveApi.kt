@@ -1,7 +1,7 @@
 package com.six.cat.sixcat.api
 
 import com.six.cat.sixcat.bean.LiveBean
-import com.six.cat.sixcat.module.movieshowcase.MovieShowcaseBean
+import com.six.cat.sixcat.bean.MovieShowcaseBean
 
 import io.reactivex.Observable
 

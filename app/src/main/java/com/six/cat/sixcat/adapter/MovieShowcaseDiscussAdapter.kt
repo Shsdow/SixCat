@@ -2,17 +2,15 @@ package com.six.cat.sixcat.adapter
 
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Glide.init
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.SixCatApplication
-import com.six.cat.sixcat.module.movieshowcase.MovieShowcaseBean
+import com.six.cat.sixcat.bean.MovieShowcaseBean
 
 /**
  * @author liguoying

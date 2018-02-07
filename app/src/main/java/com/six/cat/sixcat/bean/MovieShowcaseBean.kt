@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.module.movieshowcase
+package com.six.cat.sixcat.bean
 
 import com.google.gson.annotations.SerializedName
 

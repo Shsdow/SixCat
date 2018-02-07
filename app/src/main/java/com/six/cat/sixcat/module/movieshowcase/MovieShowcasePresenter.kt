@@ -3,11 +3,9 @@ package com.six.cat.sixcat.module.movieshowcase
 import com.six.cat.sixcat.BuildConfig
 import com.six.cat.sixcat.RetrofitFactory
 import com.six.cat.sixcat.api.ILiveApi
-import com.six.cat.sixcat.module.live.ILiveInterface
-import com.six.cat.sixcat.widget.ErrorAction
+import com.six.cat.sixcat.bean.MovieShowcaseBean
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.function.Consumer
 
 /**
  * @author liguoying

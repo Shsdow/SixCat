@@ -9,15 +9,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import butterknife.OnClick
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.six.cat.sixcat.R
-import com.six.cat.sixcat.R.drawable.finish
-import com.six.cat.sixcat.R.id.*
 import com.six.cat.sixcat.adapter.MovieShowcaseDiscussAdapter
 import com.six.cat.sixcat.base.BaseActivity
+import com.six.cat.sixcat.bean.MovieShowcaseBean
 import com.six.cat.sixcat.module.movieshowcase.IMovieShowcaseManager.IMoviewShowcasePresenter
 import com.six.cat.sixcat.utils.DisplayUtil
 import com.six.cat.sixcat.utils.WindowUtil

@@ -63,6 +63,8 @@ ext {
             // 折叠textview
             "expandableTextView"           : "com.ms-square:expandableTextView:0.1.4",
             //刷新
-            "ultra-ptr"                    : "in.srain.cube:ultra-ptr:1.0.11"
+            "ultra-ptr"                    : "in.srain.cube:ultra-ptr:1.0.11",
+            "lottie"                       : "com.airbnb.android:lottie:2.5.0-rc1",
+            "videoplayer":"fm.jiecao:jiecaovideoplayer:5.7",
     ]
 }

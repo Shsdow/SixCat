@@ -1,5 +1,7 @@
 package com.six.cat.sixcat.module.video
 
+import com.six.cat.sixcat.bean.VideoChannelBean
+import com.six.cat.sixcat.bean.VideoDetailBean
 import com.six.cat.sixcat.module.base.IBasePresenter
 import com.six.cat.sixcat.module.base.IBaseView
 
@@ -10,12 +12,15 @@ import com.six.cat.sixcat.module.base.IBaseView
 interface IVideoInterfaceManager {
 
     interface IVideoPresenter : IBasePresenter {
-        fun doLoadData()
+        fun getVideoChannel()
+        fun getVideoDetails(page: Int, listType: String, typeId: String)
         fun doNotShowMore()
     }
 
     interface IVideoView : IBaseView<IVideoPresenter> {
         fun loadData()
-        fun doSetVideoData(videobeanList: List<VideoChannelBean>?)
+        fun dosetVideoChanel(videobeanList: List<VideoChannelBean>?)
+        fun loadVideoDetails(detailBean: List<VideoDetailBean>?)
+        fun loadMoreVideoDetails(detailBean: List<VideoDetailBean>?)
     }
 }

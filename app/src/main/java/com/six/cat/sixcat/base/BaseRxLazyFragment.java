@@ -128,6 +128,7 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
      * fragment懒加载方法，获取页面信息，例如进行请求数据
      */
     protected void lazyLoad() {
+        loadData();
     }
 
     /**
@@ -164,7 +165,6 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
      * 初始化 View
      */
     protected void initView() {
-        LogUtil.e("bubu 1");
         initRecyclerView();
         initRefreshLayout();
     }

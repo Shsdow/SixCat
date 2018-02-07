@@ -1,5 +1,6 @@
 package com.six.cat.sixcat.module.movieshowcase
 
+import com.six.cat.sixcat.bean.MovieShowcaseBean
 import com.six.cat.sixcat.module.base.IBasePresenter
 import com.six.cat.sixcat.module.base.IBaseView
 

@@ -49,4 +49,7 @@
     <string name="movie_show_case_count">%d人</string>
     <string name="file_score_text">豆瓣评分</string>
     <string name="movie_short_content">内容简介</string>
+    <string name="news_toast">已为您推荐了%1$s条新资讯</string>
+    <string name="text_empty">还么有数据</string>
+    <string name="text_nonet">网络异常</string>
 </resources>

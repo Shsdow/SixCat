@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.module.video
+package com.six.cat.sixcat.bean
 
 /**
  * @author liguoying
