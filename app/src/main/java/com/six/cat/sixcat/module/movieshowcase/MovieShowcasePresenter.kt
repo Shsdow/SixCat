@@ -26,7 +26,7 @@ class MovieShowcasePresenter(val mView: IMovieShowcaseManager.IMoviewShowcaseVie
                 .compose(mView.bindToLife())
                 .subscribe({ movieShowcasebean ->
                     if (movieShowcasebean != null) {
-                        doSetData(movieShowcasebean!!)
+                        doSetData(movieShowcasebean)
                     } else {
                         doNotShowMore()
                     }

@@ -30,5 +30,6 @@
     <dimen name="textSize_large">16sp</dimen>
     <dimen name="textSize_18sp">18sp</dimen>
     <dimen name="textSize_20sp">20sp</dimen>
+    <dimen name="statusbar_view_height">0dp</dimen>
 
 </resources>

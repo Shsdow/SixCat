@@ -59,21 +59,3 @@ public class SSLSocketClient {
         return hostnameVerifier;
     }
 }
-//Error:FAILURE: Build failed with an exception.
-//
-//        * What went wrong:
-//        Could not resolve all files for configuration ':app:debugAnnotationProcessorClasspath'.
-//        > Could not resolve com.google.guava:guava:19.0.
-//        Required by:
-//        project :app > com.jakewharton:butterknife-compiler:8.8.1 > com.google.auto:auto-common:0.8
-//        > Could not resolve com.google.guava:guava:19.0.
-//        > Could not get resource 'https://dl.google.com/dl/android/maven2/com/google/guava/guava/19.0/guava-19.0.pom'.
-//        > Could not GET 'https://dl.google.com/dl/android/maven2/com/google/guava/guava/19.0/guava-19.0.pom'.
-//        > Read timed out
-//
-//        * Try:
-//        Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
-//
-//        * Get more help at https://help.gradle.org
-//
-//        BUILD FAILED in 32s

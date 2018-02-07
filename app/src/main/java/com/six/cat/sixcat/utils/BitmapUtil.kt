@@ -39,11 +39,11 @@ object BitmapUtil {
         //获得宽度和高度
         val width = bitmap.width
         val height = bitmap.height
-        var avg = 0
-        if (width > height) {
-            avg = height
+        val avg: Int
+        avg = if (width > height) {
+            height
         } else {
-            avg = width
+            width
         }
         val imageDrawable = BitmapDrawable(bitmap)
         //新建一个新的输出图片

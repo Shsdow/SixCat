@@ -2,7 +2,7 @@ package com.six.cat.sixcat;
 
 import android.support.annotation.NonNull;
 
-import com.six.cat.sixcat.api.HostApi;
+import com.six.cat.sixcat.api.ApiContants;
 import com.six.cat.sixcat.utils.NetWorkUtil;
 
 import java.io.File;
@@ -97,7 +97,7 @@ public class RetrofitFactory {
                 }
 
                 retrofit =  new Retrofit.Builder()
-                        .baseUrl(HostApi.Companion.getHOST_API())
+                        .baseUrl(ApiContants.INSTANCE.getHOST_API())
                         .client(builder.build())
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

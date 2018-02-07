@@ -4,10 +4,7 @@ import android.os.Bundle;
 
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
-import com.six.cat.sixcat.fragment.HomeFragment;
 import com.trello.rxlifecycle2.LifecycleTransformer;
-
-import java.util.List;
 
 /**
  * @author liguoying
@@ -26,7 +23,7 @@ public class HomeRegionFragment extends BaseRxLazyFragment {
 
     @Override
     public int getLayoutResId() {
-        return R.layout.fragment_ex;
+        return R.layout.fragment_home_video;
     }
 
     @Override

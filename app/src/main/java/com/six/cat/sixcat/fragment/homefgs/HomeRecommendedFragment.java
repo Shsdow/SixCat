@@ -6,8 +6,6 @@ import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.base.BaseRxLazyFragment;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
-import java.util.List;
-
 /**
  * @author liguoying
  * @date 2017/12/27.
@@ -26,7 +24,7 @@ public class HomeRecommendedFragment extends BaseRxLazyFragment {
 
     @Override
     public int getLayoutResId() {
-        return R.layout.fragment_ex;
+        return R.layout.fragment_home_video;
     }
 
     @Override

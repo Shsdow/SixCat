@@ -34,6 +34,7 @@ import kotlin.collections.ArrayList
 class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieShowcaseManager.IMoviewShowcaseView {
 
 
+
     private var movieId: String? = null
     private var adapter: MovieShowcaseDiscussAdapter? = null
     private var showCaseList: ArrayList<MovieShowcaseBean.PopularCommentsBean>? = null

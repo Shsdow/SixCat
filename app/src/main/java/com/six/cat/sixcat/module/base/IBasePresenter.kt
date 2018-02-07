@@ -1,19 +1,19 @@
-package com.six.cat.sixcat.module.base;
+package com.six.cat.sixcat.module.base
 
 /**
  * @author liguoying
  * @date 2017/12/27.
  */
 
-public interface IBasePresenter {
+interface IBasePresenter {
 
     /**
      * 刷新数据
      */
-    void doRefresh();
+    fun doRefresh()
 
     /**
      * 显示网络错误
      */
-    void doShowNetError();
+    fun doShowNetError()
 }

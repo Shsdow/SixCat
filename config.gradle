@@ -62,5 +62,7 @@ ext {
             "BaseRecyclerViewAdapterHelper": "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30",
             // 折叠textview
             "expandableTextView"           : "com.ms-square:expandableTextView:0.1.4",
+            //刷新
+            "ultra-ptr"                    : "in.srain.cube:ultra-ptr:1.0.11"
     ]
 }
