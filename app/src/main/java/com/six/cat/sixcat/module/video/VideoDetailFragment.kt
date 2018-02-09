@@ -6,15 +6,20 @@ import `in`.srain.cube.views.ptr.PtrHandler
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.six.cat.sixcat.R
+import com.six.cat.sixcat.SixCatApplication
 import com.six.cat.sixcat.adapter.VideoDetailAdapter
 import com.six.cat.sixcat.base.BaseRxLazyFragment
 import com.six.cat.sixcat.bean.VideoChannelBean
 import com.six.cat.sixcat.bean.VideoDetailBean
 import com.six.cat.sixcat.view.CustomLoadMoreView
 import com.six.cat.sixcat.view.CustomerVideoView
+import fm.jiecao.jcvideoplayer_lib.JCMediaManager
+import fm.jiecao.jcvideoplayer_lib.JCUtils
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer
 import kotlinx.android.synthetic.main.fragment_video_detail.*
 
 /**
@@ -90,11 +95,23 @@ class VideoDetailFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPres
         })
         videoDetailBean = VideoDetailBean()
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
-        videoDetailAdapter = VideoDetailAdapter(activity!!, R.layout.item_video_content, videoDetailBean?.item)
+        videoDetailAdapter = VideoDetailAdapter(SixCatApplication.getInstance(), R.layout.item_video_content, videoDetailBean?.item)
         mRecyclerView.adapter = videoDetailAdapter
         videoDetailAdapter.setLoadMoreView(CustomLoadMoreView())
         videoDetailAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
         videoDetailAdapter.setOnLoadMoreListener({ presenter.getVideoDetails(pageNum, "list", typeId!!) }, mRecyclerView)
+        mRecyclerView.addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener{
+            override fun onChildViewDetachedFromWindow(view: View?) {
+                val jzvd = view?.findViewById<View>(R.id.videoplayer)
+                jzvd.on
+//                if (jzvd != null && JCUtils.dataSourceObjectsContainsUri(jzvd., JCMediaManager.getCurrentDataSource())) {
+//                    JCVideoPlayer.releaseAllVideos()
+//                }
+            }
+
+            override fun onChildViewAttachedToWindow(view: View?) {
+            }
+        })
     }
 
     private fun onRetry() {
