@@ -67,6 +67,7 @@ class VideoDetailFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPres
 
     override fun initView() {
         initSimpleMultiStateView()
+        loadData()
     }
 
     private fun initSimpleMultiStateView() {

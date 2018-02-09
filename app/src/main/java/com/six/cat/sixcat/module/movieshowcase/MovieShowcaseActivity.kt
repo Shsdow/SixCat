@@ -71,7 +71,7 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
     private fun initScrollView() {
         val titleHeight = DisplayUtil.dp2px(40f)
         val headHeight = DisplayUtil.dp2px(220f)
-        obsvAllData.setIScrollViewLisenter { oldy, dy, isUp ->
+        obsvAllData.setIScrollViewLisenter { _, dy, isUp ->
             val movieDistance = (headHeight - titleHeight).toFloat()
             tvTitleMovieName.visibility = View.GONE
             if (!isUp && dy <= movieDistance) {

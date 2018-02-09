@@ -24,7 +24,7 @@ class VideoDetailAdapter(private var context: Context, @LayoutRes layoutResId: I
     override fun convert(helper: BaseViewHolder, item: VideoDetailBean.ItemBean) {
         val jcVideoPlayerStandard = helper.getView<JCVideoPlayerStandard>(R.id.videoplayer)
         jcVideoPlayerStandard.setUp(item.video_url, JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, item.title)
-        JCVideoPlayer.setJcUserAction { type, url, screen, objects ->
+        JCVideoPlayer.setJcUserAction { type, _, _, _ ->
             when (type) {
                 JCUserAction.ON_CLICK_START_ICON -> {
                     helper.getView<View>(R.id.tv_videoduration).visibility = View.GONE
