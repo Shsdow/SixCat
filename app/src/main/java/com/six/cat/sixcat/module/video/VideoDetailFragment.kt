@@ -103,7 +103,7 @@ class VideoDetailFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPres
         mRecyclerView.addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener{
             override fun onChildViewDetachedFromWindow(view: View?) {
                 val jzvd = view?.findViewById<View>(R.id.videoplayer)
-                jzvd.on
+//                jzvd.on
 //                if (jzvd != null && JCUtils.dataSourceObjectsContainsUri(jzvd., JCMediaManager.getCurrentDataSource())) {
 //                    JCVideoPlayer.releaseAllVideos()
 //                }

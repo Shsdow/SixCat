@@ -31,21 +31,21 @@ class VideoFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPresenter>
 
     override fun finishCreateView(state: Bundle?) {
         isPrepared = true
-        lazyLoad()
+//        lazyLoad()
     }
 
 
-    override fun lazyLoad() {
-        if (!isPrepared || !isVisible) {
-            return
-        }
-        initView()
-        isPrepared = false
-    }
-
-    override fun initView() {
-        loadData()
-    }
+//    override fun lazyLoad() {
+//        if (!isPrepared || !isVisible) {
+//            return
+//        }
+//        initView()
+//        isPrepared = false
+//    }
+//
+//    override fun initView() {
+//        loadData()
+//    }
 
     override fun setPresenter(presenter: IVideoInterfaceManager.IVideoPresenter?) {
         if (presenter == null) {
@@ -54,15 +54,19 @@ class VideoFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPresenter>
     }
 
     override fun loadData() {
+        if (!isPrepared || !isVisible) {
+            return
+        }
         presenter?.getVideoChannel()
+        isPrepared = false
     }
 
     override fun dosetVideoChanel(videobeanList: List<VideoChannelBean>?) {
-        mVideoPagerAdapter = VideoPagerAdapter(childFragmentManager,videobeanList?.get(0))
+        mVideoPagerAdapter = VideoPagerAdapter(childFragmentManager, videobeanList?.get(0))
         viewPager.adapter = mVideoPagerAdapter
         viewPager.offscreenPageLimit = 1
-        viewPager.setCurrentItem(0,false)
-        tabLayout.setupWithViewPager(viewPager,true)
+        viewPager.setCurrentItem(0, false)
+        tabLayout.setupWithViewPager(viewPager, true)
     }
 
     override fun onShowLoading() {

@@ -156,17 +156,17 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
     }
 
     /**
-     * 初始化recyclerView
-     */
-    protected void initRecyclerView() {
-    }
-
-    /**
      * 初始化 View
      */
     protected void initView() {
         initRecyclerView();
         initRefreshLayout();
+    }
+
+    /**
+     * 初始化recyclerView
+     */
+    protected void initRecyclerView() {
     }
 
     /**
