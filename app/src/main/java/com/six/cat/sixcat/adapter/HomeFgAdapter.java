@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.six.cat.sixcat.R;
-import com.six.cat.sixcat.module.video.VideoFragment;
+import com.six.cat.sixcat.fragment.VideoFragment;
 import com.six.cat.sixcat.module.movieshow.HomeLiveFragment;
 import com.six.cat.sixcat.fragment.homefgs.HomeRecommendedFragment;
 import com.six.cat.sixcat.fragment.homefgs.HomeRegionFragment;
@@ -59,7 +59,7 @@ public class HomeFgAdapter extends FragmentStatePagerAdapter {
                     mFragments[position] = HomeRecommendedFragment.newInstance();
                     break;
                 case 2:
-                    mFragments[position] = VideoFragment.Companion.newInstance();
+                    mFragments[position] = VideoFragment.newInstance();
                     break;
                 case 3:
                     mFragments[position] = HomeRegionFragment.newInstance();
