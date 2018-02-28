@@ -7,6 +7,7 @@ import com.six.cat.sixcat.adapter.VideoPagerAdapter
 import com.six.cat.sixcat.base.BaseRxLazyFragment
 import com.six.cat.sixcat.bean.VideoChannelBean
 import com.six.cat.sixcat.bean.VideoDetailBean
+import com.six.cat.sixcat.fragment.VideoFragment
 import kotlinx.android.synthetic.main.fragment_home_video.*
 
 /**
@@ -14,14 +15,14 @@ import kotlinx.android.synthetic.main.fragment_home_video.*
  * @date 2017/12/27.
  */
 
-class VideoFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPresenter>(), IVideoInterfaceManager.IVideoView {
+class VideoShowFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPresenter>(), IVideoInterfaceManager.IVideoView {
 
     private var mVideoPagerAdapter: VideoPagerAdapter? = null
 
     companion object {
-        fun newInstance(): VideoFragment {
+        fun newInstance(): VideoShowFragment {
             val args = Bundle()
-            val frgment = VideoFragment()
+            val frgment = VideoShowFragment()
             frgment.arguments = args
             return frgment
         }
@@ -31,21 +32,21 @@ class VideoFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPresenter>
 
     override fun finishCreateView(state: Bundle?) {
         isPrepared = true
-//        lazyLoad()
+        lazyLoad()
     }
 
 
-//    override fun lazyLoad() {
-//        if (!isPrepared || !isVisible) {
-//            return
-//        }
-//        initView()
-//        isPrepared = false
-//    }
-//
-//    override fun initView() {
-//        loadData()
-//    }
+    override fun lazyLoad() {
+        if (!isPrepared || !isVisible) {
+            return
+        }
+        initView()
+        isPrepared = false
+    }
+
+    override fun initView() {
+        loadData()
+    }
 
     override fun setPresenter(presenter: IVideoInterfaceManager.IVideoPresenter?) {
         if (presenter == null) {
