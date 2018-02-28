@@ -35,9 +35,8 @@ class VideoShowFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPresen
         lazyLoad()
     }
 
-
     override fun lazyLoad() {
-        if (!isPrepared || !isVisible) {
+        if (!isPrepared) {
             return
         }
         initView()
@@ -55,11 +54,7 @@ class VideoShowFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPresen
     }
 
     override fun loadData() {
-        if (!isPrepared || !isVisible) {
-            return
-        }
         presenter?.getVideoChannel()
-        isPrepared = false
     }
 
     override fun dosetVideoChanel(videobeanList: List<VideoChannelBean>?) {
