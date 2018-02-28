@@ -22,13 +22,10 @@ public class SimpleMultiStateView extends MultiStateView {
     private int mTargetState = -1;
     private long mLoadingStartTime = -1;
 
-    private final Runnable mLoadingHide = new Runnable() {
-        @Override
-        public void run() {
-            setViewState(mTargetState);
-            mLoadingStartTime = -1;
-            mTargetState = -1;
-        }
+    private final Runnable mLoadingHide = () -> {
+        setViewState(mTargetState);
+        mLoadingStartTime = -1;
+        mTargetState = -1;
     };
 
     int resIdEmpty;
@@ -95,12 +92,7 @@ public class SimpleMultiStateView extends MultiStateView {
      */
     public void showErrorView() {
         if (getViewState() != MultiStateView.STATE_CONTENT) {
-            this.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    setViewState(MultiStateView.STATE_FAIL);
-                }
-            }, 100);
+            this.postDelayed(() -> setViewState(MultiStateView.STATE_FAIL), 100);
         }
 
     }
@@ -110,12 +102,7 @@ public class SimpleMultiStateView extends MultiStateView {
      */
     public void showEmptyView() {
         if (getViewState() != MultiStateView.STATE_CONTENT) {
-            this.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    setViewState(MultiStateView.STATE_EMPTY);
-                }
-            }, 100);
+            this.postDelayed(() -> setViewState(MultiStateView.STATE_EMPTY), 100);
         }
 
     }
@@ -125,12 +112,7 @@ public class SimpleMultiStateView extends MultiStateView {
      */
     public void showNoNetView() {
         if (getViewState() != MultiStateView.STATE_CONTENT) {
-            this.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    setViewState(MultiStateView.STATE_NONET);
-                }
-            }, 100);
+            this.postDelayed(() -> setViewState(MultiStateView.STATE_NONET), 100);
 
         }
 
@@ -141,12 +123,7 @@ public class SimpleMultiStateView extends MultiStateView {
      */
     public void showContent() {
 
-        this.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setViewState(MultiStateView.STATE_CONTENT);
-            }
-        }, 100);
+        this.postDelayed(() -> setViewState(MultiStateView.STATE_CONTENT), 100);
     }
 
     @Override

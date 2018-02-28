@@ -7,7 +7,6 @@ import com.six.cat.sixcat.adapter.VideoPagerAdapter
 import com.six.cat.sixcat.base.BaseRxLazyFragment
 import com.six.cat.sixcat.bean.VideoChannelBean
 import com.six.cat.sixcat.bean.VideoDetailBean
-import com.six.cat.sixcat.fragment.VideoFragment
 import kotlinx.android.synthetic.main.fragment_home_video.*
 
 /**

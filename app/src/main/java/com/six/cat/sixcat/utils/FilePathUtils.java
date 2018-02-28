@@ -12,6 +12,7 @@ import android.util.Log;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 通过uri 获取文件的路径，因为版本不同获取的方式也不一样
@@ -29,7 +30,7 @@ class FilePathUtils {
         if (!myDir.exists()) {
             myDir.mkdirs();
         }
-        myName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
+        myName = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA).format(new Date()) + ".jpg";
         myFile = new File(myDir, myName);
         return myFile;
     }
