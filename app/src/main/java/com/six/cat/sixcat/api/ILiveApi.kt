@@ -24,7 +24,7 @@ interface ILiveApi {
      * @Query("count") int count
      * );
     </LiveBean> */
-    @GET("https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&client=somemessage&udid=dddddddddddddddddddddd ")
+    @GET("https://api.douban.com/v2/movie/in_theaters?apikey=0b2bdeda43b5688921839c8ecb20399b&client=somemessage&udid=dddddddddddddddddddddd")
     fun getLiveContent(
             @Query("city") city: String,
             @Query("start") start: Int,

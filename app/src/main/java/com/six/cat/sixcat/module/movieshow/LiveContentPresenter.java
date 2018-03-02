@@ -8,6 +8,7 @@ import com.six.cat.sixcat.widget.ErrorAction;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,8 +22,9 @@ import io.reactivex.schedulers.Schedulers;
 public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     private ILiveInterface.ILiveView mView;
-//    private List<LiveBean.SubjectsBean> mLiveDataList = new ArrayList<>();
+    //    private List<LiveBean.SubjectsBean> mLiveDataList = new ArrayList<>();
     private int count = 10;
+    private int totalSize = 0;
 
     public LiveContentPresenter(ILiveInterface.ILiveView mView) {
         this.mView = mView;
@@ -35,6 +37,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(liveBean -> {
+                    totalSize = liveBean.getTotal();
                     return liveBean.getSubjects();
                 })
                 .compose(mView.<List<LiveBean.SubjectsBean>>bindToLife())
@@ -61,6 +64,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
     @Override
     public void doLoadMoreData() {
         count += 10;
+        count = count > totalSize ? totalSize : count;
         doLoadData();
     }
 

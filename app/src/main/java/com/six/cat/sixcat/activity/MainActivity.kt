@@ -2,23 +2,19 @@ package com.six.cat.sixcat.activity
 
 import android.content.Intent
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatDelegate
-import android.support.v7.widget.Toolbar
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
+import com.airbnb.lottie.LottieProperty.POSITION
 
 import com.bumptech.glide.Glide
 import com.jaeger.library.StatusBarUtil
@@ -38,7 +34,6 @@ import com.six.cat.sixcat.widget.BottomNavigationViewHelper
 import java.util.ArrayList
 import java.util.Locale
 
-import butterknife.BindView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -52,6 +47,16 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
     private var position: Int = 0
     private val index: Int = 0
     private val titleList = ArrayList<String>()
+    private var exitTime: Long = 0L
+
+    companion object {
+        private val FRAGMENT_NEWS = 0
+        private val FRAGMENT_PHOTO = 1
+        private val FRAGMENT_VIDEO = 2
+        private val FRAGMENT_MEDIA = 3
+        private val POSITION = "position"
+        private val SELECT_ITEM = "bottomNavigationSelectItem"
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -64,7 +69,7 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
         //        StatusBarUtil.setTranslucent(this, 150);
         //        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent, null));
         //        StatusBarUtil.setTransparent(this);
-        StatusBarUtil.setColorForDrawerLayout(this@MainActivity, drawer_layout, Color.parseColor("#20C1FD"), 255)
+        StatusBarUtil.setColorForDrawerLayout(this@MainActivity, mDrawerLayoutMain, Color.parseColor("#20C1FD"), 255)
         initFragments(savedInstanceState)
         initNavigationView()
         titleList.add("讲演")
@@ -114,8 +119,8 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
             }
             true
         }
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout!!.addDrawerListener(toggle)
+        val toggle = ActionBarDrawerToggle(this, mDrawerLayoutMain, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        mDrawerLayoutMain!!.addDrawerListener(toggle)
         toggle.syncState()
     }
 
@@ -208,7 +213,7 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         ShowToast.shortTime("我点击了 naviagetion")
-        drawer_layout!!.closeDrawer(GravityCompat.START)
+        mDrawerLayoutMain!!.closeDrawer(GravityCompat.START)
         when (item.itemId) {
             R.id.item_home ->
                 // 主页
@@ -231,7 +236,7 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
             R.id.item_settings ->
                 // 设置中心
                 return true
-            else -> drawer_layout!!.closeDrawers()
+            else -> mDrawerLayoutMain!!.closeDrawers()
         }
         return false
     }
@@ -281,13 +286,24 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
 
     }
 
-    companion object {
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDrawerLayoutMain.isDrawerOpen(mDrawerLayoutMain.getChildAt(1))) {
+                mDrawerLayoutMain.closeDrawers()
+            } else {
+                exitApp()
+            }
+        }
+        return true
+    }
 
-        private val FRAGMENT_NEWS = 0
-        private val FRAGMENT_PHOTO = 1
-        private val FRAGMENT_VIDEO = 2
-        private val FRAGMENT_MEDIA = 3
-        private val POSITION = "position"
-        private val SELECT_ITEM = "bottomNavigationSelectItem"
+    private fun exitApp() {
+        when (System.currentTimeMillis() - exitTime > 2000) {
+            true -> {
+                ShowToast.shortTime("再按一次退出我")
+                exitTime = System.currentTimeMillis()
+            }
+            else -> finish()
+        }
     }
 }

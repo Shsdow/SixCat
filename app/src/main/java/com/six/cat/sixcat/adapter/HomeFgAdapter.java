@@ -53,7 +53,7 @@ public class HomeFgAdapter extends FragmentStatePagerAdapter {
         if (mFragments[position] == null) {
             switch (position) {
                 case 0:
-                    mFragments[position] = HomeLiveFragment.newInstance();
+                    mFragments[position] = HomeLiveFragment.Companion.newInstance();
                     break;
                 case 1:
                     mFragments[position] = HomeRecommendedFragment.newInstance();
