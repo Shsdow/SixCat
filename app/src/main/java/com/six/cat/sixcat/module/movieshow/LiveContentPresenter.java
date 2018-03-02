@@ -63,8 +63,8 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     @Override
     public void doLoadMoreData() {
-        count += 10;
-        count = count > totalSize ? totalSize : count;
+        count += 16;
+        count = count >= totalSize ? totalSize : count;
         doLoadData();
     }
 
@@ -82,7 +82,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     @Override
     public void doSetAdapter(@NotNull List<? extends LiveBean.SubjectsBean> mList) {
-        mView.onSetAdapter(mList);
+        mView.onSetAdapter(mList, totalSize);
         mView.onHideLoading();
     }
 }

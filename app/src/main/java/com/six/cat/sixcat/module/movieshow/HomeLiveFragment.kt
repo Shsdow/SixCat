@@ -2,6 +2,7 @@ package com.six.cat.sixcat.module.movieshow
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.IInterface
 import android.support.v7.widget.LinearLayoutManager
 
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -74,7 +75,7 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
 
     override fun initRefreshLayout() {
         srlMovieShortCaseFresh.setOnRefreshListener {
-//            mMovieShortCaseAdapter!!.setEnableLoadMore(false)
+            mMovieShortCaseAdapter!!.setEnableLoadMore(false)
             isFreshing = true
             presenter.doRefresh()
         }
@@ -93,13 +94,13 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     }
 
     override fun onLoadMoreRequested() {
-//        srlMovieShortCaseFresh.isEnabled = false
+        srlMovieShortCaseFresh.isEnabled = false
         if (mMovieShortCaseAdapter!!.data.size < PAGE_SIZE) {
             mMovieShortCaseAdapter!!.loadMoreEnd()
         } else {
             presenter.doLoadMoreData()
         }
-//        srlMovieShortCaseFresh.isEnabled = true
+        srlMovieShortCaseFresh.isEnabled = true
     }
 
     override fun onShowLoading() {
@@ -124,10 +125,14 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         }
     }
 
-    override fun onSetAdapter(list: List<*>) {
+    override fun onSetAdapter(list: List<*>, totalCount: Int) {
+
 //        mMovieShortCaseAdapter!!.setEnableLoadMore(true)
         if (/*isFreshing && */!mBeanList.isEmpty()) {
             mBeanList.clear()
+        }
+        if (list.size == totalCount) {
+            mMovieShortCaseAdapter!!.loadMoreEnd(true)
         }
         mBeanList.addAll(list as List<LiveBean.SubjectsBean>)
         mMovieShortCaseAdapter!!.notifyDataSetChanged()

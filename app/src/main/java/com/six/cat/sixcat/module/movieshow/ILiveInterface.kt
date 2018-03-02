@@ -16,7 +16,7 @@ interface ILiveInterface {
         /**
          * 设置适配器
          */
-        abstract fun onSetAdapter(list: List<*>)
+        abstract fun onSetAdapter(list: List<*>, totalCount: Int)
     }
 
     interface ILivePresenter : IBasePresenter {

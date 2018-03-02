@@ -62,7 +62,7 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
     }
 
     private fun getStatusBarHeight(): Int {
-        var result: Int = 0
+        var result = 0
         val resourcesId = resources.getIdentifier("status_bar_height", "dimen", "android")
         if (resourcesId > 0) result = resources.getDimensionPixelOffset(resourcesId)
         return result
