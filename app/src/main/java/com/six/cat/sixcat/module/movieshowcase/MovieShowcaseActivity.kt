@@ -150,7 +150,7 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>) {
                 ivMovieImage.setImageBitmap(resource)
                 Palette.from(resource).generate { palette ->
-                    val color = palette.getDominantColor(ContextCompat.getColor(this@MovieShowcaseActivity, R.color.blue_30))
+                    val color = palette.getDominantColor(ContextCompat.getColor(this@MovieShowcaseActivity, R.color.blue_light))
                     tbToolbar.setBackgroundColor(color)
                     vw_action.setBackgroundColor(color)
                     tbToolbar.background.alpha = 0

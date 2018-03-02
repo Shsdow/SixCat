@@ -83,12 +83,11 @@ public class HomeLiveFragment extends BaseRxLazyFragment<ILiveInterface.ILivePre
 
     @Override
     protected void initRefreshLayout() {
-        LogUtil.e("bubu 3");
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
             isFreshing = true;
             presenter.doRefresh();
         });
-        mSwipeRefreshLayout.setColorSchemeColors(getApplicationContext().getResources().getColor(R.color.colorAccent));
+        mSwipeRefreshLayout.setColorSchemeColors(getApplicationContext().getResources().getColor(R.color.colorAccent, null), getApplicationContext().getResources().getColor(R.color.blue_light, null), getApplicationContext().getResources().getColor(R.color.yellow_light, null));
         mSwipeRefreshLayout.post(() -> {
             mSwipeRefreshLayout.setRefreshing(true);
             loadData();
