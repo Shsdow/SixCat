@@ -8,12 +8,10 @@
     android:layout_gravity="center"
     android:layout_marginEnd="@dimen/dp_5"
     android:layout_marginStart="@dimen/dp_5"
-    android:background="@drawable/bg_click"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="@dimen/dp_5"
     app:cardUseCompatPadding="true">
-
+    <!--android:background="@drawable/bg_click"-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +24,6 @@
             android:layout_height="@dimen/dp_120"
             android:layout_alignParentStart="true"
             android:layout_marginEnd="@dimen/dp_10"
-            android:background="@drawable/iv_default"
             android:scaleType="centerCrop" />
 
         <LinearLayout
@@ -96,7 +93,7 @@
                     android:layout_gravity="center"
                     android:minHeight="@dimen/dp_20"
                     android:numStars="5"
-                    android:rating="3.3" />
+                    tools:rating="3.3" />
 
                 <TextView
                     android:id="@+id/tv_star_num"
