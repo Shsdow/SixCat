@@ -34,6 +34,6 @@ class CustomLoadMoreView: LoadMoreView() {
      * IsLoadEndGone () for false, can not return 0
      */
     override fun getLoadEndViewId(): Int {
-        return 0
+        return R.id.load_more_load_end_view
     }
 }

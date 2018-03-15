@@ -25,6 +25,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
     //    private List<LiveBean.SubjectsBean> mLiveDataList = new ArrayList<>();
     private int count = 10;
     private int totalSize = 0;
+    private int start = 0;
 
     public LiveContentPresenter(ILiveInterface.ILiveView mView) {
         this.mView = mView;
@@ -33,7 +34,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     @Override
     public void doLoadData() {
-        RetrofitFactory.getRetrofit().create(ILiveApi.class).getLiveContent("北京", 0, count)
+        RetrofitFactory.getRetrofit().create(ILiveApi.class).getLiveContent("北京", start, count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(liveBean -> {
@@ -52,10 +53,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     @Override
     public void doRefresh() {
-//        if (mLiveDataList.size() > 0) {
-//            mLiveDataList.clear();
-//            count = 1;
-//        }
+        start = 0;
         count = 10;
         mView.onShowLoading();
         doLoadData();
@@ -63,8 +61,8 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     @Override
     public void doLoadMoreData() {
-        count += 16;
-        count = count >= totalSize ? totalSize : count;
+        start += 10;
+        count = (start >= totalSize) ? totalSize % count : count;
         doLoadData();
     }
 

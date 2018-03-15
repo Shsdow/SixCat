@@ -13,6 +13,7 @@ import com.six.cat.sixcat.bean.LiveBean
 import com.six.cat.sixcat.module.live.ILiveInterface
 import com.six.cat.sixcat.module.movieshowcase.MovieShowcaseActivity
 import com.six.cat.sixcat.utils.ShowToast
+import com.six.cat.sixcat.widget.WrapContentLinearLayoutManager
 
 import java.util.ArrayList
 
@@ -62,7 +63,7 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     }
 
     override fun initRecyclerView() {
-        val linearLayoutManager = LinearLayoutManager(context)
+        val linearLayoutManager = LinearLayoutManager(context)/*WrapContentLinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)*/
         rvMovieShortCase.layoutManager = linearLayoutManager
         mMovieShortCaseAdapter = LiveJavaAdapter(mBeanList)
         mMovieShortCaseAdapter!!.setOnLoadMoreListener(this, rvMovieShortCase)
@@ -77,6 +78,7 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         srlMovieShortCaseFresh.setOnRefreshListener {
             mMovieShortCaseAdapter!!.setEnableLoadMore(false)
             isFreshing = true
+//            mBeanList?.clear()
             presenter.doRefresh()
         }
         srlMovieShortCaseFresh.setColorSchemeColors(applicationContext!!.resources.getColor(R.color.colorAccent, null), applicationContext!!.resources.getColor(R.color.blue_light, null), applicationContext!!.resources.getColor(R.color.yellow_light, null))
@@ -90,7 +92,6 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     override fun loadData() {
         onShowLoading()
         presenter.doLoadData()
-//        mCurrentCount =
     }
 
     override fun onLoadMoreRequested() {
@@ -126,13 +127,15 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     }
 
     override fun onSetAdapter(list: List<*>, totalCount: Int) {
-
-//        mMovieShortCaseAdapter!!.setEnableLoadMore(true)
-        if (/*isFreshing && */!mBeanList.isEmpty()) {
-            mBeanList.clear()
-        }
-        if (list.size == totalCount) {
+        mMovieShortCaseAdapter!!.setEnableLoadMore(true)
+        if (list.size < PAGE_SIZE) {
             mMovieShortCaseAdapter!!.loadMoreEnd(true)
+        } else {
+            mMovieShortCaseAdapter!!.loadMoreComplete()
+        }
+        if (isFreshing && !mBeanList.isEmpty()) {
+            mBeanList.clear()
+            isFreshing = false
         }
         mBeanList.addAll(list as List<LiveBean.SubjectsBean>)
         mMovieShortCaseAdapter!!.notifyDataSetChanged()
