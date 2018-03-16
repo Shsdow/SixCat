@@ -12,9 +12,14 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvMovieShortCase"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-        </android.support.v7.widget.RecyclerView>
+        <com.six.cat.sixcat.view.CustomEmptyView
+            android:id="@+id/mCuvEmptyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
     </FrameLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

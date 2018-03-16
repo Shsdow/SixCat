@@ -8,7 +8,7 @@ import com.six.cat.sixcat.R
  * @date 2018/2/7.
  */
 
-class CustomLoadMoreView: LoadMoreView() {
+class CustomLoadMoreView : LoadMoreView() {
     override fun getLayoutId(): Int {
         return R.layout.view_load_more
     }

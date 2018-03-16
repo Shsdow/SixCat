@@ -48,7 +48,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
                     } else {
                         doShowNoMore();
                     }
-                }, ErrorAction.error());
+                }, throwable -> doShowNetError());
     }
 
     @Override

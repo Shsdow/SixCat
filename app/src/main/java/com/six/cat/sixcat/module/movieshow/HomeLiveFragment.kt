@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.IInterface
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.six.cat.sixcat.R
@@ -13,7 +14,8 @@ import com.six.cat.sixcat.bean.LiveBean
 import com.six.cat.sixcat.module.live.ILiveInterface
 import com.six.cat.sixcat.module.movieshowcase.MovieShowcaseActivity
 import com.six.cat.sixcat.utils.ShowToast
-import com.six.cat.sixcat.widget.WrapContentLinearLayoutManager
+import com.six.cat.sixcat.view.CustomLoadMoreView
+import com.six.cat.sixcat.view.SnarkBarUtil
 
 import java.util.ArrayList
 
@@ -30,8 +32,6 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     private val mBeanList = ArrayList<LiveBean.SubjectsBean>()
     private var isFreshing = false
     private val PAGE_SIZE = 10
-
-
     var mCurrentCount = 0
 
     companion object {
@@ -63,10 +63,11 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     }
 
     override fun initRecyclerView() {
-        val linearLayoutManager = LinearLayoutManager(context)/*WrapContentLinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)*/
+        val linearLayoutManager = LinearLayoutManager(context)
         rvMovieShortCase.layoutManager = linearLayoutManager
         mMovieShortCaseAdapter = LiveJavaAdapter(mBeanList)
         mMovieShortCaseAdapter!!.setOnLoadMoreListener(this, rvMovieShortCase)
+        mMovieShortCaseAdapter!!.setLoadMoreView(CustomLoadMoreView())
         mMovieShortCaseAdapter!!.openLoadAnimation()
         mMovieShortCaseAdapter!!.setNotDoAnimationCount(3)
         mMovieShortCaseAdapter!!.setOnItemChildClickListener { _, _, position -> startActivity(Intent(context, MovieShowcaseActivity::class.java).putExtra("movieId", mBeanList[position].id)) }
@@ -75,10 +76,10 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
 
 
     override fun initRefreshLayout() {
+        mMovieShortCaseAdapter!!.setEnableLoadMore(false)
         srlMovieShortCaseFresh.setOnRefreshListener {
-            mMovieShortCaseAdapter!!.setEnableLoadMore(false)
+            mMovieShortCaseAdapter!!.setEnableLoadMore(true)
             isFreshing = true
-//            mBeanList?.clear()
             presenter.doRefresh()
         }
         srlMovieShortCaseFresh.setColorSchemeColors(applicationContext!!.resources.getColor(R.color.colorAccent, null), applicationContext!!.resources.getColor(R.color.blue_light, null), applicationContext!!.resources.getColor(R.color.yellow_light, null))
@@ -117,7 +118,13 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     }
 
     override fun onShowNetError() {
-        ShowToast.shortTime(R.string.network_error)
+//        ShowToast.shortTime(R.string.network_error)
+        srlMovieShortCaseFresh.isRefreshing = false
+        mCuvEmptyView.visibility = View.VISIBLE
+        srlMovieShortCaseFresh.visibility = View.GONE
+        mCuvEmptyView.setEmptyImage(R.drawable.img_tips_error_load_error)
+        mCuvEmptyView.setEmptyText("加载失败~(≧▽≦)~啦啦啦.")
+        SnarkBarUtil.showSnakbarMessage(rvMovieShortCase, "数据加载失败,请重新加载或者检查网络是否链接")
     }
 
     override fun setPresenter(presenter: ILiveInterface.ILivePresenter?) {
@@ -131,14 +138,15 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         if (list.size < PAGE_SIZE) {
             mMovieShortCaseAdapter!!.loadMoreEnd(true)
         } else {
+
             mMovieShortCaseAdapter!!.loadMoreComplete()
         }
         if (isFreshing && !mBeanList.isEmpty()) {
-            mBeanList.clear()
+            mMovieShortCaseAdapter!!.setNewData(list as List<LiveBean.SubjectsBean>)
             isFreshing = false
+        } else {
+            mMovieShortCaseAdapter!!.addData(list as List<LiveBean.SubjectsBean>)
         }
-        mBeanList.addAll(list as List<LiveBean.SubjectsBean>)
-        mMovieShortCaseAdapter!!.notifyDataSetChanged()
     }
 
     override fun onShowNoMore() {

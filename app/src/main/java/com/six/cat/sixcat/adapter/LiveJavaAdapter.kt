@@ -17,6 +17,7 @@ import com.six.cat.sixcat.utils.GlideCircleTransform
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.ArrayList
 import java.util.Locale
 
 /**
@@ -25,7 +26,7 @@ import java.util.Locale
  * 对应的 Java 代码 {@link com.six.cat.sixcat.adapter.LiveFragementJavaAdapter }
  */
 
-class LiveJavaAdapter(data: List<LiveBean.SubjectsBean>?) : BaseQuickAdapter<LiveBean.SubjectsBean, BaseViewHolder>(R.layout.item_live, data) {
+class LiveJavaAdapter(data: ArrayList<LiveBean.SubjectsBean>?) : BaseQuickAdapter<LiveBean.SubjectsBean, BaseViewHolder>(R.layout.item_live, data) {
 
     private val currentTime: Long = System.currentTimeMillis()
     private val mSimpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
