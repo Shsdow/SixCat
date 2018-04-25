@@ -5,12 +5,12 @@
     android:background="@color/black">
 
     <com.six.cat.sixcat.view.CustomerVideoView
-        android:id="@+id/cvv_guide_video"
+        android:id="@+id/cvvGuideVideo"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 
     <TextView
-        android:id="@+id/tv_guide_exit"
+        android:id="@+id/tvGuideExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"

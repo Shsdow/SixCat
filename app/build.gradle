@@ -10,7 +10,6 @@ def static releaseTime() {
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
-
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -22,26 +21,46 @@ android {
         resConfigs "es"
     }
 
-//    signConfigs {
-//        release{
-//
-//        }
-//
-//        debug{
-//
-//        }
-//    }
+    signingConfigs {
+        Release {
+            storeFile file('sixcat.jks')
+            storePassword 'sexcat'
+            keyAlias 'sixcat'
+            keyPassword 'sexcat'
+        }
+        Debug {
+            storeFile file('sixcat.jks')
+            storePassword 'sexcat'
+            keyAlias 'sixcat'
+            keyPassword 'sexcat'
+        }
+    }
+
+
+    flavorDimensions "sixcat"
+    productFlavors {
+        sixcatUpVersion {
+            dimension "sixcat"
+            minSdkVersion 24
+            applicationId 'com.six.cat.sixcat'
+            signingConfig signingConfigs.Release
+        }
+
+        sixcatDownVersion {
+            dimension "sixcat"
+            minSdkVersion 19
+            applicationId 'com.six.cat.sixcat'
+            signingConfig signingConfigs.Release
+        }
+    }
 
     lintOptions {
         abortOnError false
 
     }
-
     dexOptions {
         javaMaxHeapSize "4g"
     }
-
-
     buildTypes {
         release {
             minifyEnabled true
@@ -59,11 +78,11 @@ android {
             }
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
