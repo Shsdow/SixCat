@@ -66,6 +66,7 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
         if (!SPUtil.getBoolean("isFirst")) {
             startActivity(Intent(this, GuideActivity::class.java))
         }
+
         //        StatusBarUtil.setTranslucent(this, 150);
         //        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent, null));
         //        StatusBarUtil.setTransparent(this);
