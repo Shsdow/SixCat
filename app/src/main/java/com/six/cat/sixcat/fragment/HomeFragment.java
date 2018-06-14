@@ -19,7 +19,7 @@ import butterknife.BindView;
 
 /**
  * @author liguoying
- * @date 2017/12/11.
+ * @date 2017/12/11.Folder E:\Git\PGit\SixCat\app\build\generated\source\kaptKotlin\downDebug
  */
 
 public class HomeFragment extends BaseRxLazyFragment {
