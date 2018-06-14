@@ -22,35 +22,35 @@ android {
     }
 
     signingConfigs {
-        Release {
-            storeFile file('sixcat.jks')
+        release {
+            storeFile file('./sixcat.jks')
             storePassword 'sexcat'
             keyAlias 'sixcat'
             keyPassword 'sexcat'
         }
-        Debug {
-            storeFile file('sixcat.jks')
-            storePassword 'sexcat'
-            keyAlias 'sixcat'
-            keyPassword 'sexcat'
-        }
+//        debug {
+//            storeFile file('./sixcat.jks')
+//            storePassword 'sexcat'
+//            keyAlias 'sixcat'
+//            keyPassword 'sexcat'
+//        }
     }
 
 
     flavorDimensions "sixcat"
     productFlavors {
-        sixcatUpVersion {
-            dimension "sixcat"
-            minSdkVersion 24
-            applicationId 'com.six.cat.sixcat'
-            signingConfig signingConfigs.Release
+        up {
+//            dimension "sixcat"
+//            minSdkVersion 24
+//            applicationId 'com.six.cat.sixcat'
+//            signingConfig signingConfigs.Release
         }
 
-        sixcatDownVersion {
+        down {
             dimension "sixcat"
-            minSdkVersion 19
-            applicationId 'com.six.cat.sixcat'
-            signingConfig signingConfigs.Release
+            minSdkVersion 23
+//            applicationId 'com.six.cat.sixcat'
+//            signingConfig signingConfigs.Release
         }
     }
 
