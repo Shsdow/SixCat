@@ -38,6 +38,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigationItemSelectedListener {
+    override fun mSetPresenter(presenter: IBasePresenter?) {
+
+    }
 
     private val fragments: Array<Fragment>? = null
     private var mHomeFragment: HomeFragment? = null
@@ -279,9 +282,7 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
 
     }
 
-    override fun setPresenter(presenter: IBasePresenter?) {
 
-    }
 
     override fun onShowNoMore() {
 

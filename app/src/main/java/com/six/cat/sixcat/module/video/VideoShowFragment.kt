@@ -46,7 +46,7 @@ class VideoShowFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPresen
         loadData()
     }
 
-    override fun setPresenter(presenter: IVideoInterfaceManager.IVideoPresenter?) {
+    override fun mSetPresenter(presenter: IVideoInterfaceManager.IVideoPresenter?) {
         if (presenter == null) {
             this.presenter = VideoPresenter(this)
         }

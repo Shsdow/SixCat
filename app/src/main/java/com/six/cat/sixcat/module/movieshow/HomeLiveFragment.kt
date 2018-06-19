@@ -127,7 +127,7 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         SnarkBarUtil.showSnakbarMessage(rvMovieShortCase, "数据加载失败,请重新加载或者检查网络是否链接")
     }
 
-    override fun setPresenter(presenter: ILiveInterface.ILivePresenter?) {
+    override fun mSetPresenter(presenter: ILiveInterface.ILivePresenter?) {
         if (presenter == null) {
             this.presenter = LiveContentPresenter(this)
         }

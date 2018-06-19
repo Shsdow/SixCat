@@ -113,7 +113,7 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
 
     override fun loadData() {
         onShowLoading()
-        presenter.doLoadData(movieId)
+        mSetPresenter!!.doLoadData(movieId)
     }
 
     override fun onShowLoading() {
@@ -128,9 +128,9 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
 
     }
 
-    override fun setPresenter(presenter: IMoviewShowcasePresenter?) {
+    override fun mSetPresenter(presenter: IMoviewShowcasePresenter?) {
         if (presenter == null) {
-            this.presenter = MovieShowcasePresenter(this)
+            this.mSetPresenter = MovieShowcasePresenter(this)
         }
     }
 
@@ -168,8 +168,8 @@ class MovieShowcaseActivity : BaseActivity<IMoviewShowcasePresenter>(), IMovieSh
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mManager.currentActivity() != null) {
-            mManager.finishActivity()
+        if (mManager!!.currentActivity() != null) {
+            mManager!!.finishActivity()
         }
     }
 

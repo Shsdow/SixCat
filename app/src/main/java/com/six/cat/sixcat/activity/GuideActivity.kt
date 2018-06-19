@@ -22,7 +22,11 @@ import kotlinx.android.synthetic.main.activity_guide.*
  * 首次进入app的展示：1.视频展示 2.多图片滑动
  */
 class GuideActivity : BaseActivity<IBasePresenter>() {
-//    @BindView(R.id.cvv_guide_video)
+    override fun mSetPresenter(presenter: IBasePresenter?) {
+    }
+
+
+    //    @BindView(R.id.cvv_guide_video)
 //    internal var mVideoView: CustomerVideoView? = null
 //    @BindView(R.id.tv_guide_exit)
 //    internal var mGuideExit: TextView? = null
@@ -32,7 +36,7 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
         return R.layout.activity_guide
     }
 
-    override fun initView(savedInstanceState: Bundle) {
+    override fun initView(savedInstanceState: Bundle ?) {
         StatusBarUtil.setTranslucent(this, 0)
         SPUtil.setBoolean("isFirst", true)
         playVideo()
@@ -54,7 +58,7 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
     }
 
     private fun finishVideo() {
-        mManager.finishActivity()
+        mManager!!.finishActivity()
         cvvGuideVideo.destroyDrawingCache()
     }
 
@@ -62,7 +66,7 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
         if (keyCode != 4) {
             return super.onKeyDown(keyCode, event)
         }
-        mManager.finishActivity(this as Activity)
+        mManager!!.finishActivity(this as Activity)
         cvvGuideVideo.destroyDrawingCache()
         return true
 
@@ -89,7 +93,7 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
         super.onDestroy()
         cvvGuideVideo.destroyDrawingCache()
         cvvGuideVideo
-        mManager.finishActivity()
+        mManager!!.finishActivity()
     }
 
     override fun onShowLoading() {
@@ -104,9 +108,7 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
 
     }
 
-    override fun setPresenter(presenter: IBasePresenter?) {
 
-    }
 
     override fun onShowNoMore() {
 

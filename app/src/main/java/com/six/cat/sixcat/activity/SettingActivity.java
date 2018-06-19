@@ -51,7 +51,7 @@ public class SettingActivity extends BaseActivity<IBasePresenter> implements Col
     }
 
     @Override
-    public void setPresenter(IBasePresenter presenter) {
+    public void mSetPresenter(IBasePresenter presenter) {
 
     }
 

@@ -47,7 +47,7 @@ public class HomeRegionFragment extends BaseRxLazyFragment {
     }
 
     @Override
-    public void setPresenter(Object presenter) {
+    public void mSetPresenter(Object presenter) {
 
     }
 

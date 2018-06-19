@@ -157,7 +157,7 @@ class VideoDetailFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPres
         mSimpleMultiStateView?.showNoNetView()
     }
 
-    override fun setPresenter(presenter: IVideoInterfaceManager.IVideoPresenter?) {
+    override fun mSetPresenter(presenter: IVideoInterfaceManager.IVideoPresenter?) {
         if (presenter == null) {
             this.presenter = VideoPresenter(this)
         }

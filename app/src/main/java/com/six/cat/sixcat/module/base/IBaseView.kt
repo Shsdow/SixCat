@@ -26,7 +26,7 @@ interface IBaseView<T> {
     /**
      * 设置 presenter
      */
-     fun setPresenter(presenter: T?)
+     fun mSetPresenter(presenter: T?)
 
     /**
      * 加载完毕
