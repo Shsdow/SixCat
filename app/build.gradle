@@ -125,8 +125,12 @@ dependencies {
     implementation rootProject.ext.dependencies["ultra-ptr"]
     implementation rootProject.ext.dependencies["lottie"]
     implementation rootProject.ext.dependencies["videoplayer"]
+    implementation rootProject.ext.dependencies["permissionsDispatcher"]
+//    kapt rootProject.ext.dependencies["permissionsDispatcherKapt"]
+    kapt "com.github.hotchemi:permissionsdispatcher-processor:3.2.0"
+//    kapt rootProject.ext.dependencies["permissionsDispatcherKapt"]
 }
 
-kapt {
-    generateStubs = true
-}
+//kapt {
+//    generateStubs = true
+//}

@@ -14,6 +14,10 @@ ext {
             support: "27.0.2"
     ]
 
+    lastversion = [
+            permissionsDispatcherLastVersion: "3.2.0"
+    ]
+
     dependencies = [
             //android-support
             "support-v7"                   : "com.android.support:appcompat-v7:${dependVersion.support}",
@@ -66,5 +70,8 @@ ext {
             "ultra-ptr"                    : "in.srain.cube:ultra-ptr:1.0.11",
             "lottie"                       : "com.airbnb.android:lottie:2.5.0-rc1",
             "videoplayer":"fm.jiecao:jiecaovideoplayer:5.7",
+            //permission
+            "permissionsDispatcher"        : "com.github.hotchemi:permissionsdispatcher:3.2.0",
+            "permissionsDispatcherKapt "   : "com.github.hotchemi:permissionsdispatcher-processor:3.2.0",
     ]
 }

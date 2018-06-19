@@ -22,14 +22,7 @@ import kotlinx.android.synthetic.main.activity_guide.*
  * 首次进入app的展示：1.视频展示 2.多图片滑动
  */
 class GuideActivity : BaseActivity<IBasePresenter>() {
-    override fun mSetPresenter(presenter: IBasePresenter?) {
-    }
 
-
-    //    @BindView(R.id.cvv_guide_video)
-//    internal var mVideoView: CustomerVideoView? = null
-//    @BindView(R.id.tv_guide_exit)
-//    internal var mGuideExit: TextView? = null
     private var position: Int = 0
 
     override fun getLayoutId(): Int {
@@ -108,7 +101,8 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
 
     }
 
-
+    override fun mSetPresenter(presenter: IBasePresenter?) {
+    }
 
     override fun onShowNoMore() {
 
