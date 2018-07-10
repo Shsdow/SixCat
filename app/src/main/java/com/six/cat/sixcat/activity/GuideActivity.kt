@@ -2,6 +2,7 @@ package com.six.cat.sixcat.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
@@ -47,27 +48,19 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
     private fun playVideo() {
         cvvGuideVideo.setVideoURI(Uri.parse("android.resource://" + this.packageName + Constants.PATHS_SEPARATOR + R.raw.video))
         cvvGuideVideo.start()
-        cvvGuideVideo.setOnCompletionListener { mediaPlayer -> finishVideo() }
-    }
-
-    private fun finishVideo() {
-        mManager!!.finishActivity()
-        cvvGuideVideo.destroyDrawingCache()
+        cvvGuideVideo.setOnCompletionListener { _ -> finishVideo() }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode != 4) {
             return super.onKeyDown(keyCode, event)
         }
-        mManager!!.finishActivity(this as Activity)
-        cvvGuideVideo.destroyDrawingCache()
+        finishVideo()
         return true
-
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-
     }
 
     override fun onResume() {
@@ -84,8 +77,11 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
 
     override fun onDestroy() {
         super.onDestroy()
+        finishVideo()
+    }
+
+    private fun finishVideo() {
         cvvGuideVideo.destroyDrawingCache()
-        cvvGuideVideo
         mManager!!.finishActivity()
     }
 

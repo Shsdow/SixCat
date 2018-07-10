@@ -5,21 +5,21 @@ import android.util.AttributeSet;
 import android.widget.VideoView;
 
 /**
- * @author liguoying
+ * @author liguoying Explicit
  * @date 2017/12/8.
  */
 
 public class CustomerVideoView extends VideoView {
     public CustomerVideoView(Context context) {
-        super(context);
+        super(context.getApplicationContext());
     }
 
     public CustomerVideoView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        super(context.getApplicationContext(), attrs);
     }
 
     public CustomerVideoView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        super(context.getApplicationContext(), attrs, defStyleAttr);
     }
 
     @Override

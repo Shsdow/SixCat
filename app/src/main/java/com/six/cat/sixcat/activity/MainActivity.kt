@@ -1,5 +1,7 @@
 package com.six.cat.sixcat.activity
 
+import android.Manifest
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
@@ -14,7 +16,7 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import com.airbnb.lottie.LottieProperty.POSITION
+import android.widget.Toast
 
 import com.bumptech.glide.Glide
 import com.jaeger.library.StatusBarUtil
@@ -36,11 +38,11 @@ import java.util.Locale
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import permissions.dispatcher.*
 
+@RuntimePermissions
 class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigationItemSelectedListener {
-    override fun mSetPresenter(presenter: IBasePresenter?) {
 
-    }
 
     private val fragments: Array<Fragment>? = null
     private var mHomeFragment: HomeFragment? = null
@@ -66,6 +68,7 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        shoWriteWithPermissionCheck()
         if (!SPUtil.getBoolean("isFirst")) {
             startActivity(Intent(this, GuideActivity::class.java))
         }
@@ -94,6 +97,35 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
         } else {
             showFragment(FRAGMENT_NEWS)
         }
+    }
+
+    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun shoWrite() {
+    }
+
+//    @OnShowRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//    fun showRationaleWriteExternal(request: PermissionRequest) {
+//        AlertDialog.Builder(this)
+//                .setMessage("wwe")
+//                .setPositiveButton("ok", { dialog, button -> request.proceed() })
+//                .setNegativeButton("cancle", { dialog, button -> request.cancel() })
+//                .show()
+//        ShowToast.shortTime("我要申请文件写入权限")
+//    }
+
+    @OnPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun onWriteDenied() {
+        ShowToast.shortTime(R.string.permission_write_denied);
+    }
+
+    @OnNeverAskAgain(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun onWriteNeverAskAgain() {
+        ShowToast.shortTime(R.string.permission_write_never_askagain);
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // NOTE: delegate the permission handling to generated function
+        onRequestPermissionsResult(requestCode, grantResults)
     }
 
     override fun initToolBar() {
@@ -270,24 +302,6 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onShowLoading() {
-
-    }
-
-    override fun onHideLoading() {
-
-    }
-
-    override fun onShowNetError() {
-
-    }
-
-
-
-    override fun onShowNoMore() {
-
-    }
-
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (mDrawerLayoutMain.isDrawerOpen(mDrawerLayoutMain.getChildAt(1))) {
@@ -307,5 +321,26 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
             }
             else -> finish()
         }
+    }
+
+    override fun mSetPresenter(presenter: IBasePresenter?) {
+
+    }
+
+    override fun onShowLoading() {
+
+    }
+
+    override fun onHideLoading() {
+
+    }
+
+    override fun onShowNetError() {
+
+    }
+
+
+    override fun onShowNoMore() {
+
     }
 }

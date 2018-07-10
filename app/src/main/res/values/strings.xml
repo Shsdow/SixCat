@@ -52,4 +52,6 @@
     <string name="news_toast">已为您推荐了%1$s条新资讯</string>
     <string name="text_empty">还么有数据</string>
     <string name="text_nonet">网络异常</string>
+    <string name="permission_write_denied">拒绝文件写入权限</string>
+    <string name="permission_write_never_askagain">不要在询问请求文件写入权限</string>
 </resources>

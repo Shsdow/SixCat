@@ -13,7 +13,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.SixCatApplication;
 import com.six.cat.sixcat.bean.LiveBean;
-import com.six.cat.sixcat.utils.GlideCircleTransform;
+import com.six.cat.sixcat.widget.GlideCircleTransform;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

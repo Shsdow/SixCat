@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.utils;
+package com.six.cat.sixcat.widget;
 
 import android.content.Context;
 import android.content.res.Resources;

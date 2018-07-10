@@ -64,6 +64,8 @@ public class HomeFgAdapter extends FragmentStatePagerAdapter {
                 case 3:
                     mFragments[position] = HomeRegionFragment.newInstance();
                     break;
+                default:
+                    break;
 
             }
         }

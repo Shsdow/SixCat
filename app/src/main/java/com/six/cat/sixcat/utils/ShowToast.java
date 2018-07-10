@@ -22,6 +22,9 @@ public class ShowToast {
     private static TextView tvText;
 
     public static void shortTime(int resId) {
+        if (SixCatApplication.getInstance() == null) {
+            return;
+        }
         shortTime(SixCatApplication.getInstance().getString(resId));
     }
 
