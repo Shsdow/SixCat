@@ -17,7 +17,6 @@ import android.view.MenuItem
 import android.widget.TextView
 
 import com.bumptech.glide.Glide
-import com.jaeger.library.StatusBarUtil
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.views.base.BaseActivity
 import com.six.cat.sixcat.views.fragment.HomeFragment
@@ -28,6 +27,7 @@ import com.six.cat.sixcat.views.fragment.VideoShowFragment
 import com.six.cat.sixcat.utils.SPUtil
 import com.six.cat.sixcat.utils.SettingUtil
 import com.six.cat.sixcat.utils.ShowToast
+import com.six.cat.sixcat.utils.StatusBarUtil
 import com.six.cat.sixcat.widgets.CircleImageView
 import com.six.cat.sixcat.widgets.BottomNavigationViewHelper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,13 +42,11 @@ import permissions.dispatcher.*
 class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigationItemSelectedListener {
 
 
-    private val fragments: Array<Fragment>? = null
     private var mHomeFragment: HomeFragment? = null
     private var mPictureFragment: PictureFragment? = null
     private var mThemeFragment: ThemeFragment? = null
     private var mVideoFragment: VideoShowFragment? = null
     private var position: Int = 0
-    private val index: Int = 0
     private val titleList = ArrayList<String>()
     private var exitTime: Long = 0L
 

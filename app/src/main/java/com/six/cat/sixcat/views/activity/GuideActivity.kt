@@ -4,12 +4,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
 
-import com.jaeger.library.StatusBarUtil
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.views.base.BaseActivity
 import com.six.cat.sixcat.constants.Constants
 import com.six.cat.sixcat.presenter.IBasePresenter
 import com.six.cat.sixcat.utils.SPUtil
+import com.six.cat.sixcat.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_guide.*
 
 /**

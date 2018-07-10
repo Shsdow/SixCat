@@ -115,7 +115,7 @@ dependencies {
     releaseImplementation rootProject.ext.dependencies["leakcanary-android-no-op"]
     implementation rootProject.ext.dependencies["butterknife"]
     kapt rootProject.ext.dependencies["butterknife-compiler"]
-    implementation rootProject.ext.dependencies["statusbarutil"]
+//    implementation rootProject.ext.dependencies["statusbarutil"]
     implementation rootProject.ext.dependencies["slidableactivity"]
     implementation rootProject.ext.dependencies["material-dialogs"]
     implementation rootProject.ext.dependencies["SmartRefreshLayout"]
