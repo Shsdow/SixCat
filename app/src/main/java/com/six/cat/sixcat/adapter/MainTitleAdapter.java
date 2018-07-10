@@ -33,14 +33,17 @@ public class MainTitleAdapter extends PagerAdapter implements View.OnClickListen
         this.context = context;
     }
 
+    @Override
     public int getCount() {
         return this.images.length;
     }
 
+    @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
 
+    @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(this.context).inflate(R.layout.main_title_item, null);
         ((ImageView) view.findViewById(R.id.main_title_image)).setImageResource(this.images[position]);
@@ -54,10 +57,12 @@ public class MainTitleAdapter extends PagerAdapter implements View.OnClickListen
         return view;
     }
 
+    @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
     }
 
+    @Override
     public void onClick(View v) {
         if (this.mOnItemClickLitener != null) {
             switch (v.getId()) {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.six.cat.sixcat.activity.MainActivity"
+    tools:context=".views.activity.MainActivity"
     tools:openDrawer="end">
 
     <android.support.design.widget.CoordinatorLayout
@@ -27,7 +27,7 @@
             android:background="@color/white"
             app:itemIconTint="@drawable/nav_item_color_state"
             app:itemTextColor="@drawable/nav_item_color_state"
-            app:layout_behavior="com.six.cat.sixcat.widget.BottomNavigationBehavior"
+            app:layout_behavior="com.six.cat.sixcat.widgets.BottomNavigationBehavior"
             app:menu="@menu/bottom_navigation_main" />
 
     </android.support.design.widget.CoordinatorLayout>

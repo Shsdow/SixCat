@@ -1,10 +1,8 @@
 package com.six.cat.sixcat.adapter
 
 import android.content.Context
-import android.net.Uri
 import android.support.annotation.LayoutRes
 import android.view.View
-import com.airbnb.lottie.utils.Utils
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -12,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.six.cat.sixcat.R
-import com.six.cat.sixcat.bean.VideoDetailBean
+import com.six.cat.sixcat.model.VideoDetailBean
 import com.six.cat.sixcat.utils.conversionPlayTime
 import com.six.cat.sixcat.utils.conversionTime
 import fm.jiecao.jcvideoplayer_lib.JCUserAction

@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.six.cat.sixcat.R;
-import com.six.cat.sixcat.fragment.VideoFragment;
-import com.six.cat.sixcat.module.movieshow.HomeLiveFragment;
-import com.six.cat.sixcat.fragment.homefgs.HomeRecommendedFragment;
-import com.six.cat.sixcat.fragment.homefgs.HomeRegionFragment;
+import com.six.cat.sixcat.views.fragment.VideoFragment;
+import com.six.cat.sixcat.views.fragment.HomeLiveFragment;
+import com.six.cat.sixcat.views.fragment.HomeRecommendedFragment;
+import com.six.cat.sixcat.views.fragment.HomeRegionFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

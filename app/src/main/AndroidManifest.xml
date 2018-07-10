@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/sixcatTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.six.cat.sixcat.views.activity.MainActivity"
             android:theme="@style/sixcatTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,14 +25,14 @@
         </activity>
 
         <activity
-            android:name=".activity.GuideActivity"
+            android:name="com.six.cat.sixcat.views.activity.GuideActivity"
             android:screenOrientation="portrait"
             android:theme="@style/sixcatTheme" />
 
-        <activity android:name=".activity.SettingActivity" />
+        <activity android:name="com.six.cat.sixcat.views.activity.SettingActivity" />
 
         <activity
-            android:name=".module.movieshowcase.MovieShowcaseActivity"
+            android:name=".views.activity.MovieShowcaseActivity"
             android:theme="@style/titleTheme" />
     </application>
 

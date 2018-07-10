@@ -10,7 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.SixCatApplication
-import com.six.cat.sixcat.bean.MovieShowcaseBean
+import com.six.cat.sixcat.model.MovieShowcaseBean
 
 /**
  * @author liguoying

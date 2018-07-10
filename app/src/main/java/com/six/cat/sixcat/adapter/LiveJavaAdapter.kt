@@ -12,8 +12,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.SixCatApplication
-import com.six.cat.sixcat.bean.LiveBean
-import com.six.cat.sixcat.widget.GlideCircleTransform
+import com.six.cat.sixcat.model.LiveBean
+import com.six.cat.sixcat.widgets.GlideCircleTransform
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -34,15 +34,15 @@ class LiveJavaAdapter(data: ArrayList<LiveBean.SubjectsBean>?) : BaseQuickAdapte
     override fun convert(helper: BaseViewHolder, item: LiveBean.SubjectsBean) {
         try {
             helper.addOnClickListener(R.id.cv_item)
-            Glide.with(mContext).load(item.images.medium)
+            Glide.with(mContext).load(item.images?.medium)
                     .apply(RequestOptions.bitmapTransform(GlideCircleTransform(SixCatApplication.getInstance(), 4))).into(helper.getView<ImageView>(R.id.iv_post_card))
             helper.setText(R.id.tv_item_title, item.title)
             helper.setText(R.id.tv_director,
-                    String.format(Locale.CHINA, SixCatApplication.getInstance().resources.getString(R.string.showing_movie_director), item.directors[0].name))
+                    String.format(Locale.CHINA, SixCatApplication.getInstance().resources.getString(R.string.showing_movie_director), item.directors?.get(0)?.name))
             val actors = StringBuilder()
             val castsBeanList = item.casts
-            val size = castsBeanList.size - 1
-            for (i in 0..size) {
+            val size = castsBeanList?.size?.minus(1)
+            for (i in 0..size!!) {
                 actors.append(castsBeanList[i].name).append(if (i == size) "" else "/")
             }
             helper.setText(R.id.tv_actor, String.format(Locale.CHINA, SixCatApplication.getInstance().resources.getString(R.string.showing_movie_actors), actors.toString()))
@@ -57,8 +57,8 @@ class LiveJavaAdapter(data: ArrayList<LiveBean.SubjectsBean>?) : BaseQuickAdapte
                     (helper.getView<TextView>(R.id.tv_not_on_show)).visibility = View.GONE
                     (helper.getView<LinearLayout>(R.id.ll_star_show)).visibility = View.VISIBLE
                     helper.setText(R.id.tv_port_status, "购票")
-                    helper.setText(R.id.tv_star_num, item.rating.average.toString())
-                    (helper.getView<RatingBar>(R.id.rb_star)).rating = item.rating.average.toFloat() / 2.0f
+                    helper.setText(R.id.tv_star_num, item.rating?.average.toString())
+                    (helper.getView<RatingBar>(R.id.rb_star)).rating = item.rating?.average?.toFloat()!! / 2.0f
                 }
             }
         } catch (e: ParseException) {

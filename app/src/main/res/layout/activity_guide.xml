@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <com.six.cat.sixcat.view.CustomerVideoView
+    <com.six.cat.sixcat.widgets.CustomerVideoView
         android:id="@+id/cvvGuideVideo"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

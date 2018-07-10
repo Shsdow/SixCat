@@ -2,7 +2,7 @@ package com.six.cat.sixcat;
 
 import android.support.annotation.NonNull;
 
-import com.six.cat.sixcat.api.ApiContants;
+import com.six.cat.sixcat.presenter.ApiContants;
 import com.six.cat.sixcat.utils.NetWorkUtil;
 
 import java.io.File;
