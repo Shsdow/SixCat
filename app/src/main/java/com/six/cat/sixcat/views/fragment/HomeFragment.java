@@ -59,15 +59,6 @@ public class HomeFragment extends BaseRxLazyFragment {
         mHomell.setBackgroundColor(SettingUtil.getInstance().getColor());
     }
 
-    @Override
-    public void onShowLoading() {
-
-    }
-
-    @Override
-    public void onHideLoading() {
-
-    }
 
     @Override
     public void onShowNetError() {

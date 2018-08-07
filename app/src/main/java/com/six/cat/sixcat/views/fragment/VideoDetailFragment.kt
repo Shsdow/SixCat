@@ -16,6 +16,7 @@ import com.six.cat.sixcat.model.VideoChannelBean
 import com.six.cat.sixcat.model.VideoDetailBean
 import com.six.cat.sixcat.presenter.IVideoInterfaceManager
 import com.six.cat.sixcat.presenter.VideoPresenter
+import com.six.cat.sixcat.utils.LogUtil
 import com.six.cat.sixcat.widgets.CustomLoadMoreView
 import kotlinx.android.synthetic.main.fragment_video_detail.*
 
@@ -29,6 +30,7 @@ class VideoDetailFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPres
     private var pageNum = 1
     private var videoDetailBean: VideoDetailBean? = null
     private lateinit var videoDetailAdapter: VideoDetailAdapter
+    private val TAG = "VideoDetailFragment";
 
     companion object {
         fun newInstance(typeId: String): VideoDetailFragment {
@@ -43,6 +45,7 @@ class VideoDetailFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPres
     override fun getLayoutResId(): Int = R.layout.fragment_video_detail
 
     override fun finishCreateView(state: Bundle?) {
+        LogUtil.d(TAG  + " finishcreateview")
         isPrepared = true
         lazyLoad()
 

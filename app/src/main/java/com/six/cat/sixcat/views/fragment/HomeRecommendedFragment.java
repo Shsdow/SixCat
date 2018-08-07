@@ -1,6 +1,7 @@
 package com.six.cat.sixcat.views.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.views.base.BaseRxLazyFragment;
@@ -14,6 +15,7 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
 public class HomeRecommendedFragment extends BaseRxLazyFragment {
 
     private static HomeRecommendedFragment instance;
+    private static final String TAG = "HomeRecommendedFragment";
 
     public static HomeRecommendedFragment newInstance() {
         if (instance == null) {
@@ -29,18 +31,9 @@ public class HomeRecommendedFragment extends BaseRxLazyFragment {
 
     @Override
     public void finishCreateView(Bundle state) {
-
+        Log.e(TAG, "finishCreateView: " + TAG);
     }
 
-    @Override
-    public void onShowLoading() {
-
-    }
-
-    @Override
-    public void onHideLoading() {
-
-    }
 
     @Override
     public void onShowNetError() {

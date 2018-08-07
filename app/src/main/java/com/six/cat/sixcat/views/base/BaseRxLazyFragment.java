@@ -5,10 +5,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 
 import com.six.cat.sixcat.presenter.IBasePresenter;
 import com.six.cat.sixcat.presenter.IBaseView;
@@ -31,6 +31,7 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
     //标志位 fragment是否可见
     protected boolean isVisible;
     private Unbinder bind;
+    private static final String TAG = "BaseRxLazyFragment";
 
     @LayoutRes
     public abstract int getLayoutResId();
@@ -146,12 +147,25 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
      * 显示进度条
      */
     protected void showProgressBar() {
+        Log.e("", "");
     }
 
     /**
      * 隐藏进度条
      */
     protected void hideProgressBar() {
+        Log.e("", "");
+    }
+
+
+    @Override
+    public void onShowLoading() {
+
+    }
+
+    @Override
+    public void onHideLoading() {
+
     }
 
     /**

@@ -4,21 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.adapter.LiveJavaAdapter
-import com.six.cat.sixcat.views.base.BaseRxLazyFragment
 import com.six.cat.sixcat.model.LiveBean
 import com.six.cat.sixcat.module.live.ILiveInterface
-import com.six.cat.sixcat.views.activity.MovieShowcaseActivity
 import com.six.cat.sixcat.presenter.LiveContentPresenter
+import com.six.cat.sixcat.utils.LogUtil
 import com.six.cat.sixcat.utils.ShowToast
+import com.six.cat.sixcat.views.activity.MovieShowcaseActivity
+import com.six.cat.sixcat.views.base.BaseRxLazyFragment
 import com.six.cat.sixcat.widgets.CustomLoadMoreView
 import com.six.cat.sixcat.widgets.SnarkBarUtil
 import kotlinx.android.synthetic.main.fragment_live.*
-
-import java.util.ArrayList
+import java.util.*
 
 
 /**
@@ -32,6 +31,7 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     private var isFreshing = false
     private val PAGE_SIZE = 10
     var mCurrentCount = 0
+    val TAG = "HomeLiveFragment"
 
     companion object {
         fun newInstance(): HomeLiveFragment {
@@ -48,6 +48,7 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     }
 
     override fun finishCreateView(state: Bundle?) {
+        LogUtil.d(TAG  + " finishcreateview" + " " + TAG)
         isPrepared = true
         lazyLoad()
     }
