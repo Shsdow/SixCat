@@ -7,6 +7,9 @@ def static releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
+kapt {
+    generateStubs = true
+}
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -87,6 +90,9 @@ android {
 }
 
 dependencies {
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v13'
+    }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation rootProject.ext.dependencies["support-v7"]
