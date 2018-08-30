@@ -1,7 +1,6 @@
 package com.six.cat.sixcat.views.base
 
 import android.os.Bundle
-
 import com.six.cat.sixcat.presenter.IBasePresenter
 import com.six.cat.sixcat.presenter.IBaseView
 import com.six.cat.sixcat.utils.ActivityManager
@@ -9,12 +8,9 @@ import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
-import butterknife.ButterKnife
-import butterknife.Unbinder
-
 abstract class BaseActivity<T : IBasePresenter> : RxAppCompatActivity(), IBaseView<T> {
 
-    public var mManager: ActivityManager? = null
+    var mManager: ActivityManager? = null
     private var bind: Unbinder? = null
     protected var mSetPresenter: T? = null
 

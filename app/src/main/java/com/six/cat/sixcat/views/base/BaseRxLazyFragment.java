@@ -143,21 +143,6 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
     protected void loadData() {
     }
 
-    /**
-     * 显示进度条
-     */
-    protected void showProgressBar() {
-        Log.e("", "");
-    }
-
-    /**
-     * 隐藏进度条
-     */
-    protected void hideProgressBar() {
-        Log.e("", "");
-    }
-
-
     @Override
     public void onShowLoading() {
 

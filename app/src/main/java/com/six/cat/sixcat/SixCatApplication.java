@@ -5,6 +5,7 @@ import android.app.Application;
 import com.akaita.java.rxjava2debug.RxJava2Debug;
 import com.squareup.leakcanary.LeakCanary;
 
+
 /**
  * @author liguoying
  * @date 2017/12/4.
@@ -41,5 +42,6 @@ public class SixCatApplication extends Application {
         RxJava2Debug.enableRxJava2AssemblyTracking(new String[]{"com.six.cat.sixcat", "com.six.cat.sixcat"});
 
         LeakCanary.install(this);
+
     }
 }
