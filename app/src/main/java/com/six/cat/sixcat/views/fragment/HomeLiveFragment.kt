@@ -72,6 +72,9 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         mMovieShortCaseAdapter!!.setNotDoAnimationCount(3)
         mMovieShortCaseAdapter!!.setOnItemChildClickListener { _, _, position -> startActivity(Intent(context, MovieShowcaseActivity::class.java).putExtra("movieId", mBeanList[position].id)) }
         rvMovieShortCase.adapter = mMovieShortCaseAdapter
+        mCuvEmptyView.setOnClickListener{
+            loadData()
+        }
     }
 
 
