@@ -1,6 +1,8 @@
 package com.six.cat.sixcat.views.base
 
 import android.os.Bundle
+import butterknife.ButterKnife
+import butterknife.Unbinder
 import com.six.cat.sixcat.presenter.IBasePresenter
 import com.six.cat.sixcat.presenter.IBaseView
 import com.six.cat.sixcat.utils.ActivityManager
