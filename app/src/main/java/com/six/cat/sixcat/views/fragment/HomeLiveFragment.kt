@@ -57,20 +57,10 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         LogUtil.d(TAG + " finishcreateview" + " " + TAG)
         isPrepared = true
         initView()
-//        lazyLoad()
     }
 
 
-//    override fun lazyLoad() {
-//        if (!isPrepared || !isVisible) {
-//            return
-//        }
-//        initView()
-//
-//    }
-
     override fun initView() {
-//        initRefreshLayout()
         initRecyclerView()
         isPrepared = false
     }
