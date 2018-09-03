@@ -5,13 +5,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.six.cat.sixcat.presenter.IBasePresenter;
 import com.six.cat.sixcat.presenter.IBaseView;
+import com.six.cat.sixcat.utils.ActivityManager;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.support.RxFragment;
@@ -128,6 +128,9 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
      * fragment懒加载方法，获取页面信息，例如进行请求数据
      */
     protected void lazyLoad() {
+        if (!isPrepared || !isVisible) {
+            return;
+        }
         loadData();
     }
 
@@ -157,27 +160,32 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
      * 初始化 View
      */
     protected void initView() {
-        initRecyclerView();
-        initRefreshLayout();
-    }
-
-    /**
-     * 初始化recyclerView
-     */
-    protected void initRecyclerView() {
-    }
-
-    /**
-     * 初始化refreshLayout
-     */
-    protected void initRefreshLayout() {
+//        initRecyclerView();
+//        initRefreshLayout();
     }
 
 //    /**
-//     * 设置数据显示
+//     * 初始化recyclerView
 //     */
-//    protected void finishTask() {
+//    protected void initRecyclerView() {
 //    }
+//
+//    /**
+//     * 初始化refreshLayout
+//     */
+//    protected void initRefreshLayout() {
+//    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        finishTask();
+    }
+
+    protected void finishTask() {
+        ActivityManager.Companion.getInstance().finishActivity(activity);
+    }
 
     @Override
     public <T> LifecycleTransformer<T> bindToLife() {

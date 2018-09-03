@@ -8,6 +8,12 @@ import com.trello.rxlifecycle2.LifecycleTransformer
  */
 
 interface IBaseView<T> {
+
+    /**
+     * 设置 presenter
+     */
+    fun mSetPresenter(presenter: T?)
+
     /**
      * 显示加载动画
      */
@@ -22,11 +28,6 @@ interface IBaseView<T> {
      * 显示网络错误
      */
     fun onShowNetError()
-
-    /**
-     * 设置 presenter
-     */
-     fun mSetPresenter(presenter: T?)
 
     /**
      * 加载完毕

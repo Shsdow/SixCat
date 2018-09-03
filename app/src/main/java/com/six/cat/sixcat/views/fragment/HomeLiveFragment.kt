@@ -47,22 +47,35 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         return R.layout.fragment_live
     }
 
+    override fun mSetPresenter(presenter: ILiveInterface.ILivePresenter?) {
+        if (presenter == null) {
+            this.presenter = LiveContentPresenter(this)
+        }
+    }
+
     override fun finishCreateView(state: Bundle?) {
-        LogUtil.d(TAG  + " finishcreateview" + " " + TAG)
+        LogUtil.d(TAG + " finishcreateview" + " " + TAG)
         isPrepared = true
-        lazyLoad()
+        initView()
+//        lazyLoad()
     }
 
 
-    override fun lazyLoad() {
-        if (!isPrepared || !isVisible) {
-            return
-        }
-        initView()
+//    override fun lazyLoad() {
+//        if (!isPrepared || !isVisible) {
+//            return
+//        }
+//        initView()
+//
+//    }
+
+    override fun initView() {
+//        initRefreshLayout()
+        initRecyclerView()
         isPrepared = false
     }
 
-    override fun initRecyclerView() {
+    private fun initRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(context)
         rvMovieShortCase.layoutManager = linearLayoutManager
         mMovieShortCaseAdapter = LiveJavaAdapter(mBeanList)
@@ -72,13 +85,15 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         mMovieShortCaseAdapter!!.setNotDoAnimationCount(3)
         mMovieShortCaseAdapter!!.setOnItemChildClickListener { _, _, position -> startActivity(Intent(context, MovieShowcaseActivity::class.java).putExtra("movieId", mBeanList[position].id)) }
         rvMovieShortCase.adapter = mMovieShortCaseAdapter
+        initRefreshLayout()
         mCuvEmptyView.setOnClickListener{
             loadData()
         }
+
     }
 
 
-    override fun initRefreshLayout() {
+    private fun initRefreshLayout() {
         mMovieShortCaseAdapter!!.setEnableLoadMore(false)
         srlMovieShortCaseFresh.setOnRefreshListener {
             mMovieShortCaseAdapter!!.setEnableLoadMore(true)
@@ -130,11 +145,7 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         SnarkBarUtil.showSnakbarMessage(rvMovieShortCase, "数据加载失败,请重新加载或者检查网络是否链接")
     }
 
-    override fun mSetPresenter(presenter: ILiveInterface.ILivePresenter?) {
-        if (presenter == null) {
-            this.presenter = LiveContentPresenter(this)
-        }
-    }
+
 
     override fun onSetAdapter(list: List<*>, totalCount: Int) {
         mMovieShortCaseAdapter!!.setEnableLoadMore(true)

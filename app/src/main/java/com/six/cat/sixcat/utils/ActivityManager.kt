@@ -18,7 +18,7 @@ class ActivityManager {
 
         fun getInstance(): ActivityManager {
             if (instance == null) {
-                synchronized(ActivityManager::class.java) {
+                synchronized(ActivityManager::class) {
                     if (instance == null) {
                         instance = ActivityManager()
                     }
