@@ -24,12 +24,10 @@ public class HomeFragment extends BaseRxLazyFragment {
     private static HomeFragment instance;
     @BindView(R.id.vp_home_fragment)
     ViewPager mHomeViewPage;
-    @BindView(R.id.ll_home_fragment_header_layout)
-    LinearLayout mHomell;
+//    @BindView(R.id.ll_home_fragment_header_layout)
+//    LinearLayout mHomell;
     @BindView(R.id.tb_home_fragment)
     TabLayout mHomeTb;
-    @BindView(R.id.iv_home_fragment_add_channel)
-    ImageView mHomeIv;
 
 
     public static HomeFragment newInstance() {
@@ -55,8 +53,7 @@ public class HomeFragment extends BaseRxLazyFragment {
         mHomeViewPage.setAdapter(homeFgAdapter);
         mHomeTb.setupWithViewPager(mHomeViewPage);
         mHomeTb.setTabMode(TabLayout.MODE_SCROLLABLE);
-        mHomeIv.setOnClickListener(view -> ShowToast.shortTime("i click it"));
-        mHomell.setBackgroundColor(SettingUtil.getInstance().getColor());
+        mHomeTb.setBackgroundColor(SettingUtil.getInstance().getColor());
     }
 
 

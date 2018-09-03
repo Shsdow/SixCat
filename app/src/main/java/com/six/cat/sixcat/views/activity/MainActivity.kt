@@ -6,7 +6,6 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -15,28 +14,27 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-
 import com.bumptech.glide.Glide
 import com.six.cat.sixcat.R
-import com.six.cat.sixcat.views.base.BaseActivity
-import com.six.cat.sixcat.views.fragment.HomeFragment
-import com.six.cat.sixcat.views.fragment.PictureFragment
-import com.six.cat.sixcat.views.fragment.ThemeFragment
 import com.six.cat.sixcat.presenter.IBasePresenter
-import com.six.cat.sixcat.views.fragment.VideoShowFragment
 import com.six.cat.sixcat.utils.SPUtil
 import com.six.cat.sixcat.utils.SettingUtil
 import com.six.cat.sixcat.utils.ShowToast
 import com.six.cat.sixcat.utils.StatusBarUtil
-import com.six.cat.sixcat.widgets.CircleImageView
+import com.six.cat.sixcat.views.base.BaseActivity
+import com.six.cat.sixcat.views.fragment.HomeFragment
+import com.six.cat.sixcat.views.fragment.PictureFragment
+import com.six.cat.sixcat.views.fragment.ThemeFragment
+import com.six.cat.sixcat.views.fragment.VideoShowFragment
 import com.six.cat.sixcat.widgets.BottomNavigationViewHelper
+import com.six.cat.sixcat.widgets.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
-
-import java.util.ArrayList
-import java.util.Locale
-
-import permissions.dispatcher.*
+import permissions.dispatcher.NeedsPermission
+import permissions.dispatcher.OnNeverAskAgain
+import permissions.dispatcher.OnPermissionDenied
+import permissions.dispatcher.RuntimePermissions
+import java.util.*
 
 @RuntimePermissions
 class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigationItemSelectedListener {
@@ -64,14 +62,9 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        shoWriteWithPermissionCheck()
         if (!SPUtil.getBoolean("isFirst")) {
             startActivity(Intent(this, GuideActivity::class.java))
         }
-
-        //        StatusBarUtil.setTranslucent(this, 150);
-        //        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent, null));
-        //        StatusBarUtil.setTransparent(this);
         StatusBarUtil.setColorForDrawerLayout(this@MainActivity, mDrawerLayoutMain, Color.parseColor("#20C1FD"), 255)
         initFragments(savedInstanceState)
         initNavigationView()
@@ -118,10 +111,11 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
     fun onWriteNeverAskAgain() {
         ShowToast.shortTime(R.string.permission_write_never_askagain);
     }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         // NOTE: delegate the permission handling to generated function
-        onRequestPermissionsResult(requestCode, grantResults)
+//        onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun initToolBar() {
@@ -204,8 +198,6 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
                 } else {
                     ft.show(mThemeFragment)
                 }
-            }
-            else -> {
             }
         }
 
