@@ -4,7 +4,7 @@ import android.os.Bundle
 
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.adapter.VideoPagerAdapter
-import com.six.cat.sixcat.views.base.BaseRxLazyFragment
+import com.six.cat.sixcat.base.BaseRxLazyFragment
 import com.six.cat.sixcat.model.VideoChannelBean
 import com.six.cat.sixcat.model.VideoDetailBean
 import com.six.cat.sixcat.presenter.IVideoInterfaceManager
@@ -48,14 +48,14 @@ class VideoShowFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPresen
         loadData()
     }
 
-    override fun mSetPresenter(presenter: IVideoInterfaceManager.IVideoPresenter?) {
+    override fun setPresenterView(presenter: IVideoInterfaceManager.IVideoPresenter?) {
         if (presenter == null) {
             this.presenter = VideoPresenter(this)
         }
     }
 
     override fun loadData() {
-        presenter?.getVideoChannel()
+        presenter!!.getVideoChannel()
     }
 
     override fun dosetVideoChanel(videobeanList: List<VideoChannelBean>?) {

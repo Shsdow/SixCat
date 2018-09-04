@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.views.base;
+package com.six.cat.sixcat.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,8 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.six.cat.sixcat.presenter.IBasePresenter;
-import com.six.cat.sixcat.presenter.IBaseView;
 import com.six.cat.sixcat.utils.ActivityManager;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.FragmentEvent;
@@ -43,8 +41,12 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
         parentView = inflater.inflate(getLayoutResId(), container, false);
         bind = ButterKnife.bind(this, parentView);
         activity = getSupportActivity();
-        mSetPresenter(presenter);
+        setPresenterView(presenter);
         return parentView;
+    }
+
+    private FragmentActivity getSupportActivity() {
+        return getActivity();
     }
 
     @Override
@@ -52,6 +54,7 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
         super.onViewCreated(view, savedInstanceState);
         finishCreateView(savedInstanceState);
     }
+
 
     /**
      * 初始化views
@@ -86,11 +89,6 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
     }
 
 
-    public FragmentActivity getSupportActivity() {
-        return super.getActivity();
-    }
-
-
     public android.app.ActionBar getSupportActionBar() {
         return getSupportActivity().getActionBar();
     }
@@ -100,7 +98,6 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
         return this.activity == null ? (getActivity() == null ?
                 null : getActivity().getApplicationContext()) : this.activity.getApplicationContext();
     }
-
 
     /**
      * Fragment数据的懒加载
@@ -160,21 +157,7 @@ public abstract class BaseRxLazyFragment<T extends IBasePresenter> extends RxFra
      * 初始化 View
      */
     protected void initView() {
-//        initRecyclerView();
-//        initRefreshLayout();
     }
-
-//    /**
-//     * 初始化recyclerView
-//     */
-//    protected void initRecyclerView() {
-//    }
-//
-//    /**
-//     * 初始化refreshLayout
-//     */
-//    protected void initRefreshLayout() {
-//    }
 
 
     @Override

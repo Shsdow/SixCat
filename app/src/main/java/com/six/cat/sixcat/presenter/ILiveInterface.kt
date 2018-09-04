@@ -1,8 +1,8 @@
 package com.six.cat.sixcat.module.live
 
+import com.six.cat.sixcat.base.IBasePresenter
+import com.six.cat.sixcat.base.IBaseView
 import com.six.cat.sixcat.model.LiveBean
-import com.six.cat.sixcat.presenter.IBasePresenter
-import com.six.cat.sixcat.presenter.IBaseView
 
 /**
  * @author liguoying
@@ -12,29 +12,31 @@ import com.six.cat.sixcat.presenter.IBaseView
 
 interface ILiveInterface {
     interface ILiveView : IBaseView<ILivePresenter> {
-        fun loadData()
+
         /**
          * 设置适配器
          */
-        abstract fun onSetAdapter(list: List<*>, totalCount: Int)
+        fun onLoadDataSuccess(list: List<*>, totalCount: Int)
+
+        fun haveNoMore()
     }
 
     interface ILivePresenter : IBasePresenter {
-        /**
-         * 请求数据
-         */
-        fun doLoadData()
 
+        /**
+         * 刷新数据
+         */
+        fun doRefresh()
         /**
          * 再起请求数据
          */
         fun doLoadMoreData()
 
-        /**
-         * 设置适配器
-         */
-        fun doSetAdapter(mList: List<LiveBean.SubjectsBean>)
-
-        fun doShowNoMore()
+//        /**
+//         * 设置适配器
+//         */
+//        fun doSetAdapter(mList: List<LiveBean.SubjectsBean>)
+//
+//        fun doShowNoMore()
     }
 }

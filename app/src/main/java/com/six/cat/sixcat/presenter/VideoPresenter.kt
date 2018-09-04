@@ -1,7 +1,7 @@
 package com.six.cat.sixcat.presenter
 
 import com.six.cat.sixcat.RetrofitFactory
-import com.six.cat.sixcat.views.base.BaseObserver
+import com.six.cat.sixcat.base.BaseObserver
 import com.six.cat.sixcat.model.VideoChannelBean
 import com.six.cat.sixcat.model.VideoDetailBean
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -53,7 +53,7 @@ class VideoPresenter(val mView: IVideoInterfaceManager.IVideoView?) : IVideoInte
     override fun doNotShowMore() {
     }
 
-    override fun doRefresh() {
+    override fun loadData() {
     }
 
     override fun doShowNetError() {

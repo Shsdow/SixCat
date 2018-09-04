@@ -16,12 +16,12 @@ import android.view.MenuItem
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.six.cat.sixcat.R
-import com.six.cat.sixcat.presenter.IBasePresenter
+import com.six.cat.sixcat.base.IBasePresenter
 import com.six.cat.sixcat.utils.SPUtil
 import com.six.cat.sixcat.utils.SettingUtil
 import com.six.cat.sixcat.utils.ShowToast
 import com.six.cat.sixcat.utils.StatusBarUtil
-import com.six.cat.sixcat.views.base.BaseActivity
+import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.views.fragment.HomeFragment
 import com.six.cat.sixcat.views.fragment.PictureFragment
 import com.six.cat.sixcat.views.fragment.ThemeFragment
@@ -311,7 +311,7 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
         }
     }
 
-    override fun mSetPresenter(presenter: IBasePresenter?) {
+    override fun setPresenterView(presenter: IBasePresenter?) {
 
     }
 

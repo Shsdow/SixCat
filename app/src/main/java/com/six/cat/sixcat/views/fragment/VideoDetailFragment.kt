@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.SixCatApplication
 import com.six.cat.sixcat.adapter.VideoDetailAdapter
-import com.six.cat.sixcat.views.base.BaseRxLazyFragment
+import com.six.cat.sixcat.base.BaseRxLazyFragment
 import com.six.cat.sixcat.model.VideoChannelBean
 import com.six.cat.sixcat.model.VideoDetailBean
 import com.six.cat.sixcat.presenter.IVideoInterfaceManager
@@ -157,7 +157,7 @@ class VideoDetailFragment : BaseRxLazyFragment<IVideoInterfaceManager.IVideoPres
         mSimpleMultiStateView?.showNoNetView()
     }
 
-    override fun mSetPresenter(presenter: IVideoInterfaceManager.IVideoPresenter?) {
+    override fun setPresenterView(presenter: IVideoInterfaceManager.IVideoPresenter?) {
         if (presenter == null) {
             this.presenter = VideoPresenter(this)
         }

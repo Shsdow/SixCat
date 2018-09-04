@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.presenter
+package com.six.cat.sixcat.base
 
 import com.trello.rxlifecycle2.LifecycleTransformer
 
@@ -12,7 +12,7 @@ interface IBaseView<T> {
     /**
      * 设置 presenter
      */
-    fun mSetPresenter(presenter: T?)
+    fun setPresenterView(presenter: T?)
 
     /**
      * 显示加载动画

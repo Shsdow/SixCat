@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 class MovieShowcasePresenter(val mView: IMovieShowcaseManager.IMoviewShowcaseView) : IMovieShowcaseManager.IMoviewShowcasePresenter {
 
 
-    override fun doRefresh() {
+    override fun loadData() {
     }
 
     override fun doLoadData(movieId: String?) {
@@ -49,6 +49,4 @@ class MovieShowcasePresenter(val mView: IMovieShowcaseManager.IMoviewShowcaseVie
         mView.onHideLoading()
         mView.onShowNoMore()
     }
-
-
 }

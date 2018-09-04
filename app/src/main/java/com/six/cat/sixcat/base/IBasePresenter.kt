@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.presenter
+package com.six.cat.sixcat.base
 
 /**
  * @author liguoying
@@ -8,9 +8,9 @@ package com.six.cat.sixcat.presenter
 interface IBasePresenter {
 
     /**
-     * 刷新数据
+     * 请求数据
      */
-    fun doRefresh()
+    fun loadData()
 
     /**
      * 显示网络错误

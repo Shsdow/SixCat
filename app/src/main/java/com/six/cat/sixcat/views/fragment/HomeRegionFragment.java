@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.six.cat.sixcat.R;
-import com.six.cat.sixcat.views.base.BaseRxLazyFragment;
+import com.six.cat.sixcat.base.BaseRxLazyFragment;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
 /**
@@ -40,7 +40,7 @@ public class HomeRegionFragment extends BaseRxLazyFragment {
     }
 
     @Override
-    public void mSetPresenter(Object presenter) {
+    public void setPresenterView(Object presenter) {
 
     }
 

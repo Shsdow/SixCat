@@ -1,4 +1,4 @@
-package com.six.cat.sixcat.views.base
+package com.six.cat.sixcat.base
 
 import io.reactivex.Observer
 import io.reactivex.annotations.NonNull

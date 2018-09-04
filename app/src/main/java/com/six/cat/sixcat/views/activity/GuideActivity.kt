@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.KeyEvent
 
 import com.six.cat.sixcat.R
-import com.six.cat.sixcat.views.base.BaseActivity
+import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.constants.Constants
-import com.six.cat.sixcat.presenter.IBasePresenter
+import com.six.cat.sixcat.base.IBasePresenter
 import com.six.cat.sixcat.utils.SPUtil
 import com.six.cat.sixcat.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_guide.*
@@ -90,7 +90,7 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
 
     }
 
-    override fun mSetPresenter(presenter: IBasePresenter?) {
+    override fun setPresenterView(presenter: IBasePresenter?) {
     }
 
     override fun onShowNoMore() {

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+
 import com.six.cat.sixcat.R;
 import com.six.cat.sixcat.views.fragment.VideoFragment;
 import com.six.cat.sixcat.views.fragment.HomeLiveFragment;
