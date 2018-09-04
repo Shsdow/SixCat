@@ -155,7 +155,7 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
     }
 
     private fun showFragment(fragmentNews: Int) {
-        ShowToast.shortTime(String.format(Locale.CHINA, "这是第 %d 个 fragment ", fragmentNews))
+//        ShowToast.shortTime(String.format(Locale.CHINA, "这是第 %d 个 fragment ", fragmentNews))
         val ft = supportFragmentManager.beginTransaction()
         hideFragment(ft)
         position = fragmentNews

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.Toast
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.adapter.LiveJavaAdapter
@@ -78,7 +79,6 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
         mCuvEmptyView.setOnClickListener {
             presenter.doRefresh()
         }
-
     }
 
 
@@ -95,12 +95,6 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
             presenter.doRefresh()
         }
     }
-
-
-//    override fun loadData() {
-//        onShowLoading()
-//        presenter.loadData()
-//    }
 
     override fun onLoadMoreRequested() {
         srlMovieShortCaseFresh.isEnabled = false
@@ -119,13 +113,17 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     override fun onShowNetError() {
         srlMovieShortCaseFresh.isRefreshing = false
         mCuvEmptyView.visibility = View.VISIBLE
-        srlMovieShortCaseFresh.visibility = View.GONE
+        rvMovieShortCase.visibility = View.GONE
         mCuvEmptyView.setEmptyImage(R.drawable.img_tips_error_load_error)
         mCuvEmptyView.setEmptyText("加载失败~(≧▽≦)~啦啦啦.")
-        SnarkBarUtil.showSnakbarMessage(rvMovieShortCase, "数据加载失败,请重新加载或者检查网络是否链接")
+//        Toast.makeText(activity,"jiji",Toast.LENGTH_SHORT).show()
+        ShowToast.shortTime(String.format(Locale.CHINA, "这是第 %d 个 fragment ", 34))
+//        SnarkBarUtil.showSnakbarMessage(rvMovieShortCase, "数据加载失败,请重新加载或者检查网络是否链接")
     }
 
     override fun onLoadDataSuccess(list: List<*>, totalCount: Int) {
+        mCuvEmptyView.visibility = View.GONE
+        rvMovieShortCase.visibility = View.VISIBLE
         mMovieShortCaseAdapter!!.setEnableLoadMore(true)
         if (list.size < PAGE_SIZE) {
             mMovieShortCaseAdapter!!.loadMoreEnd(true)
