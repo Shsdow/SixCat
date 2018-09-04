@@ -27,7 +27,6 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
 
     @Override
     public void loadData() {
-        mView.onShowLoading();
         RetrofitFactory.getRetrofit().create(ILiveApi.class).getLiveContent("北京", start, count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -37,6 +36,7 @@ public class LiveContentPresenter implements ILiveInterface.ILivePresenter {
                 })
                 .compose(mView.<List<LiveBean.SubjectsBean>>bindToLife())
                 .subscribe(subjectsBeans -> {
+                    mView.onHideLoading();
                     if (subjectsBeans.size() > 0) {
                         mView.onLoadDataSuccess(subjectsBeans, totalSize);
                     } else {

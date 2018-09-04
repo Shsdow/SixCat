@@ -22,7 +22,6 @@ open class HomeFragment : Fragment() {
 
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
-
     }
 
     fun getLayoutResId() = R.layout.fragment_home
@@ -31,8 +30,8 @@ open class HomeFragment : Fragment() {
         return inflater.inflate(getLayoutResId(), null, false)
     }
 
-
-    fun finishCreateView(state: Bundle?) {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         initViewPage()
     }
 

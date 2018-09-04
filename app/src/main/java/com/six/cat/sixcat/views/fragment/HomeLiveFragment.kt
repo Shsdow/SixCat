@@ -97,10 +97,10 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     }
 
 
-    override fun loadData() {
-        onShowLoading()
-        presenter.loadData()
-    }
+//    override fun loadData() {
+//        onShowLoading()
+//        presenter.loadData()
+//    }
 
     override fun onLoadMoreRequested() {
         srlMovieShortCaseFresh.isEnabled = false
@@ -142,7 +142,6 @@ class HomeLiveFragment : BaseRxLazyFragment<ILiveInterface.ILivePresenter>(), IL
     }
 
     override fun haveNoMore() {
-        onHideLoading()
         onShowNoMore()
     }
 
