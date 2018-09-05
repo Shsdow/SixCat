@@ -22,7 +22,16 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resConfigs "es"
+
+        //ARouter 配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
+
+
 
     signingConfigs {
         release {
@@ -133,6 +142,7 @@ dependencies {
     implementation rootProject.ext.dependencies["lottie"]
     implementation rootProject.ext.dependencies["videoplayer"]
     implementation rootProject.ext.dependencies["permissionsDispatcher"]
-    kapt "com.github.hotchemi:permissionsdispatcher-processor:3.2.0"
-//    kapt rootProject.ext.dependencies["permissionsDispatcherKapt"]
+    kapt rootProject.ext.dependencies["permissions-kapt"]
+    kapt rootProject.ext.dependencies["arouter-annotation"]
+    api rootProject.ext.dependencies["arouter"]
 }

@@ -69,9 +69,13 @@ ext {
             //刷新
             "ultra-ptr"                    : "in.srain.cube:ultra-ptr:1.0.11",
             "lottie"                       : "com.airbnb.android:lottie:2.5.0-rc1",
-            "videoplayer":"fm.jiecao:jiecaovideoplayer:5.7",
+            "videoplayer"                  : "fm.jiecao:jiecaovideoplayer:5.7",
             //permission
             "permissionsDispatcher"        : "com.github.hotchemi:permissionsdispatcher:3.2.0",
-            "permissionsDispatcherKapt "   : "com.github.hotchemi:permissionsdispatcher-processor:3.2.0",
+            "permissions-kapt"             : "com.github.hotchemi:permissionsdispatcher-processor:3.2.0",
+            // ARouter
+            "arouter"                      : "com.alibaba:arouter-api:1.4.0",
+            "arouter-annotation"           : "com.alibaba:arouter-compiler:1.4.0",
+
     ]
 }

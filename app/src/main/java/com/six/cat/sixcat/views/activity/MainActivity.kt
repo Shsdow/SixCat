@@ -92,16 +92,6 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
     fun shoWrite() {
     }
 
-//    @OnShowRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//    fun showRationaleWriteExternal(request: PermissionRequest) {
-//        AlertDialog.Builder(this)
-//                .setMessage("wwe")
-//                .setPositiveButton("ok", { dialog, button -> request.proceed() })
-//                .setNegativeButton("cancle", { dialog, button -> request.cancel() })
-//                .show()
-//        ShowToast.shortTime("我要申请文件写入权限")
-//    }
-
     @OnPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     fun onWriteDenied() {
         ShowToast.shortTime(R.string.permission_write_denied);
