@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".views.activity.MovieShowcaseActivity">
+    tools:context=".views.activity.MovieDetailActivity">
 
 
     <com.six.cat.sixcat.widgets.ObserverScrollView

@@ -145,4 +145,6 @@ dependencies {
     kapt rootProject.ext.dependencies["permissions-kapt"]
     kapt rootProject.ext.dependencies["arouter-annotation"]
     api rootProject.ext.dependencies["arouter"]
+    implementation rootProject.ext.dependencies["logger"]
+
 }

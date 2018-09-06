@@ -3,7 +3,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
 import com.six.cat.sixcat.base.BaseRxLazyFragment
-import com.six.cat.sixcat.model.VideoChannelBean
+import com.six.cat.sixcat.model.bean.VideoChannelBean
 import com.six.cat.sixcat.views.fragment.VideoDetailFragment
 
 /**

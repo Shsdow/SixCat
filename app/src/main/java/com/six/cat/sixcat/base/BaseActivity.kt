@@ -1,18 +1,19 @@
 package com.six.cat.sixcat.base
 
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import butterknife.ButterKnife
 import butterknife.Unbinder
+import com.six.cat.sixcat.SixCatApplication
 import com.six.cat.sixcat.utils.ActivityManager
-import com.trello.rxlifecycle2.LifecycleTransformer
-import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 
-abstract class BaseActivity<T : IBasePresenter> : RxAppCompatActivity(), IBaseView<T> {
+abstract class BaseActivity : RxAppCompatActivity() {
 
     var mManager: ActivityManager? = null
     private var bind: Unbinder? = null
-    protected var mSetPresenter: T? = null
 
     abstract fun getLayoutId(): Int
 
@@ -20,19 +21,37 @@ abstract class BaseActivity<T : IBasePresenter> : RxAppCompatActivity(), IBaseVi
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         bind = ButterKnife.bind(this)
-        setPresenterView(mSetPresenter)
-        initView(savedInstanceState)
-        initToolBar()
+        initView()
         mManager = ActivityManager.getInstance()
         mManager!!.addActivity(this)
     }
 
-    protected abstract fun initView(savedInstanceState: Bundle?)
+    abstract fun initView()
 
-    protected abstract fun initToolBar()
+//    override fun <T> bindToLife(): LifecycleTransformer<T> {
+//        return bindUntilEvent(ActivityEvent.DESTROY)
+//    }
 
-    override fun <T> bindToLife(): LifecycleTransformer<T> {
-        return bindUntilEvent(ActivityEvent.DESTROY)
+    /**
+     * 打卡软键盘
+     */
+    fun openKeyBord(mEditText: EditText, mContext: Context) {
+        val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN)
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
     }
 
+    /**
+     * 关闭软键盘
+     */
+    fun closeKeyBord(mEditText: EditText, mContext: Context) {
+        val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(mEditText.windowToken, 0)
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        SixCatApplication.getRefWatcher(this)?.watch(this)
+    }
 }

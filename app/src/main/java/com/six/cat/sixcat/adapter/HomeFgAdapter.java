@@ -57,13 +57,13 @@ public class HomeFgAdapter extends FragmentStatePagerAdapter {
                     mFragments[position] = HomeLiveFragment.Companion.newInstance();
                     break;
                 case 1:
-                    mFragments[position] = HomeRecommendedFragment.newInstance();
+                    mFragments[position] = HomeRecommendedFragment.Companion.newInstance();
                     break;
                 case 2:
-                    mFragments[position] = VideoFragment.newInstance();
+                    mFragments[position] = VideoFragment.Companion.newInstance();
                     break;
                 case 3:
-                    mFragments[position] = HomeRegionFragment.newInstance();
+                    mFragments[position] = HomeRegionFragment.Companion.newInstance();
                     break;
                 default:
                     break;

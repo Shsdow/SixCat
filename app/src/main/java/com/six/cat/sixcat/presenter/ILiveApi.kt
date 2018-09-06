@@ -1,7 +1,7 @@
 package com.six.cat.sixcat.presenter
 
-import com.six.cat.sixcat.model.LiveBean
-import com.six.cat.sixcat.model.MovieShowcaseBean
+import com.six.cat.sixcat.model.bean.LiveBean
+import com.six.cat.sixcat.model.bean.MovieShowcaseBean
 
 import io.reactivex.Observable
 

@@ -1,13 +1,10 @@
 package com.six.cat.sixcat.views.activity
 
 import android.net.Uri
-import android.os.Bundle
 import android.view.KeyEvent
-
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.constants.Constants
-import com.six.cat.sixcat.base.IBasePresenter
 import com.six.cat.sixcat.utils.SPUtil
 import com.six.cat.sixcat.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_guide.*
@@ -15,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_guide.*
 /**
  * 首次进入app的展示：1.视频展示 2.多图片滑动
  */
-class GuideActivity : BaseActivity<IBasePresenter>() {
+class GuideActivity : BaseActivity() {
 
     private var position: Int = 0
 
@@ -23,15 +20,11 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
         return R.layout.activity_guide
     }
 
-    override fun initView(savedInstanceState: Bundle ?) {
+    override fun initView() {
         StatusBarUtil.setTranslucent(this, 0)
         SPUtil.setBoolean("isFirst", true)
         playVideo()
         initViewClick()
-    }
-
-    override fun initToolBar() {
-
     }
 
     private fun initViewClick() {
@@ -52,9 +45,6 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
         return true
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
 
     override fun onResume() {
         super.onResume()
@@ -76,24 +66,5 @@ class GuideActivity : BaseActivity<IBasePresenter>() {
     private fun finishVideo() {
         cvvGuideVideo.destroyDrawingCache()
         mManager!!.finishActivity()
-    }
-
-    override fun onShowLoading() {
-
-    }
-
-    override fun onHideLoading() {
-
-    }
-
-    override fun onShowNetError() {
-
-    }
-
-    override fun setPresenterView(presenter: IBasePresenter?) {
-    }
-
-    override fun onShowNoMore() {
-
     }
 }

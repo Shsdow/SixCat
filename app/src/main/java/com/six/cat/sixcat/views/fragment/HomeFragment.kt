@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.six.cat.sixcat.R
+import com.six.cat.sixcat.R.id.tabHome
+import com.six.cat.sixcat.R.id.vpHome
 import com.six.cat.sixcat.adapter.HomeFgAdapter
+import com.six.cat.sixcat.base.BaseRxLazyFragment
 import com.six.cat.sixcat.utils.SettingUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -16,15 +19,16 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * Data: 2018/9/4 0004 11:45
  */
 
-open class HomeFragment : Fragment() {
+open class HomeFragment : BaseRxLazyFragment() {
 
-    private var homeFgAdapter: HomeFgAdapter? = null
 
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
     }
 
-    fun getLayoutResId() = R.layout.fragment_home
+    private val homeFgAdapter by lazy { HomeFgAdapter(childFragmentManager, activity) }
+
+    override fun getLayoutResId() = R.layout.fragment_home
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(getLayoutResId(), null, false)
@@ -36,11 +40,17 @@ open class HomeFragment : Fragment() {
     }
 
     fun initViewPage() {
-        homeFgAdapter = HomeFgAdapter(childFragmentManager, activity)
         vpHome.adapter = homeFgAdapter
         vpHome.offscreenPageLimit = 3
         tabHome.setupWithViewPager(vpHome)
         tabHome.tabMode = TabLayout.MODE_SCROLLABLE
-        tabHome.setBackgroundColor(SettingUtil.getInstance().color)
+        tabHome.setBackgroundColor(SettingUtil.instance.color)
     }
+
+    override fun initView() {
+    }
+
+    override fun lazyLoad() {
+    }
+
 }

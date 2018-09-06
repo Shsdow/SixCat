@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.six.cat.sixcat.R
-import com.six.cat.sixcat.model.VideoDetailBean
+import com.six.cat.sixcat.model.bean.VideoDetailBean
 import com.six.cat.sixcat.utils.conversionPlayTime
 import com.six.cat.sixcat.utils.conversionTime
 import fm.jiecao.jcvideoplayer_lib.JCUserAction

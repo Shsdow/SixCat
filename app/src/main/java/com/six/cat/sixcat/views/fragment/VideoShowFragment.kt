@@ -5,8 +5,8 @@ import android.os.Bundle
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.adapter.VideoPagerAdapter
 import com.six.cat.sixcat.base.BaseRxLazyFragment
-import com.six.cat.sixcat.model.VideoChannelBean
-import com.six.cat.sixcat.model.VideoDetailBean
+import com.six.cat.sixcat.model.bean.VideoChannelBean
+import com.six.cat.sixcat.model.bean.VideoDetailBean
 import com.six.cat.sixcat.presenter.IVideoInterfaceManager
 import com.six.cat.sixcat.presenter.VideoPresenter
 import kotlinx.android.synthetic.main.fragment_home_video.*

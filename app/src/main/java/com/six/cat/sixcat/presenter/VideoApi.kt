@@ -1,7 +1,7 @@
 package com.six.cat.sixcat.presenter
 
-import com.six.cat.sixcat.model.VideoChannelBean
-import com.six.cat.sixcat.model.VideoDetailBean
+import com.six.cat.sixcat.model.bean.VideoChannelBean
+import com.six.cat.sixcat.model.bean.VideoDetailBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

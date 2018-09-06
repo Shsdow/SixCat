@@ -16,12 +16,12 @@ import android.view.MenuItem
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.six.cat.sixcat.R
+import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.base.IBasePresenter
 import com.six.cat.sixcat.utils.SPUtil
 import com.six.cat.sixcat.utils.SettingUtil
 import com.six.cat.sixcat.utils.ShowToast
 import com.six.cat.sixcat.utils.StatusBarUtil
-import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.views.fragment.HomeFragment
 import com.six.cat.sixcat.views.fragment.PictureFragment
 import com.six.cat.sixcat.views.fragment.ThemeFragment
@@ -37,7 +37,7 @@ import permissions.dispatcher.RuntimePermissions
 import java.util.*
 
 @RuntimePermissions
-class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
     private var mHomeFragment: HomeFragment? = null
@@ -61,12 +61,13 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
         return R.layout.activity_main
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
+    override fun initView() {
         if (!SPUtil.getBoolean("isFirst")) {
             startActivity(Intent(this, GuideActivity::class.java))
         }
         StatusBarUtil.setColorForDrawerLayout(this@MainActivity, mDrawerLayoutMain, Color.parseColor("#20C1FD"), 255)
-        initFragments(savedInstanceState)
+        initToolBar()
+        initFragments(null)
         initNavigationView()
         titleList.add("讲演")
         titleList.add("枝丫")
@@ -108,7 +109,7 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
 //        onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun initToolBar() {
+    fun initToolBar() {
         toolbar!!.inflateMenu(R.menu.menu_activity_main)
         BottomNavigationViewHelper.disableShiftMode(bttom_nav)
         setSupportActionBar(toolbar)
@@ -258,10 +259,10 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
     private fun changeTheme() {
         val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         if (mode == Configuration.UI_MODE_NIGHT_YES) {
-            SettingUtil.getInstance().isNightMode = false
+            SettingUtil.instance.isNightMode = false
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         } else {
-            SettingUtil.getInstance().isNightMode = true
+            SettingUtil.instance.isNightMode = true
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
         window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
@@ -301,24 +302,4 @@ class MainActivity : BaseActivity<IBasePresenter>(), NavigationView.OnNavigation
         }
     }
 
-    override fun setPresenterView(presenter: IBasePresenter?) {
-
-    }
-
-    override fun onShowLoading() {
-
-    }
-
-    override fun onHideLoading() {
-
-    }
-
-    override fun onShowNetError() {
-
-    }
-
-
-    override fun onShowNoMore() {
-
-    }
 }

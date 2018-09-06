@@ -41,12 +41,12 @@ public class RetrofitFactory {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            if (!NetWorkUtil.isNetworkConnected(SixCatApplication.getInstance())) {
+            if (!NetWorkUtil.INSTANCE.isNetworkConnected(SixCatApplication.Companion.getContext())) {
                 request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
             }
 
             Response originalResponse = chain.proceed(request);
-            if (NetWorkUtil.isNetworkConnected(SixCatApplication.getInstance())) {
+            if (NetWorkUtil.INSTANCE.isNetworkConnected(SixCatApplication.Companion.getContext())) {
                 // 有网络时 设置缓存为默认值
                 String cacheControl = request.cacheControl().toString();
                 return originalResponse.newBuilder()
@@ -71,7 +71,7 @@ public class RetrofitFactory {
 //                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 //                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
                 // 指定缓存路径,缓存大小 50Mb
-                Cache cache = new Cache(new File(SixCatApplication.getInstance().getCacheDir(), "HttpCache"),
+                Cache cache = new Cache(new File(SixCatApplication.Companion.getContext().getCacheDir(), "HttpCache"),
                         1024 * 1024 * 50);
 
                 // Cookie 持久化

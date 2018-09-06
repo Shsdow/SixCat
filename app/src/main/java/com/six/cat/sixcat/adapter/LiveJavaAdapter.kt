@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.SixCatApplication
-import com.six.cat.sixcat.model.LiveBean
+import com.six.cat.sixcat.model.bean.LiveBean
 import com.six.cat.sixcat.widgets.GlideCircleTransform
 
 import java.text.ParseException

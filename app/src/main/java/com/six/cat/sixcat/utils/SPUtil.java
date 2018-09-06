@@ -23,7 +23,7 @@ public class SPUtil {
     private static void init() {
         if (mSharedPreferences == null) {
             mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(
-                    SixCatApplication.getInstance());
+                    SixCatApplication.Companion.getInstance());
         }
     }
 

@@ -2,8 +2,8 @@ package com.six.cat.sixcat.presenter
 
 import com.six.cat.sixcat.RetrofitFactory
 import com.six.cat.sixcat.base.BaseObserver
-import com.six.cat.sixcat.model.VideoChannelBean
-import com.six.cat.sixcat.model.VideoDetailBean
+import com.six.cat.sixcat.model.bean.VideoChannelBean
+import com.six.cat.sixcat.model.bean.VideoDetailBean
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

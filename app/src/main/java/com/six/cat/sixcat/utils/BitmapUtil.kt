@@ -281,7 +281,7 @@ object BitmapUtil {
     }
 
     fun saveBitmap(bitmap: Bitmap): String? {
-        val cacheDir = FilePathUtils.getImageFile()
+        val cacheDir = FilePathUtils.imageFile
         try {
             val out = FileOutputStream(cacheDir)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)

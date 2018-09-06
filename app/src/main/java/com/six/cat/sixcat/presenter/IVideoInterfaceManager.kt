@@ -2,8 +2,8 @@ package com.six.cat.sixcat.presenter
 
 import com.six.cat.sixcat.base.IBasePresenter
 import com.six.cat.sixcat.base.IBaseView
-import com.six.cat.sixcat.model.VideoChannelBean
-import com.six.cat.sixcat.model.VideoDetailBean
+import com.six.cat.sixcat.model.bean.VideoChannelBean
+import com.six.cat.sixcat.model.bean.VideoDetailBean
 
 /**
  * @author liguoying
