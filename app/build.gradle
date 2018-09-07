@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt' // kapt 插件
+//apply plugin: 'com.alibaba.arouter' // ARouter
 
 def static releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -52,19 +53,19 @@ android {
 
     flavorDimensions "sixcat"
     productFlavors {
-        up {
+//        up {
+////            dimension "sixcat"
+////            minSdkVersion 24
+////            applicationId 'com.six.cat.sixcat'
+////            signingConfig signingConfigs.Release
+//        }
+//
+//        down {
 //            dimension "sixcat"
-//            minSdkVersion 24
-//            applicationId 'com.six.cat.sixcat'
-//            signingConfig signingConfigs.Release
-        }
-
-        down {
-            dimension "sixcat"
-            minSdkVersion 23
-//            applicationId 'com.six.cat.sixcat'
-//            signingConfig signingConfigs.Release
-        }
+//            minSdkVersion 23
+////            applicationId 'com.six.cat.sixcat'
+////            signingConfig signingConfigs.Release
+//        }
     }
 
     lintOptions {
@@ -104,7 +105,7 @@ dependencies {
         all*.exclude group: 'com.android.support', module: 'support-v13'
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation rootProject.ext.dependencies["support-v7"]
     implementation rootProject.ext.dependencies["support-v4"]
     implementation rootProject.ext.dependencies["design"]
@@ -143,8 +144,8 @@ dependencies {
     implementation rootProject.ext.dependencies["videoplayer"]
     implementation rootProject.ext.dependencies["permissionsDispatcher"]
     kapt rootProject.ext.dependencies["permissions-kapt"]
-    kapt rootProject.ext.dependencies["arouter-annotation"]
     api rootProject.ext.dependencies["arouter"]
+    kapt rootProject.ext.dependencies["arouter-compiler"]
     implementation rootProject.ext.dependencies["logger"]
 
 }

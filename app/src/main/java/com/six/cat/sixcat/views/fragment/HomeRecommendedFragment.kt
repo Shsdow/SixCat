@@ -1,11 +1,7 @@
 package com.six.cat.sixcat.views.fragment
 
-import android.os.Bundle
-import android.util.Log
-
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.base.BaseRxLazyFragment
-import com.trello.rxlifecycle2.LifecycleTransformer
 
 /**
  * @author liguoying
@@ -14,9 +10,7 @@ import com.trello.rxlifecycle2.LifecycleTransformer
 
 class HomeRecommendedFragment : BaseRxLazyFragment() {
 
-    override fun getLayoutResId(): Int {
-        return R.layout.fragment_home_video
-    }
+    override fun getLayoutResId() = R.layout.fragment_home_video
 
 
     override fun initView() {

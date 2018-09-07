@@ -98,8 +98,8 @@ object RetrofitManager {
                             .connectTimeout(10, TimeUnit.SECONDS)
                             .readTimeout(15, TimeUnit.SECONDS)
                             .writeTimeout(15, TimeUnit.SECONDS)
-                            .sslSocketFactory(SSLSocketClient.getSSLSocketFactory(), null)
-                            .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
+                            .sslSocketFactory(SSLSocketClient.sslSocketFactory, null)
+                            .hostnameVerifier(SSLSocketClient.hostnameVerifier)
                             .retryOnConnectionFailure(true)
                             .build()
 

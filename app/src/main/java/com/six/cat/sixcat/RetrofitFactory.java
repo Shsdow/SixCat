@@ -87,8 +87,8 @@ public class RetrofitFactory {
                         .connectTimeout(10, TimeUnit.SECONDS)
                         .readTimeout(15, TimeUnit.SECONDS)
                         .writeTimeout(15, TimeUnit.SECONDS)
-                        .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())//配置
-                        .hostnameVerifier(SSLSocketClient.getHostnameVerifier())//配置
+                        .sslSocketFactory(SSLSocketClient.INSTANCE.getSSLSocketFactory())//配置
+                        .hostnameVerifier(SSLSocketClient.INSTANCE.getHostnameVerifier())//配置
                         .retryOnConnectionFailure(true);
 
                 // Log 拦截器

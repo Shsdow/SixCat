@@ -75,7 +75,7 @@ ext {
             "permissions-kapt"             : "com.github.hotchemi:permissionsdispatcher-processor:3.2.0",
             // ARouter
             "arouter"                      : "com.alibaba:arouter-api:1.4.0",
-            "arouter-annotation"           : "com.alibaba:arouter-compiler:1.4.0",
+            "arouter-compiler"           : "com.alibaba:arouter-compiler:1.2.1",
             //Logger 日志
             "logger"                       : "com.orhanobut:logger:2.2.0"
 
