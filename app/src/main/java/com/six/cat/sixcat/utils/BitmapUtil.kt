@@ -287,7 +287,7 @@ object BitmapUtil {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
             out.flush()
             out.close()
-            return cacheDir.path
+            return cacheDir?.path
         } catch (e: Exception) {
             e.printStackTrace()
             return null

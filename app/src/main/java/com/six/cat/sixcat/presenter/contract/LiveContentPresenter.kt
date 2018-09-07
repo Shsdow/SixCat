@@ -1,11 +1,9 @@
-package com.six.cat.sixcat.presenter
+package com.six.cat.sixcat.presenter.contract
 
 import com.hazz.kotlinmvp.net.exception.ExceptionHandle
 import com.six.cat.sixcat.base.refactor.BasePresenter
 import com.six.cat.sixcat.model.LiveModel
 import com.six.cat.sixcat.module.live.LiveContrace
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 /**
  * @author liguoying

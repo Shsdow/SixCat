@@ -35,18 +35,18 @@ class LiveJavaAdapter(data: ArrayList<LiveBean.SubjectsBean>?) : BaseQuickAdapte
         try {
             helper.addOnClickListener(R.id.cv_item)
             Glide.with(mContext).load(item.images?.medium)
-                    .apply(RequestOptions.bitmapTransform(GlideCircleTransform(SixCatApplication.getInstance(), 4))).into(helper.getView<ImageView>(R.id.iv_post_card))
+                    .apply(RequestOptions.bitmapTransform(GlideCircleTransform(SixCatApplication.context, 4))).into(helper.getView<ImageView>(R.id.iv_post_card))
             helper.setText(R.id.tv_item_title, item.title)
             helper.setText(R.id.tv_director,
-                    String.format(Locale.CHINA, SixCatApplication.getInstance().resources.getString(R.string.showing_movie_director), item.directors?.get(0)?.name))
+                    String.format(Locale.CHINA, SixCatApplication.context.resources.getString(R.string.showing_movie_director), item.directors?.get(0)?.name))
             val actors = StringBuilder()
             val castsBeanList = item.casts
             val size = castsBeanList?.size?.minus(1)
             for (i in 0..size!!) {
                 actors.append(castsBeanList[i].name).append(if (i == size) "" else "/")
             }
-            helper.setText(R.id.tv_actor, String.format(Locale.CHINA, SixCatApplication.getInstance().resources.getString(R.string.showing_movie_actors), actors.toString()))
-            helper.setText(R.id.tv_want_to_watch_number, String.format(SixCatApplication.getInstance().getString(R.string.number_want_to_watch_movie), item.collect_count.toString()))
+            helper.setText(R.id.tv_actor, String.format(Locale.CHINA, SixCatApplication.context.resources.getString(R.string.showing_movie_actors), actors.toString()))
+            helper.setText(R.id.tv_want_to_watch_number, String.format(SixCatApplication.context.getString(R.string.number_want_to_watch_movie), item.collect_count.toString()))
             when (mSimpleDateFormat.parse(item.mainland_pubdate).time > this.currentTime) {
                 true -> {
                     helper.setText(R.id.tv_port_status, "预售")

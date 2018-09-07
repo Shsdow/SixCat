@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 open class HomeFragment : BaseRxLazyFragment() {
 
-
     companion object {
         fun newInstance(): HomeFragment = HomeFragment()
     }

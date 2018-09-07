@@ -40,6 +40,9 @@ interface ApiService {
     ): Observable<MovieShowcaseBean>
 
 
+    /**
+     * 视频频道类别
+     */
     @GET("http://api.iclient.ifeng.com/ifengvideoList")
     fun getVideoChannel(@Query("page") page: Int = 1): Observable<List<VideoChannelBean>>
 

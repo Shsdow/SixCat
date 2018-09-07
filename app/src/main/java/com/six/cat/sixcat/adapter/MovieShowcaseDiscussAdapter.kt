@@ -28,7 +28,7 @@ class MovieShowcaseDiscussAdapter(mContext: Context, data: List<MovieShowcaseBea
     }
 
     override fun convert(helper: BaseViewHolder, item: MovieShowcaseBean.PopularCommentsBean) {
-        Glide.with(SixCatApplication.getInstance()).load(item.author?.avatar).into(helper.getView<ImageView>(R.id.civCommentImg))
+        Glide.with(SixCatApplication.context).load(item.author?.avatar).into(helper.getView<ImageView>(R.id.civCommentImg))
 //        helper.setText(R.id.rbStarNum, item.rating?.value.toString())
         helper.getView<RatingBar>(R.id.rbStarNum).rating = item.rating!!.value.toFloat()/2
         helper.setText(R.id.tvCommentName, item.author?.name)

@@ -10,7 +10,7 @@ import com.six.cat.sixcat.adapter.LiveJavaAdapter
 import com.six.cat.sixcat.base.BaseRxLazyFragment
 import com.six.cat.sixcat.model.bean.LiveBean
 import com.six.cat.sixcat.module.live.LiveContrace
-import com.six.cat.sixcat.presenter.LiveContentPresenter
+import com.six.cat.sixcat.presenter.contract.LiveContentPresenter
 import com.six.cat.sixcat.utils.ShowToast
 import com.six.cat.sixcat.views.activity.MovieDetailActivity
 import com.six.cat.sixcat.widgets.CustomLoadMoreView
@@ -47,6 +47,7 @@ class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View, BaseQuickAdapt
 
     override fun initView() {
         initRecyclerView()
+        presenter.attachView(this)
     }
 
     private fun initRecyclerView() {

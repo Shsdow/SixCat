@@ -15,7 +15,8 @@ import com.six.cat.sixcat.R
 import com.six.cat.sixcat.adapter.MovieShowcaseDiscussAdapter
 import com.six.cat.sixcat.base.BaseActivity
 import com.six.cat.sixcat.model.bean.MovieShowcaseBean
-import com.six.cat.sixcat.presenter.MovieDetailPresenter
+import com.six.cat.sixcat.presenter.MovieDetailContract
+import com.six.cat.sixcat.presenter.contract.MovieDetailPresenter
 import com.six.cat.sixcat.utils.DisplayUtil
 import com.six.cat.sixcat.utils.WindowUtil
 import kotlinx.android.synthetic.main.activity_movie_showcase.*
@@ -28,7 +29,8 @@ import kotlin.collections.ArrayList
  * @author liguoying
  * @date 2018/1/27.
  */
-class MovieDetailActivity : BaseActivity() {
+class MovieDetailActivity : BaseActivity(), MovieDetailContract.View {
+
 
     private var movieId: String? = null
     private var showCaseList: ArrayList<MovieShowcaseBean.PopularCommentsBean>? = null
@@ -41,6 +43,7 @@ class MovieDetailActivity : BaseActivity() {
 
     override fun initView() {
         movieId = this.intent.getStringExtra("movieId")
+        mPresenter.attachView(this)
         setLayoutParams()
         initRecyclerview()
         initScrollView()
@@ -107,9 +110,21 @@ class MovieDetailActivity : BaseActivity() {
 
     fun loadData() {
 //        onShowLoading()
-//        mSetPresenter!!.doLoadData(movieId)
+        mPresenter.doLoadData(movieId)
     }
 
+    override fun setMovieDetail(movieShowcaseBean: MovieShowcaseBean) {
+        doSetData(movieShowcaseBean)
+    }
+
+    override fun showError(errorMsg: String, errorCode: Int) {
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun dismissLoading() {
+    }
 
     fun doSetData(movieShowcaseBean: MovieShowcaseBean) {
         tvMovieName.text = movieShowcaseBean.title
@@ -136,12 +151,12 @@ class MovieDetailActivity : BaseActivity() {
         tvWatherNum.text = String.format(Locale.CHINA, resources.getString(R.string.movie_show_case_count), movieShowcaseBean.ratings_count)
         rbStarNum.rating = movieShowcaseBean.rating?.average!!.toFloat() / 2
         showCaseList?.addAll(movieShowcaseBean.popular_comments!!)
-        adapter!!.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mManager!!.currentActivity() != null) {
+        if (mManager?.currentActivity() != null) {
             mManager!!.finishActivity()
         }
     }
