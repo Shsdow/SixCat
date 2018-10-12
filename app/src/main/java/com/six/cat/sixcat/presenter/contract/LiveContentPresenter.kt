@@ -15,7 +15,6 @@ class LiveContentPresenter : BasePresenter<LiveContrace.View>(), LiveContrace.Pr
     private var count = 10
     private var totalSize = 0
     private var start = 0
-
     private val liveModel by lazy { LiveModel() }
 
     override fun loadData(city: String, start: Int, count: Int) {
@@ -26,37 +25,23 @@ class LiveContentPresenter : BasePresenter<LiveContrace.View>(), LiveContrace.Pr
                     totalSize = liveBean.total
                     liveBean.subjects
                 }
+                .filter { it.isNotEmpty() }
                 .subscribe({ subjectsBeans ->
                     mRootView?.apply {
-                        setLiveData(subjectsBeans, totalSize)
+                        setLiveData(subjectsBeans, start, totalSize)
                     }
                 }, { throwable ->
                     mRootView?.apply {
                         showError(ExceptionHandle.handleException(throwable), ExceptionHandle.errorCode)
                     }
                 })
-
+        //添加到订阅中
         addSubscription(disposable)
     }
 
-
     override fun loadMoreData() {
-    }
-
-    fun doRefresh() {
-        start = 0
-        count = 10
-        loadData("",start,count)
-    }
-
-    fun doLoadMoreData() {
         start += 10
         count = if (start >= totalSize) totalSize % count else count
-        loadData("",start,count)
+        loadData("北京", start, count)
     }
-
-//    fun doShowNetError() {
-//        mView!!.onHideLoading()
-//        mView.onShowNetError()
-//    }
 }

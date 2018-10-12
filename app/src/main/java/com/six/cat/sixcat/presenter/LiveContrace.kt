@@ -14,20 +14,20 @@ import com.six.cat.sixcat.model.bean.LiveBean
 interface LiveContrace {
     interface View : IBaseView {
         /**
-         * 设置适配器
+         * 设置适配器数据
          */
-        fun setLiveData(list: List<LiveBean.SubjectsBean>?, totalCount: Int)
+        fun setLiveData(list: List<LiveBean.SubjectsBean>?, startCount: Int, totalCount: Int)
 
         fun showError(errorMsg: String, errorCode: Int)
 
-        fun haveNoMore()
     }
 
     interface Presenter : IBasePresenter<View> {
         /**
          * 刷新数据
          */
-        fun loadData(city: String, start: Int, count: Int)
+        fun loadData(city: String = "北京", start: Int, count: Int)
+
         /**
          * 再起请求数据
          */

@@ -33,7 +33,7 @@ class LiveBean {
                 '}'.toString()
     }
 
-    class SubjectsBean {
+    open class SubjectsBean {
         /**
          * rating : {"max":10,"average":7.4,"details":{"1":8,"3":454,"2":60,"5":192,"4":628},"stars":"40","min":0}
          * genres : ["动作","奇幻","冒险"]

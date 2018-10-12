@@ -78,10 +78,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun initFragments(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
-            mHomeFragment = supportFragmentManager.findFragmentByTag(HomeFragment::class.java.name) as HomeFragment
-            mPictureFragment = supportFragmentManager.findFragmentByTag(PictureFragment::class.java.name) as PictureFragment
-            mThemeFragment = supportFragmentManager.findFragmentByTag(ThemeFragment::class.java.name) as ThemeFragment
-            mVideoFragment = supportFragmentManager.findFragmentByTag(VideoShowFragment::class.java.name) as VideoShowFragment
+            mHomeFragment = supportFragmentManager.findFragmentByTag(HomeFragment.newInstance().tag) as HomeFragment
+            mPictureFragment = supportFragmentManager.findFragmentByTag(PictureFragment.newInstance().tag) as PictureFragment
+            mThemeFragment = supportFragmentManager.findFragmentByTag(ThemeFragment.newInstance().tag) as ThemeFragment
+            mVideoFragment = supportFragmentManager.findFragmentByTag(VideoShowFragment.newInstance().tag) as VideoShowFragment
             showFragment(savedInstanceState.getInt(POSITION))
             bttom_nav!!.selectedItemId = savedInstanceState.getInt(SELECT_ITEM)
         } else {

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * Author：Administrator
- * Data: 2018/9/4 0004 11:45
+ * Data: 2018/9/4  11:45
  */
 
 open class HomeFragment : BaseRxLazyFragment() {
@@ -29,12 +29,7 @@ open class HomeFragment : BaseRxLazyFragment() {
 
     override fun getLayoutResId() = R.layout.fragment_home
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(getLayoutResId(), null, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun initView() {
         initViewPage()
     }
 
@@ -44,9 +39,6 @@ open class HomeFragment : BaseRxLazyFragment() {
         tabHome.setupWithViewPager(vpHome)
         tabHome.tabMode = TabLayout.MODE_SCROLLABLE
         tabHome.setBackgroundColor(SettingUtil.instance.color)
-    }
-
-    override fun initView() {
     }
 
     override fun lazyLoad() {

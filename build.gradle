@@ -11,9 +11,9 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // Kotlin
-//        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
 //        classpath 'com.alibaba:arouter-register:1.0.2'// ARouter
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -27,10 +27,9 @@ allprojects {
         jcenter()
         maven { url "https://jitpack.io" } // BaseQuickAdapter 引入
 
-//        maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }  // permisson 引入
+        maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }  // permisson 引入
     }
 }
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

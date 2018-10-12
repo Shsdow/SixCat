@@ -1,5 +1,6 @@
 package com.six.cat.sixcat.views.fragment
 
+import android.arch.lifecycle.LiveData
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -23,27 +24,18 @@ import java.util.*
  * @date 2017/12/27.
  */
 
-class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View, BaseQuickAdapter.RequestLoadMoreListener {
+class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener {
 
     private val mBeanList = ArrayList<LiveBean.SubjectsBean>()
-    private var isFreshing = false
     private val PAGE_SIZE = 10
-
     private val mMovieShortCaseAdapter by lazy { LiveJavaAdapter(mBeanList) }
     private val presenter by lazy { LiveContentPresenter() }
 
     companion object {
-        fun newInstance(): HomeLiveFragment {
-            var instance: HomeLiveFragment? = null
-            if (instance == null) {
-                instance = HomeLiveFragment()
-            }
-            return instance
-        }
+        fun newInstance(): HomeLiveFragment = HomeLiveFragment()
     }
 
     override fun getLayoutResId() = R.layout.fragment_live
-
 
     override fun initView() {
         initRecyclerView()
@@ -57,45 +49,58 @@ class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View, BaseQuickAdapt
         mMovieShortCaseAdapter.setLoadMoreView(CustomLoadMoreView())
         mMovieShortCaseAdapter.openLoadAnimation()
         mMovieShortCaseAdapter.setNotDoAnimationCount(3)
-        mMovieShortCaseAdapter.setOnItemChildClickListener { _, _, position -> startActivity(Intent(context, MovieDetailActivity::class.java).putExtra("movieId", mBeanList[position].id)) }
+        mMovieShortCaseAdapter.onItemChildClickListener = this//
         rvMovieShortCase.adapter = mMovieShortCaseAdapter
-        initRefreshLayout()
+        mMovieShortCaseAdapter.setEnableLoadMore(false)
+        srlMovieShortCaseFresh.setColorSchemeColors(SixCatApplication.context.resources.getColor(R.color.colorAccent, null),
+                SixCatApplication.context.resources.getColor(R.color.blue_light, null),
+                SixCatApplication.context.resources.getColor(R.color.yellow_light, null))
         mCuvEmptyView.setOnClickListener {
             presenter.loadData("", 0, 10)
         }
     }
 
-    private fun initRefreshLayout() {
-        mMovieShortCaseAdapter.setEnableLoadMore(false)
-        srlMovieShortCaseFresh.setColorSchemeColors(SixCatApplication.context.resources.getColor(R.color.colorAccent, null),
-                SixCatApplication.context.resources.getColor(R.color.blue_light, null),
-                SixCatApplication.context.resources.getColor(R.color.yellow_light, null))
-        srlMovieShortCaseFresh.post {
+    override fun lazyLoad() {
+        srlMovieShortCaseFresh.isRefreshing = true
+        presenter.loadData("", 0, PAGE_SIZE)
+        srlMovieShortCaseFresh.setOnRefreshListener {
             srlMovieShortCaseFresh.isRefreshing = true
-            presenter.doRefresh()
+            mMovieShortCaseAdapter.setEnableLoadMore(true)
+            presenter.loadData("", 0, PAGE_SIZE)
         }
     }
 
     override fun onLoadMoreRequested() {
         srlMovieShortCaseFresh.isEnabled = false
-        if (mMovieShortCaseAdapter.data.size < PAGE_SIZE) {
-            mMovieShortCaseAdapter.loadMoreEnd()
-        } else {
-            presenter.doLoadMoreData()
-        }
+        presenter.loadMoreData()
         srlMovieShortCaseFresh.isEnabled = true
     }
 
-    private fun isFresh(isFresh: Boolean) {
-        srlMovieShortCaseFresh!!.post { srlMovieShortCaseFresh.isRefreshing = isFresh }
+    override fun setLiveData(list: List<LiveBean.SubjectsBean>?, startCount: Int, totalCount: Int) {
+        srlMovieShortCaseFresh.isRefreshing = false
+        mCuvEmptyView.visibility = View.GONE
+        rvMovieShortCase.visibility = View.VISIBLE
+        mMovieShortCaseAdapter.setEnableLoadMore(true)
+        if (startCount == 0) {
+            mMovieShortCaseAdapter.setNewData(list)
+        } else {
+            mMovieShortCaseAdapter.addData(list!!)
+        }
+        if (mMovieShortCaseAdapter.data.size == totalCount) {
+            mMovieShortCaseAdapter.loadMoreEnd(true)
+        } else {
+            mMovieShortCaseAdapter.loadMoreComplete()
+        }
+        mBeanList.addAll(mMovieShortCaseAdapter.data)
     }
 
-    override fun lazyLoad() {
-        srlMovieShortCaseFresh.setOnRefreshListener {
-            mMovieShortCaseAdapter.setEnableLoadMore(true)
-            isFreshing = true
-            presenter.doRefresh()
-        }
+    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
+        val mBean = adapter?.data?.get(position) as LiveBean.SubjectsBean
+        startActivity(Intent(context, MovieDetailActivity::class.java)
+                .putExtra("movieId", mBean.id))
+    }
+
+    override fun showError(errorMsg: String, errorCode: Int) {
     }
 
     override fun showLoading() {
@@ -105,44 +110,11 @@ class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View, BaseQuickAdapt
     }
 
 
-    override fun showError(errorMsg: String, errorCode: Int) {
-    }
-
-//    override fun onShowNetError() {
-//        srlMovieShortCaseFresh.isRefreshing = false
-//        mCuvEmptyView.visibility = View.VISIBLE
-//        rvMovieShortCase.visibility = View.GONE
-//        mCuvEmptyView.setEmptyImage(R.drawable.img_tips_error_load_error)
-//        mCuvEmptyView.setEmptyText("加载失败~(≧▽≦)~啦啦啦.")
-////        Toast.makeText(activity,"jiji",Toast.LENGTH_SHORT).show()
-//        ShowToast.shortTime(String.format(Locale.CHINA, "这是第 %d 个 fragment ", 34))
-////        SnarkBarUtil.showSnakbarMessage(rvMovieShortCase, "数据加载失败,请重新加载或者检查网络是否链接")
-//    }
-
-    override fun setLiveData(list: List<LiveBean.SubjectsBean>?, totalCount: Int) {
-        mCuvEmptyView.visibility = View.GONE
-        rvMovieShortCase.visibility = View.VISIBLE
-        mMovieShortCaseAdapter.setEnableLoadMore(true)
-        if (list?.size!! < PAGE_SIZE) {
-            mMovieShortCaseAdapter.loadMoreEnd(true)
-        } else {
-
-            mMovieShortCaseAdapter.loadMoreComplete()
-        }
-        if (isFreshing && !mBeanList.isEmpty()) {
-            mMovieShortCaseAdapter.setNewData(list as List<LiveBean.SubjectsBean>)
-            isFreshing = false
-        } else {
-            mMovieShortCaseAdapter.addData(list as List<LiveBean.SubjectsBean>)
-        }
-    }
-
-    override fun haveNoMore() {
-        onShowNoMore()
-    }
-
-
-    fun onShowNoMore() {
+    private fun onShowNoMore() {
         activity!!.runOnUiThread { ShowToast.shortTime(R.string.have_no_data) }
+        mCuvEmptyView.visibility = View.VISIBLE
+        rvMovieShortCase.visibility = View.GONE
     }
+
+
 }
