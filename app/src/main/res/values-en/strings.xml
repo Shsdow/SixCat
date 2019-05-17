@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">SixCat</string>
+    <string name="item_settings">设置与帮助</string>
+    <string name="item_app">应用推荐</string>
+    <string name="item_theme">主题选择</string>
+    <string name="item_tracker">我的钱包</string>
+    <string name="item_group">关注的人</string>
+    <string name="item_history">历史记录</string>
+    <string name="item_favourite">我的收藏</string>
+    <string name="item_downloaded">离线下载</string>
+    <string name="item_vip">我的会员</string>
+    <string name="item_home">主页</string>
+    <string name="title_news">新闻</string>
+    <string name="title_photo">图片</string>
+    <string name="title_video">视频</string>
+    <string name="title_media">个人</string>
+    <string name="action_search">搜索</string>
+
+    <string name="navigation_drawer_open">打开侧栏</string>
+    <string name="navigation_drawer_close">关闭侧栏</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="hometabs">
+        <item>@string/section_live</item>
+        <item>@string/section_recommend</item>
+        <item>@string/section_bangumi</item>
+        <item>@string/section_more</item>
+    </string-array>
+
+    <string name="home_tab_more">More</string>
+    <string name="section_recommend">News</string>
+    <string name="section_live">Film</string>
+    <string name="section_focus">关注</string>
+    <string name="section_more">分区</string>
+    <string name="section_bangumi">WanAndorid</string>
+    <string name="section_discover">Find</string>
+    <string name="network_error">Internet Error</string>
+    <string name="have_no_data">Have No Data</string>
+
+    <string name="showing_movie_actors">主演：%1$s</string>
+    <string name="showing_movie_director">导演：%1$s</string>
+    <string name="number_want_to_watch_movie">%1$s人看过</string>
+    <string name="show_toast_tip">我是一个toast</string>
+    <string name="have_not_show">尚无上映</string>
+    <string name="movie_show_case">%s\n上映时间:%s\n片长:%s</string>
+    <string name="movie_show_case_count">%d人</string>
+    <string name="file_score_text">豆瓣评分</string>
+    <string name="movie_short_content">内容简介</string>
+    <string name="news_toast">已为您推荐了%1$s条新资讯</string>
+    <string name="text_empty">还么有数据</string>
+    <string name="text_nonet">网络异常</string>
+    <string name="permission_write_denied">拒绝文件写入权限</string>
+    <string name="permission_write_never_askagain">不要在询问请求文件写入权限</string>
+</resources>
