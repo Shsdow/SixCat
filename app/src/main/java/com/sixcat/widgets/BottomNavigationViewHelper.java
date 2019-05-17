@@ -10,6 +10,8 @@ import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 /**
  * @author liguoying
  * @date 2017/12/11.
+ *
+ * 当选项多于 3 个时，BottomNavigationView 有非常浮夸的动画，此方法用于关闭该动画
  */
 
 public class BottomNavigationViewHelper {

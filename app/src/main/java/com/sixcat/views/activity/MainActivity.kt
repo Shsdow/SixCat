@@ -46,17 +46,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private val titleList = ArrayList<String>()
     private var exitTime: Long = 0L
 
-    companion object {
-        private const val FRAGMENT_NEWS = 0
-        private const val FRAGMENT_PHOTO = 1
-        private const val FRAGMENT_VIDEO = 2
-        private const val FRAGMENT_MEDIA = 3
-        private const val POSITION = "position"
-        private const val SELECT_ITEM = "bottomNavigationSelectItem"
-    }
 
     override fun getLayoutId() = R.layout.activity_main
-
 
     override fun initView() {
         if (!SPUtil.getBoolean("isFirst")) {
@@ -270,6 +261,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
             else -> finish()
         }
+    }
+
+    companion object {
+        private const val FRAGMENT_NEWS = 0
+        private const val FRAGMENT_PHOTO = 1
+        private const val FRAGMENT_VIDEO = 2
+        private const val FRAGMENT_MEDIA = 3
+        private const val POSITION = "position"
+        private const val SELECT_ITEM = "bottomNavigationSelectItem"
     }
 
 }
