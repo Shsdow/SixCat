@@ -6,11 +6,13 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import com.akaita.java.rxjava2debug.RxJava2Debug
+import com.crashlytics.android.Crashlytics
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
+import io.fabric.sdk.android.Fabric
 import kotlin.properties.Delegates
 
 
@@ -37,9 +39,10 @@ class SixCatApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+        Fabric.with(this, Crashlytics())
         refWatcher = setupLeakCanary()
         initLogConfig()
-//        Fabric.with(this, new Crashlytics ());
+        Fabric.with(this, Crashlytics());
 
         // Enable RxJava assembly stack collection, to make RxJava crash reports clear and unique
         // Make sure this is called AFTER setting up any Crash reporting mechanism as Crashlytics

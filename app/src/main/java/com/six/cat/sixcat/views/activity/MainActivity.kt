@@ -5,19 +5,18 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.app.FragmentTransaction
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatDelegate
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
+import com.google.android.material.navigation.NavigationView
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.base.BaseActivity
-import com.six.cat.sixcat.base.IBasePresenter
 import com.six.cat.sixcat.utils.SPUtil
 import com.six.cat.sixcat.utils.SettingUtil
 import com.six.cat.sixcat.utils.ShowToast
@@ -38,28 +37,26 @@ import java.util.*
 
 @RuntimePermissions
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-
-    private var mHomeFragment: HomeFragment? = null
-    private var mPictureFragment: PictureFragment? = null
-    private var mThemeFragment: ThemeFragment? = null
-    private var mVideoFragment: VideoShowFragment? = null
+    private val mHomeFragment by lazy { HomeFragment.newInstance() }
+    private val mPictureFragment by lazy { PictureFragment.newInstance() }
+    private val mThemeFragment by lazy { ThemeFragment.newInstance() }
+    private val mVideoFragment by lazy { VideoShowFragment.newInstance() }
+    private val manager by lazy { supportFragmentManager.beginTransaction() }
     private var position: Int = 0
     private val titleList = ArrayList<String>()
     private var exitTime: Long = 0L
 
     companion object {
-        private val FRAGMENT_NEWS = 0
-        private val FRAGMENT_PHOTO = 1
-        private val FRAGMENT_VIDEO = 2
-        private val FRAGMENT_MEDIA = 3
-        private val POSITION = "position"
-        private val SELECT_ITEM = "bottomNavigationSelectItem"
+        private const val FRAGMENT_NEWS = 0
+        private const val FRAGMENT_PHOTO = 1
+        private const val FRAGMENT_VIDEO = 2
+        private const val FRAGMENT_MEDIA = 3
+        private const val POSITION = "position"
+        private const val SELECT_ITEM = "bottomNavigationSelectItem"
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_main
-    }
+    override fun getLayoutId() = R.layout.activity_main
+
 
     override fun initView() {
         if (!SPUtil.getBoolean("isFirst")) {
@@ -78,15 +75,19 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun initFragments(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
-            mHomeFragment = supportFragmentManager.findFragmentByTag(HomeFragment.newInstance().tag) as HomeFragment
-            mPictureFragment = supportFragmentManager.findFragmentByTag(PictureFragment.newInstance().tag) as PictureFragment
-            mThemeFragment = supportFragmentManager.findFragmentByTag(ThemeFragment.newInstance().tag) as ThemeFragment
-            mVideoFragment = supportFragmentManager.findFragmentByTag(VideoShowFragment.newInstance().tag) as VideoShowFragment
             showFragment(savedInstanceState.getInt(POSITION))
             bttom_nav!!.selectedItemId = savedInstanceState.getInt(SELECT_ITEM)
         } else {
+            addFragmentsToActivity()
             showFragment(FRAGMENT_NEWS)
         }
+    }
+
+    private fun addFragmentsToActivity() {
+        manager.add(R.id.container, mHomeFragment, PictureFragment::class.java.name)
+        manager.add(R.id.container, mPictureFragment, PictureFragment::class.java.name)
+        manager.add(R.id.container, mThemeFragment, PictureFragment::class.java.name)
+        manager.add(R.id.container, mVideoFragment, PictureFragment::class.java.name)
     }
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -103,13 +104,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         ShowToast.shortTime(R.string.permission_write_never_askagain);
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        // NOTE: delegate the permission handling to generated function
-//        onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        // NOTE: delegate the permission handling to generated function
+////        onRequestPermissionsResult(requestCode, permissions, grantResults)
+//    }
 
-    fun initToolBar() {
+    private fun initToolBar() {
         toolbar!!.inflateMenu(R.menu.menu_activity_main)
         BottomNavigationViewHelper.disableShiftMode(bttom_nav)
         setSupportActionBar(toolbar)
@@ -146,68 +147,37 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun showFragment(fragmentNews: Int) {
-//        ShowToast.shortTime(String.format(Locale.CHINA, "这是第 %d 个 fragment ", fragmentNews))
-        val ft = supportFragmentManager.beginTransaction()
-        hideFragment(ft)
+        hideFragment(manager)
         position = fragmentNews
         when (fragmentNews) {
             FRAGMENT_NEWS -> {
                 toolbar!!.setTitle(R.string.app_name)
-                if (mHomeFragment == null) {
-                    mHomeFragment = HomeFragment.newInstance()
-                    ft.add(R.id.container, mHomeFragment, HomeFragment::class.java.name)
-                } else {
-                    ft.show(mHomeFragment)
-                }
+                manager.show(mHomeFragment)
             }
 
             FRAGMENT_PHOTO -> {
                 toolbar!!.setTitle(R.string.title_photo)
-                if (mPictureFragment == null) {
-                    mPictureFragment = PictureFragment.newInstance()
-                    ft.add(R.id.container, mPictureFragment, PictureFragment::class.java.name)
-                } else {
-                    ft.show(mPictureFragment)
-                }
+                manager.show(mPictureFragment)
             }
 
             FRAGMENT_VIDEO -> {
                 toolbar!!.title = getString(R.string.title_video)
-                if (mVideoFragment == null) {
-                    mVideoFragment = VideoShowFragment.newInstance()
-                    ft.add(R.id.container, mVideoFragment, VideoShowFragment::class.java.name)
-                } else {
-                    ft.show(mVideoFragment)
-                }
+                manager.show(mVideoFragment!!)
             }
 
             FRAGMENT_MEDIA -> {
                 toolbar!!.title = getString(R.string.title_media)
-                if (mThemeFragment == null) {
-                    mThemeFragment = ThemeFragment.newInstance()
-                    ft.add(R.id.container, mThemeFragment, ThemeFragment::class.java.name)
-                } else {
-                    ft.show(mThemeFragment)
-                }
+                manager.show(mThemeFragment!!)
             }
         }
-
-        ft.commit()
+        manager.commit()
     }
 
-    private fun hideFragment(ft: FragmentTransaction) {
-        if (mHomeFragment != null) {
-            ft.hide(mHomeFragment)
-        }
-        if (mPictureFragment != null) {
-            ft.hide(mPictureFragment)
-        }
-        if (mVideoFragment != null) {
-            ft.hide(mVideoFragment)
-        }
-        if (mThemeFragment != null) {
-            ft.hide(mThemeFragment)
-        }
+    private fun hideFragment(transaction: FragmentTransaction) {
+        transaction.hide(mHomeFragment)
+        transaction.hide(mPictureFragment)
+        transaction.hide(mVideoFragment)
+        transaction.hide(mThemeFragment)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

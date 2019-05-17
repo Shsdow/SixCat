@@ -5,14 +5,13 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.support.annotation.ColorInt
-import android.support.annotation.IntRange
-import android.support.design.widget.CoordinatorLayout
-import android.support.v4.widget.DrawerLayout
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
+import androidx.annotation.ColorInt
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.drawerlayout.widget.DrawerLayout
 
 import com.six.cat.sixcat.R
 
@@ -35,7 +34,7 @@ object StatusBarUtil {
      */
 
     @JvmOverloads
-    fun setColor(activity: Activity, @ColorInt color: Int, @IntRange(from = 0, to = 255) statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
+    fun setColor(activity: Activity, @ColorInt color: Int,  statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             activity.window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -65,7 +64,7 @@ object StatusBarUtil {
      */
     @JvmOverloads
     fun setColorForSwipeBack(activity: Activity, @ColorInt color: Int,
-                             @IntRange(from = 0, to = 255) statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
+                              statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
             val contentView = activity.findViewById<View>(android.R.id.content) as ViewGroup
@@ -137,7 +136,7 @@ object StatusBarUtil {
      * @param statusBarAlpha 状态栏透明度
      */
     @JvmOverloads
-    fun setTranslucent(activity: Activity, @IntRange(from = 0, to = 255) statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
+    fun setTranslucent(activity: Activity,  statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
         }
@@ -154,7 +153,7 @@ object StatusBarUtil {
      * @param activity       需要设置的activity
      * @param statusBarAlpha 状态栏透明度
      */
-    fun setTranslucentForCoordinatorLayout(activity: Activity, @IntRange(from = 0, to = 255) statusBarAlpha: Int) {
+    fun setTranslucentForCoordinatorLayout(activity: Activity,  statusBarAlpha: Int) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
         }
@@ -213,7 +212,7 @@ object StatusBarUtil {
      */
     @JvmOverloads
     fun setColorForDrawerLayout(activity: Activity, drawerLayout: DrawerLayout, @ColorInt color: Int,
-                                @IntRange(from = 0, to = 255) statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
+                                 statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
         }
@@ -301,7 +300,7 @@ object StatusBarUtil {
      */
     @JvmOverloads
     fun setTranslucentForDrawerLayout(activity: Activity, drawerLayout: DrawerLayout,
-                                      @IntRange(from = 0, to = 255) statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
+                                       statusBarAlpha: Int = DEFAULT_STATUS_BAR_ALPHA) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
         }
@@ -387,7 +386,7 @@ object StatusBarUtil {
      * @param statusBarAlpha 状态栏透明度
      * @param needOffsetView 需要向下偏移的 View
      */
-    fun setTranslucentForImageView(activity: Activity, @IntRange(from = 0, to = 255) statusBarAlpha: Int,
+    fun setTranslucentForImageView(activity: Activity,  statusBarAlpha: Int,
                                    needOffsetView: View?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return
@@ -433,7 +432,7 @@ object StatusBarUtil {
      * @param statusBarAlpha 状态栏透明度
      * @param needOffsetView 需要向下偏移的 View
      */
-    fun setTranslucentForImageViewInFragment(activity: Activity, @IntRange(from = 0, to = 255) statusBarAlpha: Int,
+    fun setTranslucentForImageViewInFragment(activity: Activity,  statusBarAlpha: Int,
                                              needOffsetView: View) {
         setTranslucentForImageView(activity, statusBarAlpha, needOffsetView)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -477,7 +476,7 @@ object StatusBarUtil {
      * @param activity       需要设置的 activity
      * @param statusBarAlpha 透明值
      */
-    private fun addTranslucentView(activity: Activity, @IntRange(from = 0, to = 255) statusBarAlpha: Int) {
+    private fun addTranslucentView(activity: Activity,  statusBarAlpha: Int) {
         val contentView = activity.findViewById<View>(android.R.id.content) as ViewGroup
         val fakeTranslucentView = contentView.findViewById<View>(FAKE_TRANSLUCENT_VIEW_ID)
         if (fakeTranslucentView != null) {

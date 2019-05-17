@@ -1,7 +1,7 @@
 package com.six.cat.sixcat.widgets
 
-import android.support.design.widget.Snackbar
 import android.view.View
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * @author liguoying

@@ -1,9 +1,8 @@
 package com.six.cat.sixcat.views.fragment
 
-import android.arch.lifecycle.LiveData
 import android.content.Intent
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.SixCatApplication

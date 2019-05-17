@@ -28,7 +28,7 @@
             <include layout="@layout/movie_showcase_movie_content" />
 
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.appcompat.widget.RecyclerView
                 android:id="@+id/rv_show_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:descendantFocusability="blocksDescendants">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvDiscuss"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.appcompat.widget.RecyclerView
                 android:id="@+id/rvCommand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -117,7 +117,7 @@
         android:layout_height="@dimen/dp_10"
         android:background="@color/tran" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbToolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
@@ -141,6 +141,6 @@
             android:visibility="gone" />
 
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 </RelativeLayout>

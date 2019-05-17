@@ -2,10 +2,10 @@ package com.six.cat.sixcat.widgets
 
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.support.design.widget.CoordinatorLayout
-import android.support.v4.view.ViewCompat
+import androidx.core.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 
 /**
  * @author liguoying

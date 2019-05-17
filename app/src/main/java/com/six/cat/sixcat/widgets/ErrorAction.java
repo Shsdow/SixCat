@@ -1,6 +1,7 @@
 package com.six.cat.sixcat.widgets;
 
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.six.cat.sixcat.BuildConfig;
 

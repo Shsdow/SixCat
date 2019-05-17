@@ -6,8 +6,6 @@ import android.graphics.BlurMaskFilter
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
 import android.text.Layout
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -33,6 +31,8 @@ import android.text.style.UnderlineSpan
 import com.six.cat.sixcat.SixCatApplication
 
 import android.graphics.BlurMaskFilter.Blur
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 
 
 /**

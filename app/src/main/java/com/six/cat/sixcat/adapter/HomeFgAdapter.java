@@ -1,17 +1,17 @@
 package com.six.cat.sixcat.adapter;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.six.cat.sixcat.R;
-import com.six.cat.sixcat.views.fragment.VideoFragment;
 import com.six.cat.sixcat.views.fragment.HomeLiveFragment;
 import com.six.cat.sixcat.views.fragment.HomeRecommendedFragment;
 import com.six.cat.sixcat.views.fragment.HomeRegionFragment;
+import com.six.cat.sixcat.views.fragment.VideoFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,8 +1,8 @@
 package com.six.cat.sixcat.adapter
 
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.view.PagerAdapter
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import com.six.cat.sixcat.base.BaseRxLazyFragment
 import com.six.cat.sixcat.model.bean.VideoChannelBean
 import com.six.cat.sixcat.views.fragment.VideoDetailFragment

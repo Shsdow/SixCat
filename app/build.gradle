@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt' // kapt 插件
-//apply plugin: 'com.alibaba.arouter' // ARouter
+apply plugin: 'io.fabric'
+apply plugin: 'com.alibaba.arouter' // ARouter
 
 def static releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -21,7 +22,7 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "es"
 
         //ARouter 配置
@@ -33,7 +34,6 @@ android {
     }
 
 
-
     signingConfigs {
         release {
             storeFile file('./sixcat.jks')
@@ -41,31 +41,17 @@ android {
             keyAlias 'sixcat'
             keyPassword 'sexcat'
         }
-//        debug {
+        debug {
 //            storeFile file('./sixcat.jks')
 //            storePassword 'sexcat'
 //            keyAlias 'sixcat'
 //            keyPassword 'sexcat'
-//        }
+        }
     }
-
 
 
     flavorDimensions "sixcat"
     productFlavors {
-//        up {
-////            dimension "sixcat"
-////            minSdkVersion 24
-////            applicationId 'com.six.cat.sixcat'
-////            signingConfig signingConfigs.Release
-//        }
-//
-//        down {
-//            dimension "sixcat"
-//            minSdkVersion 23
-////            applicationId 'com.six.cat.sixcat'
-////            signingConfig signingConfigs.Release
-//        }
     }
 
     lintOptions {
@@ -80,16 +66,11 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    def outputFile = output.outputFile
-                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        // 输出apk名称为SixCat_release_v0.1_2017-12-04.apk
-                        def fileName = "SixCat_release_v${defaultConfig.versionName}_${releaseTime()}.apk"
-                        outputFileName = fileName
-                    }
-                }
-            }
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -100,7 +81,9 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:27.1.1'
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation rootProject.ext.dependencies["recyclerview"]
+
     configurations {
         all*.exclude group: 'com.android.support', module: 'support-v13'
     }
@@ -130,8 +113,8 @@ dependencies {
     implementation rootProject.ext.dependencies["stetho"]
     debugImplementation rootProject.ext.dependencies["leakcanary-android"]
     releaseImplementation rootProject.ext.dependencies["leakcanary-android-no-op"]
-    implementation rootProject.ext.dependencies["butterknife"]
-    kapt rootProject.ext.dependencies["butterknife-compiler"]
+//    implementation rootProject.ext.dependencies["butterknife"]
+//    kapt rootProject.ext.dependencies["butterknife-compiler"]
 //    implementation rootProject.ext.dependencies["statusbarutil"]
     implementation rootProject.ext.dependencies["slidableactivity"]
     implementation rootProject.ext.dependencies["material-dialogs"]
@@ -147,5 +130,8 @@ dependencies {
     api rootProject.ext.dependencies["arouter"]
     kapt rootProject.ext.dependencies["arouter-compiler"]
     implementation rootProject.ext.dependencies["logger"]
+    implementation('com.crashlytics.sdk.android:crashlytics:2.10.0@aar') {
+        transitive = true;
+    }
 
 }

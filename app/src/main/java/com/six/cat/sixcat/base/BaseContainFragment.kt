@@ -3,13 +3,11 @@ package com.six.cat.sixcat.base
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v4.app.FragmentActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.Unbinder
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.FragmentActivity
 import com.six.cat.sixcat.utils.ActivityManager
 import com.trello.rxlifecycle2.components.RxFragment
 
@@ -20,14 +18,12 @@ import com.trello.rxlifecycle2.components.RxFragment
 abstract class BaseContainFragment : RxFragment() {
     var containActivity: FragmentActivity? = null
     private var parentView: View? = null
-    private var bind: Unbinder? = null
     @LayoutRes
     abstract fun getLayoutResId(): Int
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View? {
         parentView = inflater.inflate(getLayoutResId(), container, false)
-        bind = ButterKnife.bind(this, parentView!!)
         containActivity = getSupportActivity()
         return parentView
     }
@@ -75,7 +71,6 @@ abstract class BaseContainFragment : RxFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        bind!!.unbind()
     }
 
 

@@ -2,12 +2,13 @@ package com.six.cat.sixcat.views.activity
 
 import android.graphics.Bitmap
 import android.os.Build
-import android.support.v4.content.ContextCompat
-import android.support.v7.graphics.Palette
-import android.support.v7.widget.LinearLayoutManager
+import androidx.core.content.ContextCompat
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.palette.graphics.Palette
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
@@ -100,7 +101,7 @@ class MovieDetailActivity : BaseActivity(), MovieDetailContract.View {
         ivFinish.setOnClickListener { finish() }
         showCaseList = ArrayList()
         val linearlayoutManager = LinearLayoutManager(this)
-        linearlayoutManager.orientation = LinearLayoutManager.VERTICAL
+        linearlayoutManager.orientation = RecyclerView.VERTICAL
         rvDiscuss.layoutManager = linearlayoutManager
         rvDiscuss.isNestedScrollingEnabled = false
 //        adapter = MovieShowcaseDiscussAdapter(this, showCaseList)
@@ -138,7 +139,7 @@ class MovieDetailActivity : BaseActivity(), MovieDetailContract.View {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>) {
                 ivMovieImage.setImageBitmap(resource)
                 Palette.from(resource).generate { palette ->
-                    val color = palette.getDominantColor(ContextCompat.getColor(this@MovieDetailActivity, R.color.blue_light))
+                    val color = palette!!.getDominantColor(ContextCompat.getColor(this@MovieDetailActivity, R.color.blue_light))
                     tbToolbar.setBackgroundColor(color)
                     vw_action.setBackgroundColor(color)
                     tbToolbar.background.alpha = 0

@@ -2,12 +2,10 @@ package com.six.cat.sixcat.base
 
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
-import butterknife.Unbinder
+import androidx.annotation.LayoutRes
 import com.six.cat.sixcat.SixCatApplication
 import com.six.cat.sixcat.utils.ActivityManager
 import com.trello.rxlifecycle2.components.support.RxFragment
@@ -18,7 +16,6 @@ import com.trello.rxlifecycle2.components.support.RxFragment
  */
 abstract class BaseRxLazyFragment : RxFragment() {
     private var parentView: View? = null
-    private var bind: Unbinder? = null
     /**
      * 视图是否加载完毕
      */
@@ -38,7 +35,6 @@ abstract class BaseRxLazyFragment : RxFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View? {
         parentView = inflater.inflate(getLayoutResId(), container, false)
-        bind = ButterKnife.bind(this, parentView!!)
         return parentView
     }
 
@@ -73,7 +69,6 @@ abstract class BaseRxLazyFragment : RxFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        bind!!.unbind()
     }
 
     override fun onDestroy() {

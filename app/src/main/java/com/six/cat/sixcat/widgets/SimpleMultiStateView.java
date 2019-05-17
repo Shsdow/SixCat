@@ -2,8 +2,9 @@ package com.six.cat.sixcat.widgets;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.LayoutRes;
 import android.util.AttributeSet;
+
+import androidx.annotation.LayoutRes;
 
 import com.six.cat.sixcat.R;
 

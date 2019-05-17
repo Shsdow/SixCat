@@ -4,9 +4,9 @@ import `in`.srain.cube.views.ptr.PtrDefaultHandler
 import `in`.srain.cube.views.ptr.PtrFrameLayout
 import `in`.srain.cube.views.ptr.PtrHandler
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.six.cat.sixcat.R
 import com.six.cat.sixcat.SixCatApplication
@@ -102,22 +102,18 @@ class VideoDetailFragment : BaseRxLazyFragment(), VideoContract.View {
         })
         videoDetailBean = VideoDetailBean()
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
-//        videoDetailAdapter = VideoDetailAdapter(SixCatApplication.context, R.layout.item_video_content, videoDetailBean?.item)
         mRecyclerView.adapter = videoDetailAdapter
         videoDetailAdapter.setLoadMoreView(CustomLoadMoreView())
         videoDetailAdapter.openLoadAnimation(BaseQuickAdapter.ALPHAIN)
         videoDetailAdapter.setOnLoadMoreListener({ presenter.getVideoDetails(pageNum, "list", typeId!!) }, mRecyclerView)
         mRecyclerView.addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
-            override fun onChildViewDetachedFromWindow(view: View?) {
-                val jzvd = view?.findViewById<View>(R.id.videoplayer)
-//                jzvd.on
-//                if (jzvd != null && JCUtils.dataSourceObjectsContainsUri(jzvd., JCMediaManager.getCurrentDataSource())) {
-//                    JCVideoPlayer.releaseAllVideos()
-//                }
+            override fun onChildViewDetachedFromWindow(view: View) {
             }
 
-            override fun onChildViewAttachedToWindow(view: View?) {
+            override fun onChildViewAttachedToWindow(view: View) {
             }
+
+
         })
     }
 
@@ -148,11 +144,11 @@ class VideoDetailFragment : BaseRxLazyFragment(), VideoContract.View {
     }
 
 
-    fun success() {
+    private fun success() {
         mSimpleMultiStateView?.showContent()
     }
 
-    fun onShowNetError() {
+    private fun onShowNetError() {
         mSimpleMultiStateView?.showNoNetView()
     }
 

@@ -4,11 +4,11 @@ import java.lang.reflect.Field
 
 import android.content.Context
 import android.graphics.Rect
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.core.view.ViewCompat
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.six.cat.sixcat.BuildConfig
 
@@ -53,7 +53,7 @@ class FullyLinearLayoutManager : LinearLayoutManager {
         ViewCompat.setOverScrollMode(view, overScrollMode)
     }
 
-    override fun onMeasure(recycler: RecyclerView.Recycler?, state: RecyclerView.State?, widthSpec: Int, heightSpec: Int) {
+    override fun onMeasure(recycler: RecyclerView.Recycler, state: RecyclerView.State, widthSpec: Int, heightSpec: Int) {
         val widthMode = View.MeasureSpec.getMode(widthSpec)
         val heightMode = View.MeasureSpec.getMode(heightSpec)
 

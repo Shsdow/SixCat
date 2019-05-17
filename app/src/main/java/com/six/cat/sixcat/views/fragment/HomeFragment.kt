@@ -1,14 +1,7 @@
 package com.six.cat.sixcat.views.fragment
 
-import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import com.google.android.material.tabs.TabLayout
 import com.six.cat.sixcat.R
-import com.six.cat.sixcat.R.id.tabHome
-import com.six.cat.sixcat.R.id.vpHome
 import com.six.cat.sixcat.adapter.HomeFgAdapter
 import com.six.cat.sixcat.base.BaseRxLazyFragment
 import com.six.cat.sixcat.utils.SettingUtil

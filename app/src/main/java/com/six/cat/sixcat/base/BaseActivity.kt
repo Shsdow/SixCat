@@ -4,8 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.six.cat.sixcat.SixCatApplication
 import com.six.cat.sixcat.utils.ActivityManager
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
@@ -13,14 +11,12 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 abstract class BaseActivity : RxAppCompatActivity() {
 
     var mManager: ActivityManager? = null
-    private var bind: Unbinder? = null
 
     abstract fun getLayoutId(): Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
-        bind = ButterKnife.bind(this)
         initView()
         mManager = ActivityManager.getInstance()
         mManager!!.addActivity(this)
@@ -33,7 +29,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
 //    }
 
     /**
-     * 打卡软键盘
+     * 打开软键盘
      */
     fun openKeyBord(mEditText: EditText, mContext: Context) {
         val imm = mContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
