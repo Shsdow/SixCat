@@ -27,7 +27,7 @@
             android:background="@color/white"
             app:itemIconTint="@drawable/nav_item_color_state"
             app:itemTextColor="@drawable/nav_item_color_state"
-            app:layout_behavior="com.six.cat.sixcat.widgets.BottomNavigationBehavior"
+            app:layout_behavior="com.sixcat.widgets.BottomNavigationBehavior"
             app:menu="@menu/bottom_navigation_main"
             tools:ignore="MissingConstraints" />
 

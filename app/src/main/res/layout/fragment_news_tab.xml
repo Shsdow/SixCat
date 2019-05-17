@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TableLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             style="@style/TabLayout"
             android:layout_width="0dp"
@@ -23,30 +23,15 @@
             app:tabTextColor="@color/gray"
             tools:ignore="MissingPrefix" />
 
-        <!--<ImageView-->
-            <!--android:id="@+id/iv_add_channel_iv"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:background="?attr/selectableItemBackground"-->
-            <!--android:foreground="?attr/selectableItemBackground"-->
-            <!--android:maxHeight="?attr/actionBarSize"-->
-            <!--android:paddingBottom="4dp"-->
-            <!--android:paddingLeft="10dp"-->
-            <!--android:paddingRight="10dp"-->
-            <!--android:paddingTop="4dp"-->
-            <!--android:scaleType="center"-->
-            <!--app:srcCompat="@drawable/ic_add_white_24dp"-->
-            <!--tools:ignore="ContentDescription" />-->
 
     </LinearLayout>
 
-    <androidx.core.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:layout="@layout/fragment_list">
-    </androidx.core.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>

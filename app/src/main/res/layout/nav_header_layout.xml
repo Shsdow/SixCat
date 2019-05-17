@@ -5,7 +5,7 @@
     android:layout_height="@dimen/dp_200"
     android:orientation="vertical">
 
-    <com.six.cat.sixcat.widgets.CircleImageView
+    <com.sixcat.widgets.CircleImageView
         android:id="@+id/civ_header"
         android:layout_width="@dimen/dp_80"
         android:layout_height="@dimen/dp_80"

@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             tools:visibility="gone" />
 
-        <com.six.cat.sixcat.widgets.CustomEmptyView
+        <com.sixcat.widgets.CustomEmptyView
             android:id="@+id/mCuvEmptyView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

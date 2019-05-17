@@ -8,7 +8,7 @@
     tools:context=".views.activity.MovieDetailActivity">
 
 
-    <com.six.cat.sixcat.widgets.ObserverScrollView
+    <com.sixcat.widgets.ObserverScrollView
         android:id="@+id/obsvAllData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
             <!--android:layout_marginTop="@dimen/dp_5" />-->
         </LinearLayout>
 
-    </com.six.cat.sixcat.widgets.ObserverScrollView>
+    </com.sixcat.widgets.ObserverScrollView>
 
     <View
         android:id="@+id/vw_action"
