@@ -162,12 +162,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
             FRAGMENT_VIDEO -> {
                 toolbar!!.title = getString(R.string.title_video)
-                manager.show(mVideoFragment!!)
+                manager.show(mVideoFragment)
             }
 
             FRAGMENT_MEDIA -> {
                 toolbar!!.title = getString(R.string.title_media)
-                manager.show(mThemeFragment!!)
+                manager.show(mThemeFragment)
             }
         }
         manager.commit()
