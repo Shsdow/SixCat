@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/AppTheme.AppBarOverlay"
-            app:tabTextColor="@color/gray" />
+            app:tabTextColor="@color/white_light" />
 
         <!--<ImageView-->
             <!--android:id="@+id/iv_home_fragment_add_channel"-->

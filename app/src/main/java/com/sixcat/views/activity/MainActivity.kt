@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
-import com.google.android.material.navigation.NavigationView
 import com.sixcat.R
 import com.sixcat.base.BaseActivity
 import com.sixcat.utils.SPUtil
@@ -33,21 +32,25 @@ import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnNeverAskAgain
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
-import java.util.*
 
 @RuntimePermissions
-class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private val mHomeFragment by lazy { HomeFragment.newInstance() }
-    private val mPictureFragment by lazy { PictureFragment.newInstance() }
-    private val mThemeFragment by lazy { ThemeFragment.newInstance() }
-    private val mVideoFragment by lazy { VideoShowFragment.newInstance() }
-    private val manager by lazy { supportFragmentManager.beginTransaction() }
+class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedListener*/ {
+
+
+    private var mHomeFragment: HomeFragment? = null
+    private var mPictureFragment: PictureFragment? = null
+    private var mThemeFragment: ThemeFragment? = null
+    private var mVideoFragment: VideoShowFragment? = null
     private var position: Int = 0
-    private val titleList = ArrayList<String>()
+    private val titleList by lazy {
+        listOf(resources.getString(R.string.app_name), resources.getString(R.string.title_photo), resources.getString(R.string.title_video), getString(R.string.title_media))
+    }
     private var exitTime: Long = 0L
 
 
-    override fun getLayoutId() = R.layout.activity_main
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
+    }
 
     override fun initView() {
         if (!SPUtil.getBoolean("isFirst")) {
@@ -57,28 +60,20 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         initToolBar()
         initFragments(null)
         initNavigationView()
-        titleList.add("讲演")
-        titleList.add("枝丫")
-        titleList.add("线程")
-        titleList.add("记录")
     }
 
 
     private fun initFragments(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
+            mHomeFragment = supportFragmentManager.findFragmentByTag(HomeFragment::class.java.name) as HomeFragment
+            mPictureFragment = supportFragmentManager.findFragmentByTag(PictureFragment::class.java.name) as PictureFragment
+            mThemeFragment = supportFragmentManager.findFragmentByTag(ThemeFragment::class.java.name) as ThemeFragment
+            mVideoFragment = supportFragmentManager.findFragmentByTag(VideoShowFragment::class.java.name) as VideoShowFragment
             showFragment(savedInstanceState.getInt(POSITION))
-            bttom_nav!!.selectedItemId = savedInstanceState.getInt(SELECT_ITEM)
+            bottomNav!!.selectedItemId = savedInstanceState.getInt(SELECT_ITEM)
         } else {
-            addFragmentsToActivity()
             showFragment(FRAGMENT_NEWS)
         }
-    }
-
-    private fun addFragmentsToActivity() {
-        manager.add(R.id.container, mHomeFragment, PictureFragment::class.java.name)
-        manager.add(R.id.container, mPictureFragment, PictureFragment::class.java.name)
-        manager.add(R.id.container, mThemeFragment, PictureFragment::class.java.name)
-        manager.add(R.id.container, mVideoFragment, PictureFragment::class.java.name)
     }
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -103,119 +98,147 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun initToolBar() {
         toolbar!!.inflateMenu(R.menu.menu_activity_main)
-        BottomNavigationViewHelper.disableShiftMode(bttom_nav)
+        BottomNavigationViewHelper.disableShiftMode(bottomNav)
         setSupportActionBar(toolbar)
-        bttom_nav!!.setOnNavigationItemSelectedListener { item ->
+        val toggle = ActionBarDrawerToggle(this, mDrawerLayoutMain, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        mDrawerLayoutMain!!.addDrawerListener(toggle)
+        toggle.syncState()
+        initListener()
+    }
+
+    private fun initListener() {
+        bottomNav!!.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_news -> {
                     showFragment(FRAGMENT_NEWS)
-                    doubleClick(FRAGMENT_NEWS)
                 }
                 R.id.action_photo -> {
                     showFragment(FRAGMENT_PHOTO)
-                    doubleClick(FRAGMENT_PHOTO)
                 }
                 R.id.action_video -> {
                     showFragment(FRAGMENT_VIDEO)
-                    doubleClick(FRAGMENT_VIDEO)
                 }
                 R.id.action_media -> {
                     showFragment(FRAGMENT_MEDIA)
-                    doubleClick(FRAGMENT_MEDIA)
-                }
-                else -> {
                 }
             }
             true
         }
-        val toggle = ActionBarDrawerToggle(this, mDrawerLayoutMain, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        mDrawerLayoutMain!!.addDrawerListener(toggle)
-        toggle.syncState()
+
+        navigationView.setNavigationItemSelectedListener { item ->
+            mDrawerLayoutMain!!.closeDrawer(GravityCompat.START)
+            ShowToast.shortTime("f3434")
+            when (item.itemId) {
+                R.id.item_home -> {
+                    ShowToast.shortTime("f")
+                    true
+                }
+                R.id.item_download -> true
+                R.id.item_vip -> true
+                R.id.item_favourite -> true
+                R.id.item_history -> true
+                R.id.item_group -> true
+                R.id.item_tracker -> true
+                R.id.item_theme ->
+                    // 主题选择
+                    //                changeTheme();
+                    true
+                R.id.item_app -> {
+                    // 应用推荐
+                    startActivity(Intent(this, SettingActivity::class.java))
+                    true
+                }
+                R.id.item_settings ->
+                    // 设置中心
+                    true
+                else -> mDrawerLayoutMain!!.closeDrawers()
+            }
+            false
+        }
     }
 
-    private fun doubleClick(fragmentVideo: Int) {
-
-    }
 
     private fun showFragment(fragmentNews: Int) {
-        hideFragment(manager)
+        val transaction = supportFragmentManager.beginTransaction()
+        hideFragment(transaction)
         position = fragmentNews
         when (fragmentNews) {
             FRAGMENT_NEWS -> {
-                toolbar!!.setTitle(R.string.app_name)
-                manager.show(mHomeFragment)
+                if (mHomeFragment == null) {
+                    mHomeFragment = HomeFragment.newInstance()
+                    transaction.add(R.id.container, mHomeFragment!!, HomeFragment::class.java.name)
+                } else {
+                    transaction.show(mHomeFragment!!)
+                }
             }
 
             FRAGMENT_PHOTO -> {
-                toolbar!!.setTitle(R.string.title_photo)
-                manager.show(mPictureFragment)
+                if (mPictureFragment == null) {
+                    mPictureFragment = PictureFragment.newInstance()
+                    transaction.add(R.id.container, mPictureFragment!!, PictureFragment::class.java.name)
+                } else {
+                    transaction.show(mPictureFragment!!)
+                }
             }
 
             FRAGMENT_VIDEO -> {
-                toolbar!!.title = getString(R.string.title_video)
-                manager.show(mVideoFragment)
+                if (mVideoFragment == null) {
+                    mVideoFragment = VideoShowFragment.newInstance()
+                    transaction.add(R.id.container, mVideoFragment!!, VideoShowFragment::class.java.name)
+                } else {
+                    transaction.show(mVideoFragment!!)
+                }
             }
 
             FRAGMENT_MEDIA -> {
-                toolbar!!.title = getString(R.string.title_media)
-                manager.show(mThemeFragment)
+                if (mThemeFragment == null) {
+                    mThemeFragment = ThemeFragment.newInstance()
+                    transaction.add(R.id.container, mThemeFragment!!, ThemeFragment::class.java.name)
+                } else {
+                    transaction.show(mThemeFragment!!)
+                }
             }
         }
-        manager.commit()
+
+        transaction.commit()
+        toolbar!!.title = titleList[fragmentNews]
     }
 
-    private fun hideFragment(transaction: FragmentTransaction) {
-        transaction.hide(mHomeFragment)
-        transaction.hide(mPictureFragment)
-        transaction.hide(mVideoFragment)
-        transaction.hide(mThemeFragment)
+    private fun hideFragment(ft: FragmentTransaction) {
+        if (mHomeFragment != null) {
+            ft.hide(mHomeFragment!!)
+        }
+        if (mPictureFragment != null) {
+            ft.hide(mPictureFragment!!)
+        }
+        if (mVideoFragment != null) {
+            ft.hide(mVideoFragment!!)
+        }
+        if (mThemeFragment != null) {
+            ft.hide(mThemeFragment!!)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         // recreate 时记录当前位置 (在 Manifest 已禁止 Activity 旋转,所以旋转屏幕并不会执行以下代码)
         outState!!.putInt(POSITION, position)
-        outState.putInt(SELECT_ITEM, bttom_nav!!.selectedItemId)
+        outState.putInt(SELECT_ITEM, bottomNav!!.selectedItemId)
     }
 
     private fun initNavigationView() {
-        nvv_view!!.setNavigationItemSelectedListener(this)
-        val headerView = nvv_view!!.getHeaderView(0)
+//        navigationView!!.setNavigationItemSelectedListener(this)
+        val headerView = navigationView!!.getHeaderView(0)
         val circleImageView = headerView.findViewById<CircleImageView>(R.id.civ_header)
         val mUserName = headerView.findViewById<TextView>(R.id.tv_user_title_name)
         Glide.with(this).load("https://bingfilestore.blob.core.windows.net/homepage/app/Holiday2017/v1/icons/snow_40x40.png").into(circleImageView)
         mUserName.text = "我的大头照"
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        ShowToast.shortTime("我点击了 naviagetion")
-        mDrawerLayoutMain!!.closeDrawer(GravityCompat.START)
-        when (item.itemId) {
-            R.id.item_home ->
-                // 主页
-                return true
-            R.id.item_download -> return true
-            R.id.item_vip -> return true
-            R.id.item_favourite -> return true
-            R.id.item_history -> return true
-            R.id.item_group -> return true
-            R.id.item_tracker -> return true
-            R.id.item_theme ->
-                // 主题选择
-                //                changeTheme();
-                return true
-            R.id.item_app -> {
-                // 应用推荐
-                startActivity(Intent(this, SettingActivity::class.java))
-                return true
-            }
-            R.id.item_settings ->
-                // 设置中心
-                return true
-            else -> mDrawerLayoutMain!!.closeDrawers()
-        }
-        return false
-    }
+//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//        ShowToast.shortTime("我点击了 naviagetion")
+//
+//    }
 
     private fun changeTheme() {
         val mode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
@@ -273,3 +296,4 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
 }
+

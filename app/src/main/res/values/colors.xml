@@ -3,13 +3,14 @@
     <color name="colorPrimary">#64dacd</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
     <color name="white">#ffffff</color>
     <color name="tran">#00000000</color>
     <color name="black">#000000</color>
     <color name="black1">#b0000000</color>
     <color name="textColorPrimary">#616161</color>
     <color name="viewBackground">@android:color/white</color>
-    <color name="gray">#9cffffff</color>
+    <color name="white_light">#9cffffff</color>
     <color name="windowBackground">@color/Grey100</color>
     <color name="transparent">#00ffffff</color>
 

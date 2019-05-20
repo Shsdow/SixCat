@@ -9,7 +9,7 @@
     tools:context=".views.activity.MainActivity"
     tools:openDrawer="end">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,7 +18,7 @@
         <include layout="@layout/container" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bttom_nav"
+            android:id="@+id/bottomNav"
             style="@style/Widget.Design.BottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,10 +32,10 @@
             app:menu="@menu/bottom_navigation_main"
             tools:ignore="MissingConstraints" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nvv_view"
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
