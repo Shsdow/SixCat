@@ -20,9 +20,9 @@ import com.sixcat.utils.SPUtil
 import com.sixcat.utils.SettingUtil
 import com.sixcat.utils.ShowToast
 import com.sixcat.utils.StatusBarUtil
-import com.sixcat.views.fragment.HomeFragment
+import com.sixcat.views.fragment.FileListFragment
 import com.sixcat.views.fragment.PictureFragment
-import com.sixcat.views.fragment.ThemeFragment
+import com.sixcat.views.fragment.TodoListFragment
 import com.sixcat.views.fragment.VideoShowFragment
 import com.sixcat.widgets.BottomNavigationViewHelper
 import com.sixcat.widgets.CircleImageView
@@ -37,16 +37,15 @@ import permissions.dispatcher.RuntimePermissions
 class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedListener*/ {
 
 
-    private var mHomeFragment: HomeFragment? = null
+    private var mHomeFragment: FileListFragment? = null
     private var mPictureFragment: PictureFragment? = null
-    private var mThemeFragment: ThemeFragment? = null
+    private var mTodoListFragment: TodoListFragment? = null
     private var mVideoFragment: VideoShowFragment? = null
     private var position: Int = 0
-    private val titleList by lazy {
-        listOf(resources.getString(R.string.app_name), resources.getString(R.string.title_photo), resources.getString(R.string.title_video), getString(R.string.title_media))
-    }
     private var exitTime: Long = 0L
-
+    private val titleList by lazy {
+        listOf(resources.getString(R.string.app_name), resources.getString(R.string.title_photo), resources.getString(R.string.title_video), getString(R.string.title_todo))
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -65,14 +64,14 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
 
     private fun initFragments(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
-            mHomeFragment = supportFragmentManager.findFragmentByTag(HomeFragment::class.java.name) as HomeFragment
+            mHomeFragment = supportFragmentManager.findFragmentByTag(FileListFragment::class.java.name) as FileListFragment
             mPictureFragment = supportFragmentManager.findFragmentByTag(PictureFragment::class.java.name) as PictureFragment
-            mThemeFragment = supportFragmentManager.findFragmentByTag(ThemeFragment::class.java.name) as ThemeFragment
+            mTodoListFragment = supportFragmentManager.findFragmentByTag(TodoListFragment::class.java.name) as TodoListFragment
             mVideoFragment = supportFragmentManager.findFragmentByTag(VideoShowFragment::class.java.name) as VideoShowFragment
             showFragment(savedInstanceState.getInt(POSITION))
             bottomNav!!.selectedItemId = savedInstanceState.getInt(SELECT_ITEM)
         } else {
-            showFragment(FRAGMENT_NEWS)
+            showFragment(FRAGMENT_FILM_LIST)
         }
     }
 
@@ -109,8 +108,8 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
     private fun initListener() {
         bottomNav!!.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.action_news -> {
-                    showFragment(FRAGMENT_NEWS)
+                R.id.action_film_list -> {
+                    showFragment(FRAGMENT_FILM_LIST)
                 }
                 R.id.action_photo -> {
                     showFragment(FRAGMENT_PHOTO)
@@ -118,8 +117,8 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
                 R.id.action_video -> {
                     showFragment(FRAGMENT_VIDEO)
                 }
-                R.id.action_media -> {
-                    showFragment(FRAGMENT_MEDIA)
+                R.id.action_todo_list -> {
+                    showFragment(FRAGMENT_TODO_LIST)
                 }
             }
             true
@@ -131,7 +130,6 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
             when (item.itemId) {
                 R.id.item_home -> {
                     ShowToast.shortTime("f")
-                    true
                 }
                 R.id.item_download -> true
                 R.id.item_vip -> true
@@ -163,10 +161,10 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
         hideFragment(transaction)
         position = fragmentNews
         when (fragmentNews) {
-            FRAGMENT_NEWS -> {
+            FRAGMENT_FILM_LIST -> {
                 if (mHomeFragment == null) {
-                    mHomeFragment = HomeFragment.newInstance()
-                    transaction.add(R.id.container, mHomeFragment!!, HomeFragment::class.java.name)
+                    mHomeFragment = FileListFragment.newInstance()
+                    transaction.add(R.id.container, mHomeFragment!!, FileListFragment::class.java.name)
                 } else {
                     transaction.show(mHomeFragment!!)
                 }
@@ -190,16 +188,15 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
                 }
             }
 
-            FRAGMENT_MEDIA -> {
-                if (mThemeFragment == null) {
-                    mThemeFragment = ThemeFragment.newInstance()
-                    transaction.add(R.id.container, mThemeFragment!!, ThemeFragment::class.java.name)
+            FRAGMENT_TODO_LIST -> {
+                if (mTodoListFragment == null) {
+                    mTodoListFragment = TodoListFragment.newInstance()
+                    transaction.add(R.id.container, mTodoListFragment!!, TodoListFragment::class.java.name)
                 } else {
-                    transaction.show(mThemeFragment!!)
+                    transaction.show(mTodoListFragment!!)
                 }
             }
         }
-
         transaction.commit()
         toolbar!!.title = titleList[fragmentNews]
     }
@@ -214,8 +211,8 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
         if (mVideoFragment != null) {
             ft.hide(mVideoFragment!!)
         }
-        if (mThemeFragment != null) {
-            ft.hide(mThemeFragment!!)
+        if (mTodoListFragment != null) {
+            ft.hide(mTodoListFragment!!)
         }
     }
 
@@ -287,10 +284,10 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
     }
 
     companion object {
-        private const val FRAGMENT_NEWS = 0
+        private const val FRAGMENT_FILM_LIST = 0
         private const val FRAGMENT_PHOTO = 1
         private const val FRAGMENT_VIDEO = 2
-        private const val FRAGMENT_MEDIA = 3
+        private const val FRAGMENT_TODO_LIST = 3
         private const val POSITION = "position"
         private const val SELECT_ITEM = "bottomNavigationSelectItem"
     }

@@ -2,7 +2,7 @@ package com.sixcat.model
 
 import com.sixcat.RetrofitManager
 import com.sixcat.api.SchedulerUtils
-import com.sixcat.model.bean.LiveBean
+import com.sixcat.model.bean.MovieBean
 import io.reactivex.Observable
 
 /**
@@ -11,7 +11,7 @@ import io.reactivex.Observable
  */
 
 class LiveModel {
-    fun getLiveData(city: String, start: Int, count: Int): Observable<LiveBean> {
+    fun getLiveData(city: String, start: Int, count: Int): Observable<MovieBean> {
         return RetrofitManager.service.getLiveContent(city, start, count)
                 .compose(SchedulerUtils.ioToMain())
     }

@@ -5,22 +5,22 @@ import com.sixcat.R
 import com.sixcat.adapter.HomeFgAdapter
 import com.sixcat.base.BaseRxLazyFragment
 import com.sixcat.utils.SettingUtil
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_film_list.*
 
 /**
  * Author：Administrator
  * Data: 2018/9/4  11:45
  */
 
-open class HomeFragment : BaseRxLazyFragment() {
+open class FileListFragment : BaseRxLazyFragment() {
 
     companion object {
-        fun newInstance(): HomeFragment = HomeFragment()
+        fun newInstance(): FileListFragment = FileListFragment()
     }
 
     private val homeFgAdapter by lazy { HomeFgAdapter(childFragmentManager, activity) }
 
-    override fun getLayoutResId() = R.layout.fragment_home
+    override fun getLayoutResId() = R.layout.fragment_film_list
 
     override fun initView() {
         initViewPage()

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/dp300"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rect_white">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/sp18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/ivLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_25"
+        android:layout_marginEnd="@dimen/dp_25"
+        android:background="@drawable/line"
+        app:layout_constraintStart_toStartOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_35"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginRight="@dimen/dp_35"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/textSize_large"
+        app:layout_constraintTop_toBottomOf="@id/ivLine"
+        tools:text="Message" />
+
+    <EditText
+        android:id="@+id/etInputUser"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_margin="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp_5"
+        android:background="@drawable/bg_rect_storken"
+        android:hint="1234"
+        android:imeOptions="actionNext"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dp_10"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/tvMessage" />
+
+
+    <EditText
+        android:id="@+id/etInputPass"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_margin="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp_5"
+        android:background="@drawable/bg_rect_storken"
+        android:hint="1234"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dp_10"
+        android:singleLine="true"
+        app:layout_constraintTop_toBottomOf="@id/etInputUser" />
+
+
+    <Button
+        android:id="@+id/btnDeleteOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:background="@drawable/bg_rect_red"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp18"
+        app:layout_constraintEnd_toStartOf="@+id/btnDeleteOrderCancel"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etInputPass" />
+
+    <Button
+        android:id="@+id/btnDeleteOrderCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/bg_rect_grey"
+        android:text="取消"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="0.4"
+        app:layout_constraintStart_toEndOf="@+id/btnDeleteOrder"
+        app:layout_constraintTop_toBottomOf="@id/etInputPass"
+        app:layout_constraintTop_toTopOf="@id/btnDeleteOrder" />
+</androidx.constraintlayout.widget.ConstraintLayout>

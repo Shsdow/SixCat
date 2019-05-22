@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_news"
+        android:id="@+id/action_film_list"
         android:enabled="true"
         android:icon="@drawable/ic_new_black_24dp"
         android:title="@string/title_news"
@@ -20,9 +20,9 @@
         android:title="@string/title_video"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/action_media"
+        android:id="@+id/action_todo_list"
         android:enabled="true"
         android:icon="@drawable/ic_me_black_24dp"
-        android:title="@string/title_media"
+        android:title="@string/title_todo"
         app:showAsAction="ifRoom"/>
 </menu>

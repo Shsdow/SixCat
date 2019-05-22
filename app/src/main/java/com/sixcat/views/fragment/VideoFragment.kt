@@ -11,7 +11,7 @@ import com.sixcat.base.BaseRxLazyFragment
 class VideoFragment : BaseRxLazyFragment() {
 
     override fun getLayoutResId(): Int {
-        return R.layout.fragment_home
+        return R.layout.fragment_todo_list
     }
 
 

@@ -9,7 +9,7 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url 'https://maven.fabric.io/public' }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+//        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.0'
@@ -22,11 +22,11 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+
         jcenter()
         maven { url "https://jitpack.io" } // BaseQuickAdapter 引入
-
-        maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }  // permisson 引入
+//        maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }  // permisson 引入
+        google()
     }
 }
 task clean(type: Delete) {

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_home_fragment_header_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal">-->
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabHome"
+        style="@style/TabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:tabTextColor="@color/gray_50" />
+
+    <!--<ImageView-->
+    <!--android:id="@+id/iv_home_fragment_add_channel"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:background="?attr/selectableItemBackground"-->
+    <!--android:foreground="?attr/selectableItemBackground"-->
+    <!--android:maxHeight="?attr/actionBarSize"-->
+    <!--android:paddingBottom="4dp"-->
+    <!--android:paddingLeft="10dp"-->
+    <!--android:paddingRight="10dp"-->
+    <!--android:paddingTop="4dp"-->
+    <!--android:scaleType="center"-->
+    <!--app:srcCompat="@drawable/ic_add_white_24dp"-->
+    <!--tools:ignore="ContentDescription" />-->
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:layout="@layout/fragment_list" />
+</LinearLayout>

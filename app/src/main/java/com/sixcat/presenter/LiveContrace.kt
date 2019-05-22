@@ -2,7 +2,7 @@ package com.sixcat.module.live
 
 import com.sixcat.base.refactor.IBasePresenter
 import com.sixcat.base.refactor.IBaseView
-import com.sixcat.model.bean.LiveBean
+import com.sixcat.model.bean.MovieBean
 
 
 /**
@@ -16,7 +16,7 @@ interface LiveContrace {
         /**
          * 设置适配器数据
          */
-        fun setLiveData(list: List<LiveBean.SubjectsBean>?, startCount: Int, totalCount: Int)
+        fun setLiveData(list: List<MovieBean.SubjectsBean>?, startCount: Int, totalCount: Int)
 
         fun showError(errorMsg: String, errorCode: Int)
 

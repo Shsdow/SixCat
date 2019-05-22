@@ -8,7 +8,7 @@ import com.sixcat.R
 import com.sixcat.SixCatApplication
 import com.sixcat.adapter.LiveJavaAdapter
 import com.sixcat.base.BaseRxLazyFragment
-import com.sixcat.model.bean.LiveBean
+import com.sixcat.model.bean.MovieBean
 import com.sixcat.module.live.LiveContrace
 import com.sixcat.presenter.contract.LiveContentPresenter
 import com.sixcat.utils.ShowToast
@@ -25,7 +25,7 @@ import java.util.*
 
 class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener {
 
-    private val mBeanList = ArrayList<LiveBean.SubjectsBean>()
+    private val mBeanList = ArrayList<MovieBean.SubjectsBean>()
     private val PAGE_SIZE = 10
     private val mMovieShortCaseAdapter by lazy { LiveJavaAdapter(mBeanList) }
     private val presenter by lazy { LiveContentPresenter() }
@@ -75,7 +75,7 @@ class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View, BaseQuickAdapt
         srlMovieShortCaseFresh.isEnabled = true
     }
 
-    override fun setLiveData(list: List<LiveBean.SubjectsBean>?, startCount: Int, totalCount: Int) {
+    override fun setLiveData(list: List<MovieBean.SubjectsBean>?, startCount: Int, totalCount: Int) {
         srlMovieShortCaseFresh.isRefreshing = false
         mCuvEmptyView.visibility = View.GONE
         rvMovieShortCase.visibility = View.VISIBLE
@@ -94,7 +94,7 @@ class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View, BaseQuickAdapt
     }
 
     override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-        val mBean = adapter?.data?.get(position) as LiveBean.SubjectsBean
+        val mBean = adapter?.data?.get(position) as MovieBean.SubjectsBean
         startActivity(Intent(context, MovieDetailActivity::class.java)
                 .putExtra("movieId", mBean.id))
     }

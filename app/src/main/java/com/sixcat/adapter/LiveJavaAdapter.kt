@@ -12,7 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.sixcat.R
 import com.sixcat.SixCatApplication
-import com.sixcat.model.bean.LiveBean
+import com.sixcat.model.bean.MovieBean
 import com.sixcat.widgets.GlideCircleTransform
 
 import java.text.ParseException
@@ -26,12 +26,12 @@ import java.util.Locale
  * 对应的 Java 代码 {@link com.sixcat.adapter.LiveFragementJavaAdapter }
  */
 
-class LiveJavaAdapter(data: ArrayList<LiveBean.SubjectsBean>?) : BaseQuickAdapter<LiveBean.SubjectsBean, BaseViewHolder>(R.layout.item_live, data) {
+class LiveJavaAdapter(data: ArrayList<MovieBean.SubjectsBean>?) : BaseQuickAdapter<MovieBean.SubjectsBean, BaseViewHolder>(R.layout.item_live, data) {
 
     private val currentTime: Long = System.currentTimeMillis()
     private val mSimpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
 
-    override fun convert(helper: BaseViewHolder, item: LiveBean.SubjectsBean) {
+    override fun convert(helper: BaseViewHolder, item: MovieBean.SubjectsBean) {
         try {
             helper.addOnClickListener(R.id.cv_item)
             Glide.with(mContext).load(item.images?.medium)

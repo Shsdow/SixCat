@@ -13,7 +13,7 @@
     <string name="title_news">新闻</string>
     <string name="title_photo">图片</string>
     <string name="title_video">视频</string>
-    <string name="title_media">个人</string>
+    <string name="title_todo">TODO</string>
     <string name="action_search">搜索</string>
 
     <string name="navigation_drawer_open">打开侧栏</string>
@@ -52,4 +52,5 @@
     <string name="text_nonet">网络异常</string>
     <string name="permission_write_denied">拒绝文件写入权限</string>
     <string name="permission_write_never_askagain">不要在询问请求文件写入权限</string>
+    <string name="todo_list_statistic">完成 %d 条，未完成 %d 条，共计 %d 条</string>
 </resources>

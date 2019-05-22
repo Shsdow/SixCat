@@ -1,5 +1,7 @@
 ext {
 
+    def room_version = "2.1.0-alpha07"
+    def work_version = "2.0.1"
     android = [
             compileSdkVersion: 28,
             buildToolsVersion: "27.1.1",
@@ -7,7 +9,8 @@ ext {
             minSdkVersion    : 28,
             targetSdkVersion : 28,
             versionCode      : 1,
-            versionName      : "1.0"
+            versionName      : "1.0",
+
     ]
 
     dependVersion = [
@@ -78,7 +81,22 @@ ext {
             "arouter"                      : "com.alibaba:arouter-api:1.4.0",
             "arouter-compiler"             : "com.alibaba:arouter-compiler:1.2.1",
             //Logger 日志
-            "logger"                       : "com.orhanobut:logger:2.2.0"
+            "logger"                       : "com.orhanobut:logger:2.2.0",
+
+            //Jetpack
+
+            //Room
+            "room"                         : "androidx.room:room-runtime:2.1.0-alpha07",
+            "room-kapt"                    : "androidx.room:room-compiler:2.1.0-alpha07",
+            // optional - Kotlin Extensions and Coroutines support for Room
+            "room-ktx"                     : "androidx.room:room-ktx:2.1.0-alpha07",
+            // optional - RxJava support for Room
+            "room-rxjava"                  : "androidx.room:room-rxjava2:2.1.0-alpha07",
+
+            /**
+             * work
+             */
+            "work"                         : "androidx.work:work-runtime-ktx:2.0.1"
 
     ]
 }

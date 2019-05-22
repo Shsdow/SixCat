@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  * @date 2018/1/12.
  */
 
-class LiveBean {
+class MovieBean {
 
     /**
      * count : 1
@@ -24,7 +24,7 @@ class LiveBean {
     var subjects: List<SubjectsBean>? = null
 
     override fun toString(): String {
-        return "LiveBean{" +
+        return "MovieBean{" +
                 "count=" + count +
                 ", start=" + start +
                 ", total=" + total +

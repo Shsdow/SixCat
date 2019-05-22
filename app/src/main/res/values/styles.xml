@@ -85,4 +85,9 @@
         <item name="android:minHeight">@dimen/dp_20</item>
     </style>
 
+    <style name="ProcessDialog">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
 </resources>

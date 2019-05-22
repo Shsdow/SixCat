@@ -13,6 +13,7 @@
     <dimen name="dp_20">20dp</dimen>
     <dimen name="dp_25">25dp</dimen>
     <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_35">35dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_70">70dp</dimen>
     <dimen name="dp_80">80dp</dimen>
@@ -32,5 +33,7 @@
     <dimen name="textSize_18sp">18sp</dimen>
     <dimen name="textSize_20sp">20sp</dimen>
     <dimen name="statusbar_view_height">0dp</dimen>
+    <dimen name="dp300">300dp</dimen>
+    <dimen name="sp18">18sp</dimen>
 
 </resources>

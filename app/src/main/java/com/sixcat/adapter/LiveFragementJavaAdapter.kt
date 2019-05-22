@@ -10,7 +10,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.sixcat.R
 import com.sixcat.SixCatApplication
-import com.sixcat.model.bean.LiveBean
+import com.sixcat.model.bean.MovieBean
 import com.sixcat.widgets.GlideCircleTransform
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -22,13 +22,13 @@ import java.util.*
  * 对应的 kotlin 代码 [com.six.cat.sixcat.adapter.LiveFragementJavaAdapter]
  */
 
-class LiveFragementJavaAdapter(data: List<LiveBean.SubjectsBean>?, private val currentTime: Long = System.currentTimeMillis()) : BaseQuickAdapter<LiveBean.SubjectsBean, BaseViewHolder>(R.layout.item_live, data) {
+class LiveFragementJavaAdapter(data: List<MovieBean.SubjectsBean>?, private val currentTime: Long = System.currentTimeMillis()) : BaseQuickAdapter<MovieBean.SubjectsBean, BaseViewHolder>(R.layout.item_live, data) {
 
 
     private val mSimpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
 
 
-    override fun convert(helper: BaseViewHolder, item: LiveBean.SubjectsBean) {
+    override fun convert(helper: BaseViewHolder, item: MovieBean.SubjectsBean) {
         try {
             helper.addOnClickListener(R.id.cv_item)
             Glide.with(mContext).load(item.images!!.medium)

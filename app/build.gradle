@@ -82,15 +82,16 @@ android {
 
 dependencies {
 //    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation rootProject.ext.dependencies["recyclerview"]
 
     configurations {
         all*.exclude group: 'com.android.support', module: 'support-v13'
+        all*.exclude group: 'com.android.support', module: 'support-v4'
     }
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation rootProject.ext.dependencies["support-v7"]
     implementation rootProject.ext.dependencies["support-v4"]
+    implementation rootProject.ext.dependencies["recyclerview"]
     implementation rootProject.ext.dependencies["design"]
     implementation rootProject.ext.dependencies["palette"]
     implementation rootProject.ext.dependencies["constraint"]
@@ -105,7 +106,7 @@ dependencies {
     implementation rootProject.ext.dependencies["rxlifecycle"]
     implementation rootProject.ext.dependencies["rxlifecycle-components"]
     implementation rootProject.ext.dependencies["rxpermissions"]
-    implementation rootProject.ext.dependencies["rxpermissions"]
+//    implementation rootProject.ext.dependencies["rxpermissions"]
     implementation rootProject.ext.dependencies["okhttp3"]
     debugImplementation rootProject.ext.dependencies["logging-interceptor"]
     implementation rootProject.ext.dependencies["gson"]
@@ -133,5 +134,12 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.10.0@aar') {
         transitive = true;
     }
+
+    //Room
+    kapt rootProject.ext.dependencies["room-kapt"]
+    implementation rootProject.ext.dependencies["room"]
+    //room
+    implementation rootProject.ext.dependencies["work"]
+
 
 }
