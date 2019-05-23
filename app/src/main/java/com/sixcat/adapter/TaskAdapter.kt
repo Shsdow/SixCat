@@ -11,7 +11,6 @@ import com.sixcat.utils.LogUtil
 import kotlinx.android.synthetic.main.item_task_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * @uthor: GY.LEE
@@ -19,6 +18,7 @@ import kotlin.collections.ArrayList
  */
 class TaskAdapter(private val context: Context, private val list: ArrayList<Task>) : RecyclerView.Adapter<TaskAdapter.TaskAdapterViewHolder>() {
 
+    var completeCount = 0
     private lateinit var clickListener: OnTaskClickListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskAdapterViewHolder =
             TaskAdapterViewHolder(LayoutInflater.from(context).inflate(R.layout.item_task_layout, parent, false))
@@ -26,20 +26,19 @@ class TaskAdapter(private val context: Context, private val list: ArrayList<Task
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: TaskAdapterViewHolder, position: Int) {
-        LogUtil.d(list[position].title)
-        LogUtil.d(list[position].content)
         list[position].apply {
             holder.checkBox.isChecked = complete
+            if (!complete) completeCount++
             holder.title.text = title
             holder.content.text = content
-            holder.taskId.text = id.toString()
+            holder.taskId.text = "id:$id"
             holder.taskDate.text = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).format(date)
             holder.cardView.setOnLongClickListener {
                 clickListener.longClick(id)
                 true
             }
             holder.cardView.setOnClickListener {
-                clickListener.editClick(id)
+                clickListener.editClick(id, position)
             }
             holder.checkBox.setOnClickListener {
                 clickListener.checkoutClick(id, holder.checkBox.isChecked)
@@ -49,6 +48,7 @@ class TaskAdapter(private val context: Context, private val list: ArrayList<Task
 
 
     fun newData(newList: ArrayList<Task>) {
+        completeCount = 0
         list.clear()
         list.addAll(newList)
         notifyDataSetChanged()
@@ -68,8 +68,8 @@ class TaskAdapter(private val context: Context, private val list: ArrayList<Task
     }
 
     interface OnTaskClickListener {
-        fun editClick(position: Int)
-        fun longClick(position: Int)
-        fun checkoutClick(position: Int, boolean: Boolean)
+        fun editClick(id: Int, position: Int)
+        fun longClick(id: Int)
+        fun checkoutClick(id: Int, boolean: Boolean)
     }
 }

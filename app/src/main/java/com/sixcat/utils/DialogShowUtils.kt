@@ -17,18 +17,13 @@ import com.sixcat.R
  * @date: 2019-05-20
  */
 
-fun showDialogWithEdit(listener: View.OnClickListener) {
-
-}
-
 
 fun showEditDialog(context: Context, title: String, message: String,
                    listener: View.OnClickListener) {
-    showEditDialog(context, title, message, arrayOf("输入 Title", "输入 Content"), listener)
+    showEditDialog(context, title, message, arrayOf("输入 Title", "输入 Content"), listener,false)
 }
-
-private fun showEditDialog(context: Context, title: String, message: String,
-                           hint: Array<String>, listener: View.OnClickListener) {
+ fun showEditDialog(context: Context, title: String, message: String,
+                           hint: Array<String>, listener: View.OnClickListener,isEdit:Boolean) {
     val alertDialog = AlertDialog.Builder(context, R.style.ProcessDialog)
             .setCancelable(false).create()
     if ((context as Activity).isFinishing) {
@@ -39,13 +34,15 @@ private fun showEditDialog(context: Context, title: String, message: String,
     alertDialog.setContentView(R.layout.dialog_edit_reason)
     val tvTitle = alertDialog.window.findViewById(
             R.id.tvTitle) as TextView
-    tvTitle.text = hint[0]
+    tvTitle.text = title
     val tvMsg = alertDialog.window.findViewById<TextView>(R.id.tvMessage)
-    tvMsg.text = hint[1]
+    tvMsg.text = message
+
     val user = alertDialog.findViewById<EditText>(R.id.etInputUser)
     val password = alertDialog.findViewById<EditText>(R.id.etInputPass)
-    tvTitle.text = title
-    tvMsg.text = message
+    user!!.hint = hint[0]
+    password!!.hint = hint[1]
+
     if (TextUtils.isEmpty(message)) {
         tvMsg.visibility = View.GONE
     }
@@ -54,6 +51,10 @@ private fun showEditDialog(context: Context, title: String, message: String,
         val sb = StringBuilder()
         val title = user?.text.toString().trim()
         val content = password?.text.toString().trim()
+        if (TextUtils.isEmpty(title) && !isEdit) {
+            ShowToast.shortTime("Task's title can't be empty.")
+            return@setOnClickListener
+        }
         sb.append("$title&")
         sb.append(content)
         it.tag = sb

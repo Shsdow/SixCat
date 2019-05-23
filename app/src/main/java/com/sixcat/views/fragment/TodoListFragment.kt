@@ -42,11 +42,10 @@ class TodoListFragment : BaseRxLazyFragment() {
         initViewModel()
         initAdapter()
         addTask.setOnClickListener {
-            showEditDialog(context!!, "title", "message", View.OnClickListener {
+            showEditDialog(context!!, "提示信息", "请输入 Task 的 Title 和 Content", View.OnClickListener {
                 val text = it.tag as StringBuilder
                 title = text.split("&")[0]
                 content = text.split("&")[1]
-                LogUtil.e("$title  $content")
                 taskViewModel.insertTaskToDatabase(Task(title!!, content!!, false, Date()))
             })
         }
@@ -59,16 +58,23 @@ class TodoListFragment : BaseRxLazyFragment() {
         todoList.layoutManager = linearLayoutManager
         todoList.adapter = taskAdapter
         taskAdapter.setTaskClickListener(object : TaskAdapter.OnTaskClickListener {
-            override fun editClick(id: Int) {
-                LogUtil.d("editClick $id")
+            override fun editClick(id: Int, position: Int) {
+                val oldTask = arraylist?.get(position)
+                showEditDialog(context!!, "提示信息", "请输入 Task 的 Title 和 Content",
+                        arrayOf(oldTask!!.title, oldTask.title), View.OnClickListener {
+                    val text = it.tag as StringBuilder
+                    title = text.split("&")[0]
+                    content = text.split("&")[1]
+                    val task = Task(title!!, content!!, false, Date())
+                    task.id = id
+                    taskViewModel.insertTaskToDatabase(task)
+                })
             }
 
             /**
              * 删除指定 id 的 Task
              */
             override fun longClick(id: Int) {
-                LogUtil.d("longClick $id")
-
                 showDelete(context!!, View.OnClickListener { taskViewModel.deleteTaskWithId(id) })
             }
 
@@ -87,7 +93,10 @@ class TodoListFragment : BaseRxLazyFragment() {
             tasks.observe(this@TodoListFragment, Observer {
                 LogUtil.d("num is ${it.size}")
                 arraylist = it as ArrayList<Task>
+                showStatistic.text = String.format(resources.getString(R.string.todo_list_statistic), taskAdapter.completeCount,
+                        arraylist!!.size - taskAdapter.completeCount, arraylist!!.size)
                 taskAdapter.newData(it)
+
             })
         }
 
