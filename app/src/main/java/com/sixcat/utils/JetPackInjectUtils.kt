@@ -18,7 +18,7 @@ object JetPackInjectUtils {
      * 获得 Task 的 Repository
      */
     fun getTaskRepository(context: Context): TaskRepository =
-            TaskRepository.getInstance(TaskDatabase.getInstance(context).getTaskDao())
+            TaskRepository.getInstance(TaskDatabase.getInstance(context).taskDao())
 
 
     fun getTaskViewModelFactory(context: Application) = ViewModelFactory.getInstance(context)

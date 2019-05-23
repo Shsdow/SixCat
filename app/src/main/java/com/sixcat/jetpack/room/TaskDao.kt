@@ -25,4 +25,11 @@ interface TaskDao {
 
     @Query("SELECT * FROM tasklist WHERE title = :taskTitle")
     fun getTasksWithTitle(taskTitle: String): LiveData<List<Task>>
+
+    //    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Query("UPDATE tasklist  SET complete=:complete WHERE id=:id")
+    fun updateTaskWithComplete(id: Int, complete: Boolean)
+
+    @Query("DELETE FROM tasklist WHERE id = :id")
+    fun deleteTaskWithId(id: Int)
 }

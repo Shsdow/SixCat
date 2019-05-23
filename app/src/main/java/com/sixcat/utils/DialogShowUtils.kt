@@ -49,14 +49,32 @@ private fun showEditDialog(context: Context, title: String, message: String,
     if (TextUtils.isEmpty(message)) {
         tvMsg.visibility = View.GONE
     }
-    alertDialog.window.findViewById<Button>(R.id.btnDeleteOrderCancel).setOnClickListener({ alertDialog.dismiss() })
+    alertDialog.window.findViewById<Button>(R.id.btnDeleteOrderCancel).setOnClickListener { alertDialog.dismiss() }
     alertDialog.window.findViewById<Button>(R.id.btnDeleteOrder).setOnClickListener {
         val sb = StringBuilder()
         val title = user?.text.toString().trim()
         val content = password?.text.toString().trim()
-        sb.append(title)
+        sb.append("$title&")
         sb.append(content)
         it.tag = sb
+        listener.onClick(it)
+        alertDialog.dismiss()
+    }
+}
 
+fun showDelete(context: Context, listener: View.OnClickListener) {
+    val alertDialog = AlertDialog.Builder(context, R.style.ProcessDialog)
+            .setCancelable(false).create()
+    if ((context as Activity).isFinishing) {
+        return
+    }
+    alertDialog.show()
+    alertDialog.window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+    alertDialog.setContentView(R.layout.delete_item)
+
+    alertDialog.window.findViewById<Button>(R.id.delete_cancel).setOnClickListener { alertDialog.dismiss() }
+    alertDialog.window.findViewById<Button>(R.id.delete_agree).setOnClickListener {
+        listener.onClick(it)
+        alertDialog.dismiss()
     }
 }

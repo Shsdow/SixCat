@@ -9,9 +9,14 @@ import com.sixcat.adapter.TaskAdapter
 import com.sixcat.base.BaseRxLazyFragment
 import com.sixcat.jetpack.viewmodel.TaskViewModel
 import com.sixcat.model.bean.Task
+import com.sixcat.utils.LogUtil
 import com.sixcat.utils.obtainViewModel
+import com.sixcat.utils.showDelete
 import com.sixcat.utils.showEditDialog
 import kotlinx.android.synthetic.main.fragment_todo_list.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.util.*
 
 /**
  * @author liguoying
@@ -21,12 +26,12 @@ import kotlinx.android.synthetic.main.fragment_todo_list.*
 class TodoListFragment : BaseRxLazyFragment() {
 
     private lateinit var taskViewModel: TaskViewModel
-    private var list: List<Task>? = emptyList()
+    private var arraylist: ArrayList<Task>? = arrayListOf()
     private var title: String? = null
     private var content: String? = null
 
     private val taskAdapter by lazy {
-        TaskAdapter(context!!, list!!)
+        TaskAdapter(context!!, arraylist!!)
     }
 
     override fun getLayoutResId() =
@@ -37,29 +42,52 @@ class TodoListFragment : BaseRxLazyFragment() {
         initViewModel()
         initAdapter()
         addTask.setOnClickListener {
-            //            taskViewModel.insertTaskToDatabase(Task)
             showEditDialog(context!!, "title", "message", View.OnClickListener {
-                val text = it.tag as String
+                val text = it.tag as StringBuilder
                 title = text.split("&")[0]
                 content = text.split("&")[1]
+                LogUtil.e("$title  $content")
+                taskViewModel.insertTaskToDatabase(Task(title!!, content!!, false, Date()))
             })
         }
+
     }
 
     private fun initAdapter() {
-
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
         todoList.layoutManager = linearLayoutManager
         todoList.adapter = taskAdapter
+        taskAdapter.setTaskClickListener(object : TaskAdapter.OnTaskClickListener {
+            override fun editClick(id: Int) {
+                LogUtil.d("editClick $id")
+            }
+
+            /**
+             * 删除指定 id 的 Task
+             */
+            override fun longClick(id: Int) {
+                LogUtil.d("longClick $id")
+
+                showDelete(context!!, View.OnClickListener { taskViewModel.deleteTaskWithId(id) })
+            }
+
+            override fun checkoutClick(id: Int, complete: Boolean) {
+                GlobalScope.launch {
+                    taskViewModel.updateTaskWithComplete(id, complete)
+                }
+            }
+
+        })
 
     }
 
     private fun initViewModel() {
         taskViewModel = getTaskViewModel().apply {
             tasks.observe(this@TodoListFragment, Observer {
-                list = it
-                taskAdapter.notifyDataSetChanged()
+                LogUtil.d("num is ${it.size}")
+                arraylist = it as ArrayList<Task>
+                taskAdapter.newData(it)
             })
         }
 

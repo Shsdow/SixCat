@@ -36,7 +36,7 @@ class ViewModelFactory(
         fun getInstance(application: Application) =
                 INSTANCE ?: synchronized(ViewModelFactory::class.java) {
                     INSTANCE ?: ViewModelFactory(
-                            TaskRepository.getInstance(TaskDatabase.getInstance(application).getTaskDao()))
+                            TaskRepository.getInstance(TaskDatabase.getInstance(application).taskDao()))
                             .also { INSTANCE = it }
                 }
 

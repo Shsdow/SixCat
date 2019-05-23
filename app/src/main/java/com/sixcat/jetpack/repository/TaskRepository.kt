@@ -2,6 +2,9 @@ package com.sixcat.jetpack.repository
 
 import com.sixcat.jetpack.room.TaskDao
 import com.sixcat.model.bean.Task
+import com.sixcat.utils.AppExecutors
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * @uthor: GY.LEE
@@ -9,7 +12,7 @@ import com.sixcat.model.bean.Task
  *
  * Repository 数据类的仓库，可以包含的数据源：数据库、互联网
  */
-class TaskRepository private constructor(private val taskDao: TaskDao) {
+class TaskRepository private constructor(private val taskDao: TaskDao, private val executors: AppExecutors) {
 
     fun getAllTask() = taskDao.getAllTaskWith()
 
@@ -17,9 +20,26 @@ class TaskRepository private constructor(private val taskDao: TaskDao) {
 
     fun getTasksWithTitle(title: String) = taskDao.getTasksWithTitle(title)
 
+    suspend fun updateTaskWithComplete(id: Int, complete: Boolean) {
+
+        withContext(Dispatchers.IO) { taskDao.updateTaskWithComplete(id, complete) }
+    }
+
     fun insertTask(task: Task) {
-        cacheAndPerform(task) {
-            taskDao.insertTask(task)
+
+
+//        withContext(Dispatchers.IO) {
+//            cacheAndPerform(task) {
+//                taskDao.insertTask(task)
+//            }
+//        }
+
+        executors.diskIO.execute { taskDao.insertTask(task) }
+    }
+
+    fun deleteTaskWithId(id: Int) {
+        executors.diskIO.execute {
+            taskDao.deleteTaskWithId(id)
         }
     }
 
@@ -42,7 +62,7 @@ class TaskRepository private constructor(private val taskDao: TaskDao) {
 
         fun getInstance(taskDao: TaskDao) =
                 instance ?: synchronized(this) {
-                    instance ?: TaskRepository(taskDao).also { instance = it }
+                    instance ?: TaskRepository(taskDao, AppExecutors()).also { instance = it }
                 }
     }
 }

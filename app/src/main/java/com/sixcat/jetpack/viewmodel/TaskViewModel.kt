@@ -15,4 +15,12 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
     fun insertTaskToDatabase(task: Task) {
         taskRepository.insertTask(task)
     }
+
+    suspend fun updateTaskWithComplete(id: Int, complete: Boolean) {
+        taskRepository.updateTaskWithComplete(id, complete)
+    }
+
+    fun deleteTaskWithId(id: Int) {
+        taskRepository.deleteTaskWithId(id)
+    }
 }

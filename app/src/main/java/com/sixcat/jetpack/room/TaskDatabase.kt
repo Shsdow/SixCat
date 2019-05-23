@@ -1,12 +1,7 @@
 package com.sixcat.jetpack.room
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.room.*
 import com.sixcat.model.bean.Task
 import com.sixcat.utils.DATABASE_NAME
 
@@ -15,16 +10,18 @@ import com.sixcat.utils.DATABASE_NAME
  * @date: 2019-05-21
  */
 @Database(entities = [Task::class], version = 1)
+@TypeConverters(DateTypeConvert::class)
 abstract class TaskDatabase : RoomDatabase() {
 
-    abstract fun getTaskDao(): TaskDao
+    abstract fun taskDao(): TaskDao
 
-    companion object{
+    companion object {
 
-        @Volatile private var instance : TaskDatabase? = null
+        @Volatile
+        private var instance: TaskDatabase? = null
 
-        fun getInstance(context: Context): TaskDatabase{
-            return instance?: synchronized(this){
+        fun getInstance(context: Context): TaskDatabase {
+            return instance ?: synchronized(this) {
                 instance ?: buildInstance(context).also { instance = it }
             }
         }
