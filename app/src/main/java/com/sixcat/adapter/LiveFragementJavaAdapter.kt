@@ -32,7 +32,7 @@ class LiveFragementJavaAdapter(data: List<MovieBean.SubjectsBean>?, private val 
         try {
             helper.addOnClickListener(R.id.cv_item)
             Glide.with(mContext).load(item.images!!.medium)
-                    .apply(RequestOptions.bitmapTransform(GlideCircleTransform(SixCatApplication.context, 4))).into(helper.getView<View>(R.id.iv_post_card) as ImageView)
+                    .apply(RequestOptions.bitmapTransform(GlideCircleTransform.getInstance(SixCatApplication.context, 4))).into(helper.getView<View>(R.id.iv_post_card) as ImageView)
             helper.setText(R.id.tv_item_title, item.title)
             helper.setText(R.id.tv_director,
                     String.format(Locale.CHINA, SixCatApplication.context.resources.getString(R.string.showing_movie_director), item.directors!![0].name))

@@ -21,22 +21,46 @@ import java.security.MessageDigest;
  */
 
 public class GlideCircleTransform extends BitmapTransformation {
-    private static float radius = 0f;
+    private float radius = 0f;
+    private static int useDp = 0;
     private static final int VERSION = 1;
-    private static final String ID = BuildConfig.APPLICATION_ID + ".GlideRoundRect." + VERSION;
-    private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
+    private final String ID = BuildConfig.APPLICATION_ID + ".GlideRoundRect." + VERSION;
+    private final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
+//
+//    public GlideCircleTransform(Context context, int dp) {
+//        super(context);
+//        radius = Resources.getSystem().getDisplayMetrics().density * dp;
+//    }
 
-    public GlideCircleTransform(Context context, int dp) {
+    private GlideCircleTransform(Context context) {
         super(context);
-        radius = Resources.getSystem().getDisplayMetrics().density * dp;
+
+    }
+
+    private static GlideCircleTransform instance;
+
+    public static GlideCircleTransform getInstance(Context context, int dp) {
+        useDp = dp;
+        if (instance == null) {
+            synchronized (GlideCircleTransform.class) {
+                if (instance == null) {
+                    instance = new GlideCircleTransform(context);
+                }
+            }
+
+        }
+
+        return instance;
     }
 
     @Override
     protected Bitmap transform(BitmapPool pool, Bitmap toTransform,
                                int outWidth, int outHeight) {
+        radius = Resources.getSystem().getDisplayMetrics().density * useDp;
         return roundCrop(pool, toTransform);
     }
+
 
     private Bitmap roundCrop(BitmapPool pool, Bitmap source) {
         if (source == null)

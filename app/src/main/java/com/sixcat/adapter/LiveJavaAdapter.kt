@@ -35,7 +35,7 @@ class LiveJavaAdapter(data: ArrayList<MovieBean.SubjectsBean>?) : BaseQuickAdapt
         try {
             helper.addOnClickListener(R.id.cv_item)
             Glide.with(mContext).load(item.images?.medium)
-                    .apply(RequestOptions.bitmapTransform(GlideCircleTransform(SixCatApplication.context, 4))).into(helper.getView<ImageView>(R.id.iv_post_card))
+                    .apply(RequestOptions.bitmapTransform(GlideCircleTransform.getInstance(SixCatApplication.context, 4))).into(helper.getView<ImageView>(R.id.iv_post_card))
             helper.setText(R.id.tv_item_title, item.title)
             helper.setText(R.id.tv_director,
                     String.format(Locale.CHINA, SixCatApplication.context.resources.getString(R.string.showing_movie_director), item.directors?.get(0)?.name))

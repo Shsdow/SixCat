@@ -68,7 +68,7 @@ class TodoListFragment : BaseRxLazyFragment() {
                     val task = Task(title!!, content!!, false, Date())
                     task.id = id
                     taskViewModel.insertTaskToDatabase(task)
-                })
+                },true)
             }
 
             /**

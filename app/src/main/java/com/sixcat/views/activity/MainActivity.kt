@@ -47,6 +47,10 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
         listOf(resources.getString(R.string.app_name), resources.getString(R.string.title_photo), resources.getString(R.string.title_video), getString(R.string.title_todo))
     }
 
+    private val fragmentTags by lazy {
+        listOf(FileListFragment::class.java.name,PictureFragment::class.java.name,TodoListFragment::class.java.name,VideoShowFragment::class.java.name)
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }
@@ -62,38 +66,6 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
     }
 
 
-    private fun initFragments(savedInstanceState: Bundle?) {
-        if (savedInstanceState != null) {
-            mHomeFragment = supportFragmentManager.findFragmentByTag(FileListFragment::class.java.name) as FileListFragment
-            mPictureFragment = supportFragmentManager.findFragmentByTag(PictureFragment::class.java.name) as PictureFragment
-            mTodoListFragment = supportFragmentManager.findFragmentByTag(TodoListFragment::class.java.name) as TodoListFragment
-            mVideoFragment = supportFragmentManager.findFragmentByTag(VideoShowFragment::class.java.name) as VideoShowFragment
-            showFragment(savedInstanceState.getInt(POSITION))
-            bottomNav!!.selectedItemId = savedInstanceState.getInt(SELECT_ITEM)
-        } else {
-            showFragment(FRAGMENT_FILM_LIST)
-        }
-    }
-
-    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    fun shoWrite() {
-    }
-
-    @OnPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    fun onWriteDenied() {
-        ShowToast.shortTime(R.string.permission_write_denied);
-    }
-
-    @OnNeverAskAgain(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    fun onWriteNeverAskAgain() {
-        ShowToast.shortTime(R.string.permission_write_never_askagain);
-    }
-
-//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        // NOTE: delegate the permission handling to generated function
-////        onRequestPermissionsResult(requestCode, permissions, grantResults)
-//    }
 
     private fun initToolBar() {
         toolbar!!.inflateMenu(R.menu.menu_activity_main)
@@ -105,56 +77,19 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
         initListener()
     }
 
-    private fun initListener() {
-        bottomNav!!.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.action_film_list -> {
-                    showFragment(FRAGMENT_FILM_LIST)
-                }
-                R.id.action_photo -> {
-                    showFragment(FRAGMENT_PHOTO)
-                }
-                R.id.action_video -> {
-                    showFragment(FRAGMENT_VIDEO)
-                }
-                R.id.action_todo_list -> {
-                    showFragment(FRAGMENT_TODO_LIST)
-                }
-            }
-            true
-        }
 
-        navigationView.setNavigationItemSelectedListener { item ->
-            mDrawerLayoutMain!!.closeDrawer(GravityCompat.START)
-            ShowToast.shortTime("f3434")
-            when (item.itemId) {
-                R.id.item_home -> {
-                    ShowToast.shortTime("f")
-                }
-                R.id.item_download -> true
-                R.id.item_vip -> true
-                R.id.item_favourite -> true
-                R.id.item_history -> true
-                R.id.item_group -> true
-                R.id.item_tracker -> true
-                R.id.item_theme ->
-                    // 主题选择
-                    //                changeTheme();
-                    true
-                R.id.item_app -> {
-                    // 应用推荐
-                    startActivity(Intent(this, SettingActivity::class.java))
-                    true
-                }
-                R.id.item_settings ->
-                    // 设置中心
-                    true
-                else -> mDrawerLayoutMain!!.closeDrawers()
-            }
-            false
+    private fun initFragments(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            mHomeFragment = supportFragmentManager.findFragmentByTag(fragmentTags[0]) as FileListFragment
+            mPictureFragment = supportFragmentManager.findFragmentByTag(fragmentTags[1]) as PictureFragment
+            mTodoListFragment = supportFragmentManager.findFragmentByTag(fragmentTags[2]) as TodoListFragment
+            mVideoFragment = supportFragmentManager.findFragmentByTag(fragmentTags[3]) as VideoShowFragment
+            showFragment(savedInstanceState.getInt(POSITION))
+            bottomNav!!.selectedItemId = savedInstanceState.getInt(SELECT_ITEM)
+        } else {
+            showFragment(FRAGMENT_FILM_LIST)
         }
     }
-
 
     private fun showFragment(fragmentNews: Int) {
         val transaction = supportFragmentManager.beginTransaction()
@@ -215,6 +150,79 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
             ft.hide(mTodoListFragment!!)
         }
     }
+
+    @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun shoWrite() {
+    }
+
+    @OnPermissionDenied(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun onWriteDenied() {
+        ShowToast.shortTime(R.string.permission_write_denied);
+    }
+
+    @OnNeverAskAgain(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    fun onWriteNeverAskAgain() {
+        ShowToast.shortTime(R.string.permission_write_never_askagain);
+    }
+
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        // NOTE: delegate the permission handling to generated function
+////        onRequestPermissionsResult(requestCode, permissions, grantResults)
+//    }
+
+    private fun initListener() {
+        bottomNav!!.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_film_list -> {
+                    showFragment(FRAGMENT_FILM_LIST)
+                }
+                R.id.action_photo -> {
+                    showFragment(FRAGMENT_PHOTO)
+                }
+                R.id.action_video -> {
+                    showFragment(FRAGMENT_VIDEO)
+                }
+                R.id.action_todo_list -> {
+                    showFragment(FRAGMENT_TODO_LIST)
+                }
+            }
+            true
+        }
+
+        navigationView.setNavigationItemSelectedListener { item ->
+            mDrawerLayoutMain!!.closeDrawer(GravityCompat.START)
+            ShowToast.shortTime("f3434")
+            when (item.itemId) {
+                R.id.item_home -> {
+                    ShowToast.shortTime("f")
+                }
+                R.id.item_download -> true
+                R.id.item_vip -> true
+                R.id.item_favourite -> true
+                R.id.item_history -> true
+                R.id.item_group -> true
+                R.id.item_tracker -> true
+                R.id.item_theme ->
+                    // 主题选择
+                    //                changeTheme();
+                    true
+                R.id.item_app -> {
+                    // 应用推荐
+                    startActivity(Intent(this, SettingActivity::class.java))
+                    true
+                }
+                R.id.item_settings ->
+                    // 设置中心
+                    true
+                else -> mDrawerLayoutMain!!.closeDrawers()
+            }
+            false
+        }
+    }
+
+
+
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
