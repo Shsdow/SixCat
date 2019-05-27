@@ -23,7 +23,8 @@ import java.util.*
  * @date 2017/12/27.
  */
 
-class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener {
+class HomeLiveFragment : BaseRxLazyFragment(), LiveContrace.View,
+        BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener {
 
     private val mBeanList = ArrayList<MovieBean.SubjectsBean>()
     private val PAGE_SIZE = 10

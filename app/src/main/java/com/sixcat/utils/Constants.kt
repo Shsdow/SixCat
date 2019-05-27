@@ -7,3 +7,4 @@ package com.sixcat.utils
 
 
 const val DATABASE_NAME = "task-db"
+const val PATHS_SEPARATOR = "/"

@@ -12,21 +12,21 @@ abstract class BaseActivity : RxAppCompatActivity() {
 
     var mManager: ActivityManager? = null
 
+
+    private val activityStackManager by lazy {
+        ActivityManager.getInstance()
+    }
+
     abstract fun getLayoutId(): Int
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
         initView()
-        mManager = ActivityManager.getInstance()
-        mManager!!.addActivity(this)
+        activityStackManager.addActivity(this)
     }
 
     abstract fun initView()
-
-//    override fun <T> bindToLife(): LifecycleTransformer<T> {
-//        return bindUntilEvent(ActivityEvent.DESTROY)
-//    }
 
     /**
      * 打开软键盘
@@ -48,6 +48,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        activityStackManager.finishActivity(this)
         SixCatApplication.getRefWatcher(this)?.watch(this)
     }
 }

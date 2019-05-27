@@ -4,7 +4,7 @@ import android.net.Uri
 import android.view.KeyEvent
 import com.sixcat.R
 import com.sixcat.base.BaseActivity
-import com.sixcat.constants.Constants
+import com.sixcat.utils.PATHS_SEPARATOR
 import com.sixcat.utils.SPUtil
 import com.sixcat.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_guide.*
@@ -16,9 +16,7 @@ class GuideActivity : BaseActivity() {
 
     private var position: Int = 0
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_guide
-    }
+    override fun getLayoutId() = R.layout.activity_guide
 
     override fun initView() {
         StatusBarUtil.setTranslucent(this, 0)
@@ -28,13 +26,13 @@ class GuideActivity : BaseActivity() {
     }
 
     private fun initViewClick() {
-        tvGuideExit.setOnClickListener { v -> finishVideo() }
+        tvGuideExit.setOnClickListener { finishVideo() }
     }
 
     private fun playVideo() {
-        cvvGuideVideo.setVideoURI(Uri.parse("android.resource://" + this.packageName + Constants.PATHS_SEPARATOR + R.raw.video))
+        cvvGuideVideo.setVideoURI(Uri.parse("android.resource://" + this.packageName + PATHS_SEPARATOR + R.raw.video))
         cvvGuideVideo.start()
-        cvvGuideVideo.setOnCompletionListener { _ -> finishVideo() }
+        cvvGuideVideo.setOnCompletionListener { finishVideo() }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {

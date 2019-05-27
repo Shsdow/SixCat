@@ -2,7 +2,7 @@ package com.sixcat.utils
 
 import android.app.Activity
 import android.content.Context
-import java.util.Stack
+import java.util.*
 
 /**
  * 通过 stack 管理 Activity 工具类
@@ -17,11 +17,9 @@ class ActivityManager {
         private var instance: ActivityManager? = null
 
         fun getInstance(): ActivityManager {
-            if (instance == null) {
-                synchronized(ActivityManager::class) {
-                    if (instance == null) {
-                        instance = ActivityManager()
-                    }
+            instance ?: synchronized(ActivityManager::class) {
+                instance ?: ActivityManager().also {
+                    instance = it
                 }
             }
             return instance!!
@@ -57,7 +55,17 @@ class ActivityManager {
         }
     }
 
-    fun finishAllActivity() {
+    fun appExist(context: Context) {
+        try {
+            finishAllActivity()
+            (context.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager).killBackgroundProcesses(context.packageName)
+            System.exit(0)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun finishAllActivity() {
         val size = activityStack!!.size
         for (i in 0 until size) {
             if (activityStack!![i] != null) {
@@ -66,16 +74,4 @@ class ActivityManager {
         }
         activityStack!!.clear()
     }
-
-    fun AppExit(context: Context) {
-        try {
-            finishAllActivity()
-            (context.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager).killBackgroundProcesses(context.packageName)
-            System.exit(0)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-    }
-
 }
