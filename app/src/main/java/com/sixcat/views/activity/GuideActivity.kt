@@ -2,6 +2,7 @@ package com.sixcat.views.activity
 
 import android.net.Uri
 import android.view.KeyEvent
+import com.orhanobut.logger.Logger
 import com.sixcat.R
 import com.sixcat.base.BaseActivity
 import com.sixcat.utils.PATHS_SEPARATOR
@@ -26,19 +27,27 @@ class GuideActivity : BaseActivity() {
     }
 
     private fun initViewClick() {
-        tvGuideExit.setOnClickListener { finishVideo() }
+        tvGuideExit.setOnClickListener {
+            Logger.e("GuideActivity %s", "initViewClick")
+
+            finishVideo()
+        }
     }
 
     private fun playVideo() {
         cvvGuideVideo.setVideoURI(Uri.parse("android.resource://" + this.packageName + PATHS_SEPARATOR + R.raw.video))
         cvvGuideVideo.start()
-        cvvGuideVideo.setOnCompletionListener { finishVideo() }
+        cvvGuideVideo.setOnCompletionListener {
+            Logger.e("GuideActivity %s", "setOnCompletionListener")
+            finishVideo()
+        }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode != 4) {
             return super.onKeyDown(keyCode, event)
         }
+        Logger.d("GuideActivity %s", "onKeyDown")
         finishVideo()
         return true
     }
@@ -58,11 +67,13 @@ class GuideActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        Logger.d("GuideActivity %s", "onDestroy")
         finishVideo()
     }
 
     private fun finishVideo() {
+        Logger.d("GuideActivity %s", "finishVideo")
         cvvGuideVideo.destroyDrawingCache()
-        mManager!!.finishActivity()
+        activityStackManager.finishActivity(GuideActivity::class.java)
     }
 }

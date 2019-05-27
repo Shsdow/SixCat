@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.sixcat.R
 import com.sixcat.base.BaseActivity
-import com.sixcat.utils.SPUtil
 import com.sixcat.utils.SettingUtil
 import com.sixcat.utils.ShowToast
 import com.sixcat.utils.StatusBarUtil
@@ -48,7 +47,7 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
     }
 
     private val fragmentTags by lazy {
-        listOf(FileListFragment::class.java.name,PictureFragment::class.java.name,TodoListFragment::class.java.name,VideoShowFragment::class.java.name)
+        listOf(FileListFragment::class.java.name, PictureFragment::class.java.name, TodoListFragment::class.java.name, VideoShowFragment::class.java.name)
     }
 
     override fun getLayoutId(): Int {
@@ -56,15 +55,14 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
     }
 
     override fun initView() {
-        if (!SPUtil.getBoolean("isFirst")) {
-            startActivity(Intent(this, GuideActivity::class.java))
-        }
+//        if (!SPUtil.getBoolean("isFirst")) {
+        startActivity(Intent(this, GuideActivity::class.java))
+//        }
         StatusBarUtil.setColorForDrawerLayout(this@MainActivity, mDrawerLayoutMain, Color.parseColor("#20C1FD"), 255)
         initToolBar()
         initFragments(null)
         initNavigationView()
     }
-
 
 
     private fun initToolBar() {
@@ -220,8 +218,6 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
             false
         }
     }
-
-
 
 
     override fun onSaveInstanceState(outState: Bundle?) {

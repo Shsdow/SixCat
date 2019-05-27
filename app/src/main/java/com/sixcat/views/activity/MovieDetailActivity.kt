@@ -2,10 +2,10 @@ package com.sixcat.views.activity
 
 import android.graphics.Bitmap
 import android.os.Build
-import androidx.core.content.ContextCompat
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -157,8 +157,8 @@ class MovieDetailActivity : BaseActivity(), MovieDetailContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mManager?.currentActivity() != null) {
-            mManager!!.finishActivity()
+        if (activityStackManager.currentActivity() != null) {
+            activityStackManager.finishActivity()
         }
     }
 

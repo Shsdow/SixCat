@@ -13,7 +13,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     var mManager: ActivityManager? = null
 
 
-    private val activityStackManager by lazy {
+    val activityStackManager by lazy {
         ActivityManager.getInstance()
     }
 
