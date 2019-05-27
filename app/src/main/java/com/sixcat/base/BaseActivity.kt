@@ -26,6 +26,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
         activityStackManager.addActivity(this)
     }
 
+
     abstract fun initView()
 
     /**

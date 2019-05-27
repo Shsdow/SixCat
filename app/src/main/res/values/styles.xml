@@ -11,8 +11,12 @@
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <!--<item name="android:windowIsTranslucent">true</item>-->
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Launch">
+        <item name="android:windowBackground">@drawable/welcome</item>
     </style>
 
     <style name="sixcatTheme" parent="Theme.AppCompat.Light.NoActionBar">

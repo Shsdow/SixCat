@@ -17,7 +17,7 @@
         android:theme="@style/sixcatTheme">
         <activity
             android:name="com.sixcat.views.activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.Launch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

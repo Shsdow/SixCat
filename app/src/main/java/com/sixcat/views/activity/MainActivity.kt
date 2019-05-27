@@ -51,6 +51,7 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
     }
 
     override fun getLayoutId(): Int {
+        setTheme(R.style.AppTheme_NoActionBar)
         return R.layout.activity_main
     }
 
