@@ -57,7 +57,7 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
 
     override fun initView() {
 //        if (!SPUtil.getBoolean("isFirst")) {
-        startActivity(Intent(this, GuideActivity::class.java))
+//        startActivity(Intent(this, GuideActivity::class.java))
 //        }
         StatusBarUtil.setColorForDrawerLayout(this@MainActivity, mDrawerLayoutMain, Color.parseColor("#20C1FD"), 255)
         initToolBar()

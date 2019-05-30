@@ -132,7 +132,7 @@ class MovieDetailActivity : BaseActivity(), MovieDetailContract.View {
         tvTitleMovieName.text = movieShowcaseBean.title
         var yaear: String? = movieShowcaseBean.year
         movieShowcaseBean.genres!!.forEach {
-            yaear += "/" + it
+            yaear += "/$it"
         }
         tvMovieShortShow.text = String.format(Locale.CHINA, resources.getString(R.string.movie_show_case), yaear, movieShowcaseBean.mainland_pubdate, movieShowcaseBean.durations?.get(0).toString())
         Glide.with(this).asBitmap().load(movieShowcaseBean.images?.large).into(object : SimpleTarget<Bitmap>() {
@@ -158,7 +158,7 @@ class MovieDetailActivity : BaseActivity(), MovieDetailContract.View {
     override fun onDestroy() {
         super.onDestroy()
         if (activityStackManager.currentActivity() != null) {
-            activityStackManager.finishActivity()
+            activityStackManager.finishActivity(MovieDetailActivity::class.java)
         }
     }
 

@@ -1,5 +1,7 @@
 package com.sixcat.utils
 
+import android.app.Application
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
@@ -15,3 +17,9 @@ import com.sixcat.jetpack.viewmodel.ViewModelFactory
  */
 fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
         ViewModelProviders.of(this, ViewModelFactory.getInstance(application)).get(viewModelClass)
+
+
+fun Application.lazyLoad(perform: () -> Unit) {
+    AsyncTask.THREAD_POOL_EXECUTOR.execute(perform)
+
+}

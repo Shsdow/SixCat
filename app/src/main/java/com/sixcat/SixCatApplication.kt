@@ -11,6 +11,7 @@ import com.crashlytics.android.answers.Answers
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
+import com.sixcat.utils.lazyLoad
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import io.fabric.sdk.android.Fabric
@@ -26,32 +27,21 @@ class SixCatApplication : Application() {
 
     private var refWatcher: RefWatcher? = null
 
-    companion object {
-        private val TAG = "SixCatApplication"
-        var context: Context by Delegates.notNull()
-            private set
-
-        fun getRefWatcher(context: Context): RefWatcher? {
-            val myApplication = context.applicationContext as SixCatApplication
-            return myApplication.refWatcher
-        }
-    }
-
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
         Fabric.with(this, Crashlytics())
-        refWatcher = setupLeakCanary()
-        initLogConfig()
-        Fabric.with(this, Crashlytics());
-        Fabric.with(this, Answers());
+        Fabric.with(this, Answers())
 
         // Enable RxJava assembly stack collection, to make RxJava crash reports clear and unique
         // Make sure this is called AFTER setting up any Crash reporting mechanism as Crashlytics
-        RxJava2Debug.enableRxJava2AssemblyTracking(arrayOf("com.sixcat", "com.sixcat"))
-
-        LeakCanary.install(this)
         registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks)
+
+        lazyLoad {
+            refWatcher = setupLeakCanary()
+            initLogConfig()
+            RxJava2Debug.enableRxJava2AssemblyTracking(arrayOf("com.sixcat", "com.sixcat"))
+        }
 
     }
 
@@ -102,6 +92,17 @@ class SixCatApplication : Application() {
 
         override fun onActivityDestroyed(activity: Activity) {
             Log.d(TAG, "onDestroy: " + activity.componentName.className)
+        }
+    }
+
+    companion object {
+        private val TAG = "SixCatApplication"
+        var context: Context by Delegates.notNull()
+            private set
+
+        fun getRefWatcher(context: Context): RefWatcher? {
+            val myApplication = context.applicationContext as SixCatApplication
+            return myApplication.refWatcher
         }
     }
 
