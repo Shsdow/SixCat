@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
+import android.os.Debug
+import android.os.Environment
 import android.util.Log
 import com.akaita.java.rxjava2debug.RxJava2Debug
 import com.crashlytics.android.Crashlytics
@@ -15,6 +17,7 @@ import com.sixcat.utils.lazyLoad
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import io.fabric.sdk.android.Fabric
+import java.io.File
 import kotlin.properties.Delegates
 
 
@@ -30,18 +33,25 @@ class SixCatApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
-        Fabric.with(this, Crashlytics())
-        Fabric.with(this, Answers())
+        Debug.startMethodTracing(Environment.getExternalStorageDirectory().absolutePath + File.separator + "b.trace")
+
+
+        //开始计时
+//停止计时
 
         // Enable RxJava assembly stack collection, to make RxJava crash reports clear and unique
         // Make sure this is called AFTER setting up any Crash reporting mechanism as Crashlytics
         registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks)
 
         lazyLoad {
+            Fabric.with(this, Crashlytics())
+            Fabric.with(this, Answers())
             refWatcher = setupLeakCanary()
             initLogConfig()
             RxJava2Debug.enableRxJava2AssemblyTracking(arrayOf("com.sixcat", "com.sixcat"))
         }
+
+        Debug.stopMethodTracing()
 
     }
 

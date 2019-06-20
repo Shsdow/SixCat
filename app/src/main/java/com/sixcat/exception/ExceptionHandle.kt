@@ -1,7 +1,9 @@
-package com.hazz.kotlinmvp.net.exception
+//package com.hazz.kotlinmvp.net.exception
 
 import com.google.gson.JsonParseException
 import com.orhanobut.logger.Logger
+import com.sixcat.exception.ApiException
+import com.sixcat.exception.ErrorStatus
 
 import org.json.JSONException
 

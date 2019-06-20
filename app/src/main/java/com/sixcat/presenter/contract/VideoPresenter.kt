@@ -1,6 +1,5 @@
 package com.sixcat.presenter.contract
 
-import com.hazz.kotlinmvp.net.exception.ExceptionHandle
 import com.sixcat.base.refactor.BasePresenter
 import com.sixcat.model.VideoModel
 import com.sixcat.presenter.VideoContract

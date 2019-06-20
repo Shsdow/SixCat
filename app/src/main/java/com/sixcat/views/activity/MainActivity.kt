@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
 import com.sixcat.R
 import com.sixcat.base.BaseActivity
+import com.sixcat.utils.LogUtil
 import com.sixcat.utils.SettingUtil
 import com.sixcat.utils.ShowToast
 import com.sixcat.utils.StatusBarUtil
@@ -51,7 +52,7 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
     }
 
     override fun getLayoutId(): Int {
-        setTheme(R.style.AppTheme_NoActionBar)
+//        setTheme(R.style.AppTheme_NoActionBar)
         return R.layout.activity_main
     }
 
@@ -59,6 +60,11 @@ class MainActivity : BaseActivity()/*, NavigationView.OnNavigationItemSelectedLi
 //        if (!SPUtil.getBoolean("isFirst")) {
 //        startActivity(Intent(this, GuideActivity::class.java))
 //        }
+
+        LogUtil.e("aaaaa")
+        Thread.sleep(3000L)
+        reportFullyDrawn()
+        LogUtil.e("aaaaa")
         StatusBarUtil.setColorForDrawerLayout(this@MainActivity, mDrawerLayoutMain, Color.parseColor("#20C1FD"), 255)
         initToolBar()
         initFragments(null)

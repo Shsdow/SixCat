@@ -20,10 +20,10 @@ import com.sixcat.R
  * Time: 2018/7/10 0010 18:43
  */
 object StatusBarUtil {
-    val DEFAULT_STATUS_BAR_ALPHA = 112
-    private val FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view
-    private val FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view
-    private val TAG_KEY_HAVE_SET_OFFSET = -123
+    private const val DEFAULT_STATUS_BAR_ALPHA = 112
+    private const val FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view
+    private const val FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view
+    private const val TAG_KEY_HAVE_SET_OFFSET = -123
 
     /**
      * 设置状态栏颜色

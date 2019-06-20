@@ -1,4 +1,5 @@
-package com.hazz.kotlinmvp.net.exception
+//package com.hazz.kotlinmvp.net.exception
+package com.sixcat.exception
 
 /**
  * Created by xuhao on 2017/12/5.
